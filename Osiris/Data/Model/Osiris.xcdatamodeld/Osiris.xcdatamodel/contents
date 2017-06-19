@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="KVEntity" representedClassName="KVEntity" parentEntity="KVRootEntity" syncable="YES" codeGenerationType="class"/>
+    <entity name="KVGoods" representedClassName="KVGoods" parentEntity="KVItem" syncable="YES" codeGenerationType="class"/>
+    <entity name="KVGraphics" representedClassName="KVGraphics" syncable="YES" codeGenerationType="class">
+        <attribute name="caption" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photoActual" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="photoFileName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rating" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVRootEntity" inverseName="graphics" inverseEntity="KVRootEntity" syncable="YES"/>
+    </entity>
+    <entity name="KVItem" representedClassName="KVItem" parentEntity="KVRootEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="cost" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="isCompleteIfYes" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="skuID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tax" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="transactionID" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="KVLocation" representedClassName="KVLocation" syncable="YES" codeGenerationType="class">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="altitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="heading" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="postalCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVRootEntity" inverseName="location" inverseEntity="KVRootEntity" syncable="YES"/>
+    </entity>
+    <entity name="KVPerson" representedClassName="KVPerson" parentEntity="KVEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="emailID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="middleName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phoneNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="textID" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="KVPhysics" representedClassName="KVPhysics" syncable="YES" codeGenerationType="class">
+        <attribute name="massKG" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="xLong" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="yWide" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="zTall" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVRootEntity" inverseName="physics" inverseEntity="KVRootEntity" syncable="YES"/>
+    </entity>
+    <entity name="KVRootEntity" representedClassName="KVRootEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="hexID" attributeType="String" defaultValueString="UNSET" syncable="YES"/>
+        <attribute name="incepDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="qName" attributeType="String" defaultValueString="UNSET" syncable="YES"/>
+        <attribute name="status" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="type" attributeType="String" defaultValueString="UNSET" syncable="YES"/>
+        <relationship name="graphics" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="KVGraphics" inverseName="owner" inverseEntity="KVGraphics" syncable="YES"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="KVLocation" inverseName="owner" inverseEntity="KVLocation" syncable="YES"/>
+        <relationship name="physics" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="KVPhysics" inverseName="owner" inverseEntity="KVPhysics" syncable="YES"/>
+    </entity>
+    <entity name="KVServices" representedClassName="KVServices" parentEntity="KVItem" syncable="YES" codeGenerationType="class"/>
+    <entity name="KVSession" representedClassName="KVSession" parentEntity="KVItem" syncable="YES" codeGenerationType="class">
+        <attribute name="duration" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="label" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="priority" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="KVTransaction" representedClassName="KVTransaction" syncable="YES" codeGenerationType="class"/>
+    <entity name="KVVendor" representedClassName="KVVendor" parentEntity="KVEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="numberOfSides" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="privateIfYes" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="radiusMeters" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="rating" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="uniqueVendorID" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="KVLocation" positionX="-218" positionY="81" width="128" height="178"/>
+        <element name="KVGraphics" positionX="-74" positionY="105" width="128" height="118"/>
+        <element name="KVPhysics" positionX="-218" positionY="270" width="128" height="118"/>
+        <element name="KVSession" positionX="844" positionY="360" width="128" height="133"/>
+        <element name="KVTransaction" positionX="396" positionY="144" width="128" height="45"/>
+        <element name="KVRootEntity" positionX="259" positionY="186" width="128" height="163"/>
+        <element name="KVPerson" positionX="225" positionY="549" width="128" height="135"/>
+        <element name="KVVendor" positionX="556" positionY="540" width="128" height="120"/>
+        <element name="KVEntity" positionX="264" positionY="425" width="128" height="43"/>
+        <element name="KVGoods" positionX="837" positionY="126" width="128" height="43"/>
+        <element name="KVItem" positionX="531" positionY="200" width="128" height="133"/>
+        <element name="KVServices" positionX="846" positionY="261" width="128" height="43"/>
+    </elements>
+</model>
