@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="KVEntity" representedClassName="KVEntity" parentEntity="KVRootEntity" syncable="YES" codeGenerationType="class"/>
-    <entity name="KVGoods" representedClassName="KVGoods" parentEntity="KVItem" syncable="YES" codeGenerationType="class"/>
+    <entity name="KVGoods" representedClassName="KVGoods" parentEntity="KVItem" syncable="YES" codeGenerationType="class">
+        <relationship name="buyer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVPerson" inverseName="goodsStack" inverseEntity="KVPerson" syncable="YES"/>
+    </entity>
     <entity name="KVGraphics" representedClassName="KVGraphics" syncable="YES" codeGenerationType="class">
         <attribute name="caption" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="photoActual" optional="YES" attributeType="Transformable" syncable="YES"/>
@@ -16,6 +18,7 @@
         <attribute name="skuID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tax" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="transactionID" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="seller" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVVendor" inverseName="inventoryStack" inverseEntity="KVVendor" syncable="YES"/>
     </entity>
     <entity name="KVLocation" representedClassName="KVLocation" syncable="YES" codeGenerationType="class">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
@@ -35,6 +38,9 @@
         <attribute name="middleName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phoneNumber" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="textID" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="goodsStack" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KVGoods" inverseName="buyer" inverseEntity="KVGoods" syncable="YES"/>
+        <relationship name="servicesStack" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KVService" inverseName="buyer" inverseEntity="KVService" syncable="YES"/>
+        <relationship name="sessionsStack" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KVSession" inverseName="buyer" inverseEntity="KVSession" syncable="YES"/>
     </entity>
     <entity name="KVPhysics" representedClassName="KVPhysics" syncable="YES" codeGenerationType="class">
         <attribute name="massKG" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
@@ -53,7 +59,9 @@
         <relationship name="location" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="KVLocation" inverseName="owner" inverseEntity="KVLocation" syncable="YES"/>
         <relationship name="physics" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="KVPhysics" inverseName="owner" inverseEntity="KVPhysics" syncable="YES"/>
     </entity>
-    <entity name="KVServices" representedClassName="KVServices" parentEntity="KVItem" syncable="YES" codeGenerationType="class"/>
+    <entity name="KVService" representedClassName="KVService" parentEntity="KVItem" syncable="YES" codeGenerationType="class">
+        <relationship name="buyer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVPerson" inverseName="servicesStack" inverseEntity="KVPerson" syncable="YES"/>
+    </entity>
     <entity name="KVSession" representedClassName="KVSession" parentEntity="KVItem" syncable="YES" codeGenerationType="class">
         <attribute name="duration" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
         <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -61,6 +69,7 @@
         <attribute name="priority" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="buyer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVPerson" inverseName="sessionsStack" inverseEntity="KVPerson" syncable="YES"/>
     </entity>
     <entity name="KVTransaction" representedClassName="KVTransaction" syncable="YES" codeGenerationType="class"/>
     <entity name="KVVendor" representedClassName="KVVendor" parentEntity="KVEntity" syncable="YES" codeGenerationType="class">
@@ -69,19 +78,20 @@
         <attribute name="radiusMeters" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="rating" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
         <attribute name="uniqueVendorID" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="inventoryStack" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KVItem" inverseName="seller" inverseEntity="KVItem" syncable="YES"/>
     </entity>
     <elements>
-        <element name="KVLocation" positionX="-218" positionY="81" width="128" height="178"/>
+        <element name="KVEntity" positionX="263" positionY="423" width="128" height="43"/>
+        <element name="KVGoods" positionX="1044" positionY="126" width="128" height="58"/>
         <element name="KVGraphics" positionX="-74" positionY="105" width="128" height="118"/>
+        <element name="KVItem" positionX="738" positionY="200" width="128" height="148"/>
+        <element name="KVLocation" positionX="-218" positionY="81" width="128" height="178"/>
+        <element name="KVPerson" positionX="747" positionY="551" width="128" height="178"/>
         <element name="KVPhysics" positionX="-218" positionY="270" width="128" height="118"/>
-        <element name="KVSession" positionX="844" positionY="360" width="128" height="133"/>
-        <element name="KVTransaction" positionX="396" positionY="144" width="128" height="45"/>
         <element name="KVRootEntity" positionX="259" positionY="186" width="128" height="163"/>
-        <element name="KVPerson" positionX="225" positionY="549" width="128" height="135"/>
-        <element name="KVVendor" positionX="556" positionY="540" width="128" height="120"/>
-        <element name="KVEntity" positionX="264" positionY="425" width="128" height="43"/>
-        <element name="KVGoods" positionX="837" positionY="126" width="128" height="43"/>
-        <element name="KVItem" positionX="531" positionY="200" width="128" height="133"/>
-        <element name="KVServices" positionX="846" positionY="261" width="128" height="43"/>
+        <element name="KVService" positionX="1053" positionY="261" width="128" height="58"/>
+        <element name="KVSession" positionX="1051" positionY="360" width="128" height="148"/>
+        <element name="KVTransaction" positionX="565" positionY="686" width="128" height="43"/>
+        <element name="KVVendor" positionX="576" positionY="386" width="128" height="133"/>
     </elements>
 </model>
