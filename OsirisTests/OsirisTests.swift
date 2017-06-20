@@ -1,10 +1,10 @@
-//
-//  OsirisTests.swift
-//  OsirisTests
-//
-//  Created by Kenn Villegas on 6/13/17.
-//  Copyright © 2017 dubian. All rights reserved.
-//
+/**
+  OsirisTests.swift
+  OsirisTests
+
+  Created by Kenn Villegas on 6/13/17.
+  Copyright © 2017 dubian. All rights reserved.
+*/
 
 import XCTest
 import CoreData
@@ -62,17 +62,22 @@ class OsirisTests: XCTestCase {
     //    SUT_PSK = nil
     super.tearDown()
   }
-  func testExample() {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
+  func entityControllerTest() {
+    let testEDC = KVEntityDataController<KVEntity>()
+    testEDC.PSK = self.SUT_PSK!
+    let entityTestItem = testEDC.createEntityInContext(testEDC.PSK.viewContext, type: "Entity")
+    
+    XCTAssertNotNil((testEDC), "Failed to Create Entity Controller")
+    XCTAssertNotNil(testEDC.PSK.viewContext, "Failed to Create MOC")
+    XCTAssertNotNil(entityTestItem, "Failed to Create entity")
   }
-  
-  func testPerformanceExample() {
-    // This is an example of a performance test case.
-    self.measure {
-      // Put the code you want to measure the time of here.
-    }
+  func baseTVCTest() {
+    let tableViewController = KVPrimeTVController()
+    XCTAssertEqual(0, tableViewController.objects.count)
+    tableViewController.insertNewObject(self)
+    XCTAssertEqual(1, tableViewController.objects.count)
+    tableViewController.AllDataController = KVOsirisDataController(self.MOC!)
+    XCTAssertNotNil(tableViewController.AllDataController.MOC, "Skurry ")
   }
-  
   
 }
