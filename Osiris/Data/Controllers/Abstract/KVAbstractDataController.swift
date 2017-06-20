@@ -1,19 +1,22 @@
-//
-//  KVAbstractDataController.swift
-//  AresED-V
-//
-//  Created by Kenn Villegas on 11/23/15.
-//  Copyright © 2015 K3nV. All rights reserved.
-//
+/**
+  KVAbstractDataController.swift
+  AresED-V
 
-/*
+  Created by Kenn Villegas on 11/23/15.
+  Created by Kenn Villegas on 10/02/16.
+  Created by Kenn Villegas on 06/20/17.
+  Copyright © 2015 K3nV. All rights reserved.
+
+(•_~)
+
  this gets called from the App Deli
  let controller = masterNavigationController.topViewController as! MasterViewController
  OR A NavKhan!!!
  controller.managedObjectContext = self.persistentContainer.viewContext
- 
- Which I need to make in the vue
- */
+-
+then the controller has an instance of person/vendor/entityDataController init:_MOC from this Master version in the Delegate. Or possibly even better would be to have this be totes abstract. And process everyting on Osiris Subclasses.
+
+*/
 
 import UIKit
 import CoreData
@@ -90,8 +93,7 @@ class KVAbstractDataController<T : NSManagedObject> : NSObject
     fetchRequest.sortDescriptors = [sortDescriptor]
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
-    let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.PSK.viewContext,
-                                                               sectionNameKeyPath: nil, cacheName: "Master")
+    let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.PSK.viewContext, sectionNameKeyPath: nil, cacheName: "Master")
     //TODO: SET THE TV : THIS DELEGATE #GODOY
     //    aFetchedResultsController.delegate = self
     _fetchedResultsController = aFetchedResultsController

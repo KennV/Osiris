@@ -1,10 +1,17 @@
-//
-//  KVOsirisDataController.swift
-//  Osiris
-//
-//  Created by Kenn Villegas on 6/19/17.
-//  Copyright © 2017 dubian. All rights reserved.
-//
+/**
+  KVOsirisDataController.swift
+  Osiris
+
+  Created by Kenn Villegas on 6/19/17.
+  Copyright © 2017 dubian. All rights reserved.
+*/
+
+/**
+More on basic architecture.
+The bulk of this code has been tweaked and tuned for a while. long and short is I trust it. I am inside of 11 weeks to ship this and I need it to be the kind of code that I can work with in 15 weeks. It is, at this point more like a template. So the largest part of this refactoring was breaking the functionality into groups where I use them, not where I wrote them.
+*But!* As a strange benefit I do get it about the array being immutable.
+
+*/
 
 struct EntityTypes {
   static let Entity = "KVEntity"
@@ -51,67 +58,25 @@ class KVOsirisDataController<T : KVRootEntity > : KVAbstractDataController<T>
 //    self.entityClassName = EntityTypes.Entity
     self.MOC = ctx
   }
-
-  // MARK: -
-  // MARK: Data Accessors
+  // MARK: - Entities
   /**
-   # Workhorse01
+   ## Should be set to Default
    
-   - returns:
+   - Returns: \<T\> in ctx
    */
-  func getAllEntities() -> Array<T>
-  {
-    let todosFetch : NSFetchRequest = NSFetchRequest<T>(entityName: entityClassName!)
-    let sortDescriptor = NSSortDescriptor(key: "incepDate", ascending: false)
-    
-    todosFetch.fetchBatchSize = 20
-    todosFetch.sortDescriptors = [sortDescriptor]
-    
-    do {
-      // let r = try PSK.viewContext.fetch(todosFetch)
-      let r = try MOC?.fetch(todosFetch)
-      return r!
-    } catch { fatalError("bitched\(error)") }
+  override func createEntityInContext(_ context: NSManagedObjectContext, type: String) -> T {
+    ///Also interesting this could just init a bare NSManaged Obj. I'll take teh errors I got b/c the app works better if this fails when I hit it
+    return NSEntityDescription.insertNewObject(forEntityName: type, into: context) as! T
   }
   /**
-   # Workhorse02
-   
-   - returns: Typed Array
+   Mark the specified entity for deletion
    */
-  func getEntities(sortedBy sortDescriptor:NSSortDescriptor?, matchingPredicate predicate:NSPredicate?) -> Array <T>
+  func deleteEntityInContext(_ context: NSManagedObjectContext, entity: T)
   {
-    let todosFetch : NSFetchRequest = NSFetchRequest<T>(entityName: entityClassName!)
-    todosFetch.fetchBatchSize = 20
-    //
-    if predicate != nil {
-      todosFetch.predicate = predicate
-    }
-    if sortDescriptor != nil {
-      todosFetch.sortDescriptors = [] as Array<NSSortDescriptor>
-    }
-    do { let r = try PSK.viewContext.fetch(todosFetch)
-      return r } catch { fatalError("bitched\(error)")
-    }
+    //                    NSLog("Powa:: %@ !",object .objectID);
+    //          I bp here if it breaks
+    context.delete(entity)
   }
-  /**
-   ## Get entities of the default type matching the predicate
-   
-   - returns: Typed Array
-   */
-  func getEntitiesMatchingPredicate(predicate: NSPredicate) -> Array<T>
-  {
-    return getEntities(sortedBy: nil, matchingPredicate: predicate)
-  }
-  /**
-   Get entities of the default type sorted by descriptor and matching the predicate
-   
-   - returns: Typed Array
-   */
-  func getEntitiesSortedBy(sortDescriptor: NSSortDescriptor, matchingPredicate predicate:NSPredicate) -> Array<T>?
-  {
-    return getEntities(sortedBy: sortDescriptor, matchingPredicate: predicate)
-  }
-  
   func saveCurrentContext(_ ctx: NSManagedObjectContext)
   {
     if ctx.hasChanges {
@@ -173,29 +138,71 @@ class KVOsirisDataController<T : KVRootEntity > : KVAbstractDataController<T>
     }
     return (ss, saveMessage)
   }
+  /// optional businessRules
   func checkRulesForEntity(entity: T) -> String?
   {
     return nil
   }
+  // MARK: -
+  // MARK: Data Accessors
   /**
-  ## Should be set to Default
-  
-  - Returns: \<T\> in ctx
-  */
-  override func createEntityInContext(_ context: NSManagedObjectContext, type: String) -> T {
-    ///Also interesting this could just init a bare NSManaged Obj. I'll take teh errors I got b/c the app works better if this fails when I hit it
-    return NSEntityDescription.insertNewObject(forEntityName: type, into: context) as! T
-  }
-  // MARK: - Entities
-  /**
-  Mark the specified entity for deletion
-  */
-  func deleteEntityInContext(_ context: NSManagedObjectContext, entity: T)
+   # Workhorse01
+   
+   - returns:
+   */
+  func getAllEntities() -> Array<T>
   {
-    //                    NSLog("Powa:: %@ !",object .objectID);
-    //          I bp here if it breaks
-    context.delete(entity)
+    let todosFetch : NSFetchRequest = NSFetchRequest<T>(entityName: entityClassName!)
+    let sortDescriptor = NSSortDescriptor(key: "incepDate", ascending: false)
+    
+    todosFetch.fetchBatchSize = 20
+    todosFetch.sortDescriptors = [sortDescriptor]
+    
+    do {
+      // let r = try PSK.viewContext.fetch(todosFetch)
+      let r = try MOC?.fetch(todosFetch)
+      return r!
+    } catch { fatalError("bitched\(error)") }
   }
+  /**
+   # Workhorse02
+   
+   - returns: Typed Array
+   */
+  func getEntities(sortedBy sortDescriptor:NSSortDescriptor?, matchingPredicate predicate:NSPredicate?) -> Array <T>
+  {
+    let todosFetch : NSFetchRequest = NSFetchRequest<T>(entityName: entityClassName!)
+    todosFetch.fetchBatchSize = 20
+    //
+    if predicate != nil {
+      todosFetch.predicate = predicate
+    }
+    if sortDescriptor != nil {
+      todosFetch.sortDescriptors = [] as Array<NSSortDescriptor>
+    }
+    do { let r = try PSK.viewContext.fetch(todosFetch)
+      return r } catch { fatalError("bitched\(error)")
+    }
+  }
+  /**
+   ## Get entities of the default type matching the predicate
+   
+   - returns: Typed Array
+   */
+  func getEntitiesMatchingPredicate(predicate: NSPredicate) -> Array<T>
+  {
+    return getEntities(sortedBy: nil, matchingPredicate: predicate)
+  }
+  /**
+   Get entities of the default type sorted by descriptor and matching the predicate
+   
+   - returns: Typed Array
+   */
+  func getEntitiesSortedBy(sortDescriptor: NSSortDescriptor, matchingPredicate predicate:NSPredicate) -> Array<T>?
+  {
+    return getEntities(sortedBy: sortDescriptor, matchingPredicate: predicate)
+  }
+  // MARK: Utilities
   /// ### flat random number gen
   func makeRandomNumber(_ range: UInt32) ->Int
   {
@@ -223,14 +230,6 @@ class KVOsirisDataController<T : KVRootEntity > : KVAbstractDataController<T>
     for _ in 1...4 {
       let x = hexDigits[makeRandomNumber(16)]
       hex.append(x)
-    }
-    return hex
-  }
-  func mkRandomHexQuad() -> String
-  {
-    var hex = String()
-    for _ in 1...4 {
-      hex.append(hexDigits[makeRandomNumber(16)])
     }
     return hex
   }
