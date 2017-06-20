@@ -190,8 +190,8 @@
 		38233C1E1EF837F80000DEC1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				38233C1F1EF837F80000DEC1 /* SetupScreens */,
 				38233C211EF837F80000DEC1 /* TopLevel */,
+				38233C1F1EF837F80000DEC1 /* SetupScreens */,
 				38233C241EF837F80000DEC1 /* ViewObjects */,
 			);
 			path = ViewControllers;

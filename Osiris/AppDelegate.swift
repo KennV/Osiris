@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
 
   var window: UIWindow?
-
+  var rootDataController = KVOsirisDataController()
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
@@ -22,7 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     splitViewController.delegate = self
     //Add PrimeTVC and go
     let masterNavigationController = splitViewController.viewControllers[0] as! UINavigationController
-    let _ = masterNavigationController.topViewController as! KVPrimeTVController
+    let c = masterNavigationController.topViewController as! KVPrimeTVController
+    c.AllDataController = rootDataController as KVOsirisDataController
     
     return true
   }

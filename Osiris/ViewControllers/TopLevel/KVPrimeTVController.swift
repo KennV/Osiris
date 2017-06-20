@@ -14,9 +14,13 @@ class KVPrimeTVController: UITableViewController {
 	/**
 	Quickest task is to replace this with something from the controller
 	¿What Controller?
+   Well the OsirisKhan 
+   _PSK
+   _MOC
+   or just Array
 	*/
   var objects = [Any]()
-
+  var AllDataController = KVOsirisDataController()
 
   override func viewDidLoad() {
     super.viewDidLoad()
