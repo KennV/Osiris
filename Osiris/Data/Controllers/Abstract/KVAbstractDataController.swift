@@ -29,7 +29,7 @@ class KVAbstractDataController<T : NSManagedObject> : NSObject
   var error : NSError?
   var copyDatabaseIfNotPresent : Bool = false
   var appName: String?  = "Osiris"
-
+  var MOC : NSManagedObjectContext? = nil
   lazy var PSK: NSPersistentContainer = {
     /*
      The persistent container for the application. This implementation

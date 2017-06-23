@@ -44,7 +44,6 @@ enum saveState {
 
 class KVOsirisDataController<T : KVRootEntity > : KVAbstractDataController<T>
 {
-  var MOC : NSManagedObjectContext? = nil
   
   override init()
   {
@@ -55,7 +54,7 @@ class KVOsirisDataController<T : KVRootEntity > : KVAbstractDataController<T>
   convenience init(_ ctx: NSManagedObjectContext)
   {
     self.init()
-//    self.entityClassName = EntityTypes.Entity
+    self.entityClassName = EntityTypes.RootEntity
     self.MOC = ctx
   }
   // MARK: - Entities
@@ -119,7 +118,7 @@ class KVOsirisDataController<T : KVRootEntity > : KVAbstractDataController<T>
     var ss: saveState
     var saveMessage: String?
     //let context = persistentContainer.viewContext
-    if let moc : NSManagedObjectContext = MOC
+    if let moc : NSManagedObjectContext = self.PSK.viewContext
     {
       if moc.hasChanges {
         ss = saveState.Error
@@ -160,8 +159,8 @@ class KVOsirisDataController<T : KVRootEntity > : KVAbstractDataController<T>
     
     do {
       // let r = try PSK.viewContext.fetch(todosFetch)
-      let r = try MOC?.fetch(todosFetch)
-      return r!
+      let r = try PSK.viewContext.fetch(todosFetch)
+      return r
     } catch { fatalError("bitched\(error)") }
   }
   /**
