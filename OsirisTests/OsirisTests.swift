@@ -76,8 +76,8 @@ class OsirisTests: XCTestCase {
     XCTAssertEqual(0, tableViewController.objects.count)
     tableViewController.insertNewObject(self)
     XCTAssertEqual(1, tableViewController.objects.count)
-    tableViewController.AllDataController = KVOsirisDataController(self.MOC!)
-    XCTAssertNotNil(tableViewController.AllDataController.MOC, "Skurry ")
+    tableViewController.AllDataController.PSK = SUT_PSK!
+    XCTAssertNotNil(tableViewController.AllDataController.MOC, "No MOC")
   }
   
 }

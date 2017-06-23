@@ -11,9 +11,11 @@
 
 */
 
+import CoreLocation
+import CoreData
 import UIKit
 
 class KVEntityDataController<T : KVEntity > : KVAbstractDataController<T>
 {
-
+  
 }

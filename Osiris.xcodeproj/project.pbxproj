@@ -23,6 +23,8 @@
 		38233C381EF83BC00000DEC1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38233C371EF83BC00000DEC1 /* CoreLocation.framework */; };
 		38233C3A1EF83C250000DEC1 /* KVAbstractDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38233C391EF83C250000DEC1 /* KVAbstractDataController.swift */; };
 		38233C3C1EF83CC20000DEC1 /* KVOsirisDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38233C3B1EF83CC20000DEC1 /* KVOsirisDataController.swift */; };
+		38DFA19A1EF9A51C00954CCF /* KVVendorDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DFA1991EF9A51C00954CCF /* KVVendorDataController.swift */; };
+		38DFA19C1EF9A53400954CCF /* KVPersonDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DFA19B1EF9A53400954CCF /* KVPersonDataController.swift */; };
 		38F5DA5C1EF982AA0062CDD5 /* KVEntityDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F5DA5B1EF982AA0062CDD5 /* KVEntityDataController.swift */; };
 		38F5DA5E1EF982CC0062CDD5 /* KVItemDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F5DA5D1EF982CC0062CDD5 /* KVItemDataController.swift */; };
 /* End PBXBuildFile section */
@@ -67,6 +69,8 @@
 		38233C371EF83BC00000DEC1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		38233C391EF83C250000DEC1 /* KVAbstractDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVAbstractDataController.swift; sourceTree = "<group>"; };
 		38233C3B1EF83CC20000DEC1 /* KVOsirisDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVOsirisDataController.swift; sourceTree = "<group>"; };
+		38DFA1991EF9A51C00954CCF /* KVVendorDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KVVendorDataController.swift; path = Concrete/Entities/KVVendorDataController.swift; sourceTree = "<group>"; };
+		38DFA19B1EF9A53400954CCF /* KVPersonDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KVPersonDataController.swift; path = Concrete/Entities/KVPersonDataController.swift; sourceTree = "<group>"; };
 		38F5DA5B1EF982AA0062CDD5 /* KVEntityDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVEntityDataController.swift; sourceTree = "<group>"; };
 		38F5DA5D1EF982CC0062CDD5 /* KVItemDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVItemDataController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -256,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				38233C2B1EF83A3C0000DEC1 /* Abstract */,
+				38DFA1961EF9A40100954CCF /* Concrete */,
 			);
 			name = Controllers;
 			path = Data/Controllers;
@@ -282,6 +287,31 @@
 				38233C2F1EF83B9C0000DEC1 /* MapKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		38DFA1961EF9A40100954CCF /* Concrete */ = {
+			isa = PBXGroup;
+			children = (
+				38DFA1981EF9A4AC00954CCF /* Entities */,
+				38DFA1971EF9A49300954CCF /* Items */,
+			);
+			name = Concrete;
+			sourceTree = "<group>";
+		};
+		38DFA1971EF9A49300954CCF /* Items */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Items;
+			sourceTree = "<group>";
+		};
+		38DFA1981EF9A4AC00954CCF /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				38DFA1991EF9A51C00954CCF /* KVVendorDataController.swift */,
+				38DFA19B1EF9A53400954CCF /* KVPersonDataController.swift */,
+			);
+			name = Entities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -427,8 +457,10 @@
 				3806F9AE1EF032470070B103 /* Osiris.xcdatamodeld in Sources */,
 				38F5DA5E1EF982CC0062CDD5 /* KVItemDataController.swift in Sources */,
 				3806F9791EF031A50070B103 /* AppDelegate.swift in Sources */,
+				38DFA19C1EF9A53400954CCF /* KVPersonDataController.swift in Sources */,
 				38233C3C1EF83CC20000DEC1 /* KVOsirisDataController.swift in Sources */,
 				38233C3A1EF83C250000DEC1 /* KVAbstractDataController.swift in Sources */,
+				38DFA19A1EF9A51C00954CCF /* KVVendorDataController.swift in Sources */,
 				38233C281EF837F80000DEC1 /* KVDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
