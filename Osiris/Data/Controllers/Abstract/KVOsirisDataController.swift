@@ -59,17 +59,17 @@ class KVOsirisDataController<T : KVRootEntity > : KVAbstractDataController<T>
   }
   // MARK: - Entities
   /**
-   ## Should be set to Default
+  ## Should be set to Default
    
-   - Returns: \<T\> in ctx
-   */
+  - Returns: \<T\> in ctx
+  */
   override func createEntityInContext(_ context: NSManagedObjectContext, type: String) -> T {
     ///Also interesting this could just init a bare NSManaged Obj. I'll take teh errors I got b/c the app works better if this fails when I hit it
     return NSEntityDescription.insertNewObject(forEntityName: type, into: context) as! T
   }
   /**
-   Mark the specified entity for deletion
-   */
+  Mark the specified entity for deletion
+  */
   func deleteEntityInContext(_ context: NSManagedObjectContext, entity: T)
   {
     //                    NSLog("Powa:: %@ !",object .objectID);
@@ -88,10 +88,10 @@ class KVOsirisDataController<T : KVRootEntity > : KVAbstractDataController<T>
     }
   }
   /**
-   Save changes to the specified entity
+  Save changes to the specified entity
    
-   - returns: (saveState, saveMessage)
-   */
+  - returns: (saveState, saveMessage)
+  */
   func saveEntity(entity: T) -> (state: saveState, message: String?)
   {
     var ss: saveState
@@ -118,23 +118,26 @@ class KVOsirisDataController<T : KVRootEntity > : KVAbstractDataController<T>
     var ss: saveState
     var saveMessage: String?
     //let context = persistentContainer.viewContext
-    if let moc : NSManagedObjectContext = self.PSK.viewContext
-    {
-      if moc.hasChanges {
-        ss = saveState.Error
-        saveMessage = error?.description
-      }
-      else
-      {
-        ss = saveState.SaveComplete
-        saveMessage = "Good"
-      }
+    let moc : NSManagedObjectContext = self.PSK.viewContext
+    
+    if moc.hasChanges {
+      ss = saveState.Error
+      saveMessage = error?.description
     }
     else
     {
-      ss = saveState.Error
-      saveMessage = "Database error"
+      ss = saveState.SaveComplete
+      saveMessage = "Good"
     }
+//  if let moc : NSManagedObjectContext = self.PSK.viewContext
+//    {
+//      if moc.hasChanges {…}
+//    }
+//    else
+//    {
+//      ss = saveState.Error
+//      saveMessage = "Database error"
+//    }
     return (ss, saveMessage)
   }
   /// optional businessRules
@@ -145,10 +148,10 @@ class KVOsirisDataController<T : KVRootEntity > : KVAbstractDataController<T>
   // MARK: -
   // MARK: Data Accessors
   /**
-   # Workhorse01
+  # Workhorse01
    
-   - returns:
-   */
+  - returns:
+  */
   func getAllEntities() -> Array<T>
   {
     let todosFetch : NSFetchRequest = NSFetchRequest<T>(entityName: entityClassName!)
@@ -164,10 +167,10 @@ class KVOsirisDataController<T : KVRootEntity > : KVAbstractDataController<T>
     } catch { fatalError("bitched\(error)") }
   }
   /**
-   # Workhorse02
+  # Workhorse02
    
-   - returns: Typed Array
-   */
+  - returns: Typed Array
+  */
   func getEntities(sortedBy sortDescriptor:NSSortDescriptor?, matchingPredicate predicate:NSPredicate?) -> Array <T>
   {
     let todosFetch : NSFetchRequest = NSFetchRequest<T>(entityName: entityClassName!)
@@ -184,19 +187,19 @@ class KVOsirisDataController<T : KVRootEntity > : KVAbstractDataController<T>
     }
   }
   /**
-   ## Get entities of the default type matching the predicate
+  ## Get entities of the default type matching the predicate
    
-   - returns: Typed Array
-   */
+  - returns: Typed Array
+  */
   func getEntitiesMatchingPredicate(predicate: NSPredicate) -> Array<T>
   {
     return getEntities(sortedBy: nil, matchingPredicate: predicate)
   }
   /**
-   Get entities of the default type sorted by descriptor and matching the predicate
+  Get entities of the default type sorted by descriptor and matching the predicate
    
-   - returns: Typed Array
-   */
+  - returns: Typed Array
+  */
   func getEntitiesSortedBy(sortDescriptor: NSSortDescriptor, matchingPredicate predicate:NSPredicate) -> Array<T>?
   {
     return getEntities(sortedBy: sortDescriptor, matchingPredicate: predicate)
