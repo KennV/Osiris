@@ -21,7 +21,14 @@ class KVPrimeTVController: UITableViewController {
 	*/
   var objects = [Any]()
   var AllDataController = KVOsirisDataController()
-
+  var PDC = KVPersonDataController()
+// I replace `objects`
+  var people : Array <KVPerson> {
+    get {
+      return PDC.getAllEntities()
+    }
+    set { }
+  }
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
@@ -50,7 +57,9 @@ class KVPrimeTVController: UITableViewController {
     let indexPath = IndexPath(row: 0, section: 0)
     tableView.insertRows(at: [indexPath], with: .automatic)
   }
-
+  func insertNewPerson(_ sender: Any) {
+//    PDC.createPersonInContext(PDC.MOC!)
+  }
   // MARK: - Segues
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
