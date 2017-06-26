@@ -15,7 +15,7 @@ import CoreLocation
 import CoreData
 import UIKit
 
-class KVItemDataController<T : KVItem > : KVAbstractDataController<T>
+class KVItemDataController<T : KVItem > : KVOsirisDataController<T>
 {
 
 }

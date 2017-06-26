@@ -15,7 +15,7 @@ import CoreLocation
 import CoreData
 import UIKit
 
-class KVEntityDataController<T : KVEntity > : KVAbstractDataController<T>
+class KVEntityDataController<T : KVEntity > : KVOsirisDataController<T>
 {
   
 }
