@@ -1,10 +1,10 @@
-//
-//  DetailViewController.swift
-//  Osiris
-//
-//  Created by Kenn Villegas on 6/13/17.
-//  Copyright © 2017 dubian. All rights reserved.
-//
+/**
+  DetailViewController.swift
+  Osiris
+
+  Created by Kenn Villegas on 6/13/17.
+  Copyright © 2017 dubian. All rights reserved.
+*/
 
 import UIKit
 
@@ -17,7 +17,7 @@ class KVDetailViewController: UIViewController {
     // Update the user interface for the detail item.
     if let detail = detailItem {
         if let label = detailDescriptionLabel {
-            label.text = detail.description
+            label.text = detail.incepDate!.description
         }
     }
   }
@@ -33,7 +33,7 @@ class KVDetailViewController: UIViewController {
     // Dispose of any resources that can be recreated.
   }
 
-  var detailItem: NSDate? {
+  var detailItem: KVPerson? {
     didSet {
         // Update the view.
         configureView()

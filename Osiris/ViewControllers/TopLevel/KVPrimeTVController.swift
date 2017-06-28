@@ -1,10 +1,10 @@
-//
-//  MasterViewController.swift
-//  Osiris
-//
-//  Created by Kenn Villegas on 6/13/17.
-//  Copyright © 2017 dubian. All rights reserved.
-//
+/**
+ MasterViewController.swift
+ Osiris
+
+ Created by Kenn Villegas on 6/13/17.
+ Copyright © 2017 dubian. All rights reserved.
+*/
 
 import UIKit
 
@@ -19,7 +19,7 @@ class KVPrimeTVController: UITableViewController {
    _MOC
    or just Array
 	*/
-  var objects = [Any]()
+//  var objects = [Any]()
   var AllDataController = KVOsirisDataController()
   var PDC = KVPersonDataController()
 // I replace `objects`
@@ -51,23 +51,22 @@ class KVPrimeTVController: UITableViewController {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
-
   func insertNewObject(_ sender: Any) {
-    objects.insert(NSDate(), at: 0)
+    //    PDC.createPersonInContext(PDC.MOC!)
+    self.PDC.makePerson()
     let indexPath = IndexPath(row: 0, section: 0)
     tableView.insertRows(at: [indexPath], with: .automatic)
+    
   }
-  func insertNewPerson(_ sender: Any) {
-//    PDC.createPersonInContext(PDC.MOC!)
-  }
+  
   // MARK: - Segues
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "showDetail" {
         if let indexPath = tableView.indexPathForSelectedRow {
-            let object = objects[indexPath.row] as! NSDate
+            let person = people[indexPath.row] //as! NSDate
             let controller = (segue.destination as! UINavigationController).topViewController as! KVDetailViewController
-            controller.detailItem = object
+            controller.detailItem = person
             controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
             controller.navigationItem.leftItemsSupplementBackButton = true
         }
@@ -81,14 +80,15 @@ class KVPrimeTVController: UITableViewController {
   }
 
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return objects.count
+//    return objects.count
+    return(people.count)
   }
 
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-
-    let object = objects[indexPath.row] as! NSDate
-    cell.textLabel!.text = object.description
+    let person = people[indexPath.row] //as! NSDate
+//    let object = objects[indexPath.row] as! NSDate
+    cell.textLabel!.text = person.incepDate?.description
     return cell
   }
 
@@ -99,8 +99,10 @@ class KVPrimeTVController: UITableViewController {
 
   override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
-        objects.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .fade)
+//      let person = people[indexPath.row]
+//        objects.remove(at: indexPath.row)
+      self.PDC.deleteEntityInContext(self.PDC.PSK.viewContext, entity: (people[indexPath.row]))
+      tableView.deleteRows(at: [indexPath], with: .fade)
     } else if editingStyle == .insert {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
