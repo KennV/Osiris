@@ -32,6 +32,7 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
   {
     let entityDescription = NSEntityDescription.entity(forEntityName: self.entityClassName!, in: context)
     let e = NSManagedObject(entity: entityDescription!, insertInto: context) as! T
+//    self.saveContext()
     return e
   }
   func createPersonInContext(_ context: NSManagedObjectContext) -> T
@@ -42,6 +43,7 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
     let pxDescription = NSEntityDescription.entity(forEntityName: (EntityTypes.Physics), in: self.PSK.viewContext)
     
     let person = KVPerson(entity: pDescription!, insertInto: context) as! T
+    person.incepDate = NSDate()
     let gfx = KVGraphics(entity: gDescription!, insertInto: context)
     let physx = KVPhysics(entity: pxDescription!, insertInto: context)
     let loc = KVLocation(entity: lDescription!, insertInto: context)
@@ -92,5 +94,10 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
   /**
   
   */
-  
+  func makePerson()
+  {
+    let newPerson = self.createPersonInContext(self.PSK.viewContext)
+    setupPerson(newPerson)
+	// Now what can I assert in unit tests
+  }
 }

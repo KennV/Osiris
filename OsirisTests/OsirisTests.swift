@@ -13,11 +13,12 @@ import CoreData
 
 class OsirisTests: XCTestCase {
   var SUT_PSK : NSPersistentContainer? = nil
-  
+  var MOC : NSManagedObjectContext? = nil
   func setupPSK() -> NSPersistentContainer  {
-    //    let st = "NSInMemoryStoreType" // storeType
+    
     let container = NSPersistentContainer(name: "Osiris")
-    container.loadPersistentStores(completionHandler: { (NSInMemoryStoreType, error) in
+    container.loadPersistentStores(completionHandler:
+      { (NSInMemoryStoreType, error) in
       if let error = error as NSError? {
         // Replace this implementation with code to handle the error appropriately.
         // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -32,34 +33,20 @@ class OsirisTests: XCTestCase {
          */
         fatalError("Unresolved error \(error), \(error.userInfo)")
       }
-    })
-    //    container.NSS
+    }
+    )
+    self.MOC = container.viewContext
     return container
   }
-  var MOC : NSManagedObjectContext? = nil
-  func setUpInMemoryManagedObjectContext() -> NSManagedObjectContext
-  {
-    
-    let managedObjectModel = NSManagedObjectModel.mergedModel(from: [Bundle.main])!
-    
-    let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
-    do {
-      try persistentStoreCoordinator.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: nil)
-    } catch {
-      print("Adding in-memory persistent store coordinator failed")
-    }
-    let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-    
-    managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
-    return managedObjectContext
-  }
+  
   override func setUp() {
     super.setUp()
-    MOC = setUpInMemoryManagedObjectContext()
+    SUT_PSK = setupPSK()
+//    MOC = setUpInMemoryManagedObjectContext()
   }
   override func tearDown() {
     MOC = nil
-    //    SUT_PSK = nil
+    SUT_PSK = nil
     super.tearDown()
   }
   func entityControllerTest() {
@@ -71,13 +58,40 @@ class OsirisTests: XCTestCase {
     XCTAssertNotNil(testEDC.PSK.viewContext, "Failed to Create MOC")
     XCTAssertNotNil(entityTestItem, "Failed to Create entity")
   }
-  func baseTVCTest() {
-    let tableViewController = KVPrimeTVController()
-    XCTAssertEqual(0, tableViewController.objects.count)
-    tableViewController.insertNewObject(self)
-    XCTAssertEqual(1, tableViewController.objects.count)
-    tableViewController.AllDataController.PSK = SUT_PSK!
-    XCTAssertNotNil(tableViewController.AllDataController.MOC, "No MOC")
+  func testADController()
+  {
+    let pTVC = KVPrimeTVController()
+    XCTAssertEqual(0, pTVC.objects.count)
+    pTVC.insertNewObject(self)
+    XCTAssertEqual(1, pTVC.objects.count)
+    
+    pTVC.AllDataController.PSK = SUT_PSK!
+    XCTAssertNotNil(pTVC.AllDataController.MOC, "No MOC")
+    pTVC.PDC.MOC = pTVC.AllDataController.MOC
+    
+    XCTAssertEqual(0, pTVC.AllDataController.getAllEntities().count)
+    _ = pTVC.AllDataController.createEntityInContext((SUT_PSK?.viewContext)!, type: EntityTypes.RootEntity)
+    XCTAssertEqual(1, pTVC.AllDataController.getAllEntities().count)
+    
+    XCTAssertEqual(0, pTVC.people.count)
+    pTVC.PDC.makePerson()
+    XCTAssertEqual(1, pTVC.people.count)
+//    _ = pTVC.PDC.createEntityInContext((pTVC.PDC.MOC)!, type: EntityTypes.Person)
+//    XCTAssertEqual(2, pTVC.people.count)
   }
-  
+  func testsPDController()
+  {
+    let TVC = KVPrimeTVController()
+
+    TVC.AllDataController.PSK = SUT_PSK!
+    XCTAssertNotNil(TVC.AllDataController.MOC, "No MOC")
+    
+    TVC.PDC.MOC = TVC.AllDataController.MOC
+    XCTAssertEqual(0, TVC.people.count)
+    TVC.PDC.makePerson()
+    XCTAssertEqual(1, TVC.people.count)
+    
+    let joe = TVC.people[0]
+    XCTAssertEqual(100, joe.physics?.massKG)
+  }
 }
