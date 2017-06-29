@@ -14,7 +14,8 @@ import CoreData
 class OsirisTests: XCTestCase {
   var SUT_PSK : NSPersistentContainer? = nil
   var MOC : NSManagedObjectContext? = nil
-  func setupPSK() -> NSPersistentContainer  {
+  func setupPSK() -> NSPersistentContainer
+  {
     
     let container = NSPersistentContainer(name: "Osiris")
     container.loadPersistentStores(completionHandler:
@@ -38,18 +39,18 @@ class OsirisTests: XCTestCase {
     self.MOC = container.viewContext
     return container
   }
-  
-  override func setUp() {
+  override func setUp()
+  {
     super.setUp()
     SUT_PSK = setupPSK()
-//    MOC = setUpInMemoryManagedObjectContext()
   }
   override func tearDown() {
     MOC = nil
     SUT_PSK = nil
     super.tearDown()
   }
-  func entityControllerTest() {
+  func entityControllerTest()
+  {
     let testEDC = KVEntityDataController<KVEntity>()
     testEDC.PSK = self.SUT_PSK!
     let entityTestItem = testEDC.createEntityInContext(testEDC.PSK.viewContext, type: "Entity")
@@ -61,9 +62,6 @@ class OsirisTests: XCTestCase {
   func testADController()
   {
     let pTVC = KVPrimeTVController()
-    XCTAssertEqual(0, pTVC.objects.count)
-    pTVC.insertNewObject(self)
-    XCTAssertEqual(1, pTVC.objects.count)
     
     pTVC.AllDataController.PSK = SUT_PSK!
     XCTAssertNotNil(pTVC.AllDataController.MOC, "No MOC")
@@ -76,8 +74,6 @@ class OsirisTests: XCTestCase {
     XCTAssertEqual(0, pTVC.people.count)
     pTVC.PDC.makePerson()
     XCTAssertEqual(1, pTVC.people.count)
-//    _ = pTVC.PDC.createEntityInContext((pTVC.PDC.MOC)!, type: EntityTypes.Person)
-//    XCTAssertEqual(2, pTVC.people.count)
   }
   func testsPDController()
   {
@@ -90,8 +86,14 @@ class OsirisTests: XCTestCase {
     XCTAssertEqual(0, TVC.people.count)
     TVC.PDC.makePerson()
     XCTAssertEqual(1, TVC.people.count)
-    
+    // Currently only testing the one ivar from graphics, location and physics
     let joe = TVC.people[0]
+    XCTAssertEqual("New", joe.graphics?.caption)
+    XCTAssertEqual("NewAddress", joe.location?.address)
     XCTAssertEqual(100, joe.physics?.massKG)
+    //
+    XCTAssertEqual(joe, joe.graphics?.owner)
+    XCTAssertEqual(joe, joe.location?.owner)
+    XCTAssertEqual(joe, joe.physics?.owner)
   }
 }
