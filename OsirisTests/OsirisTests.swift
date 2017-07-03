@@ -75,7 +75,7 @@ class OsirisTests: XCTestCase {
     pTVC.PDC.makePerson()
     XCTAssertEqual(1, pTVC.people.count)
   }
-  func testsPDController()
+  func testPDController()
   {
     let TVC = KVPrimeTVController()
 
@@ -95,5 +95,18 @@ class OsirisTests: XCTestCase {
     XCTAssertEqual(joe, joe.graphics?.owner)
     XCTAssertEqual(joe, joe.location?.owner)
     XCTAssertEqual(joe, joe.physics?.owner)
+  }
+  func testVendorCon () {
+    let pTVC = KVPrimeTVController()
+    //
+    pTVC.AllDataController.PSK = SUT_PSK!
+    XCTAssertNotNil(pTVC.AllDataController.MOC, "No MOC")
+    let tKhan = KVVendorDataController()
+    tKhan.MOC = SUT_PSK?.viewContext
+    XCTAssertEqual(0, tKhan.getAllEntities().count)
+    XCTAssertNotNil(tKhan.createEntityInContext(tKhan.MOC!, type: EntityTypes.Vendor), "No Vendor")
+    _ = tKhan.createEntityInContext((SUT_PSK?.viewContext)!, type: EntityTypes.Vendor )
+//    tKhan.saveContext()
+//    XCTAssertNotEqual(0, tKhan.getAllEntities().count)
   }
 }
