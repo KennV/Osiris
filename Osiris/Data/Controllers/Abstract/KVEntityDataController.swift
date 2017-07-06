@@ -17,5 +17,30 @@ import UIKit
 
 class KVEntityDataController<T : KVEntity > : KVOsirisDataController<T>
 {
-  
+  func setupGraphics(g :KVGraphics)
+  {
+    g.caption = "New"
+    g.photoActual = UIImage()
+    g.photoFileName = g.caption
+    g.rating = 0.1
+  }
+  func setupLocation(l :KVLocation)
+  {
+    /**
+     */
+    l.latitude = 44
+    l.longitude = 128
+    l.altitude = 32
+    l.heading = 1
+    l.address = "NewAddress"
+    l.postalCode = "10001"
+    l.state = "New York"
+  }
+  func setupPhysics(p: KVPhysics)
+  {
+    p.massKG = 100
+    p.xLong = 1
+    p.yWide = 1
+    p.zTall = 2
+  }  
 }
