@@ -44,16 +44,17 @@ class OsirisTests: XCTestCase {
     super.setUp()
     SUT_PSK = setupPSK()
   }
-  override func tearDown() {
+  override func tearDown()
+  {
     MOC = nil
     SUT_PSK = nil
     super.tearDown()
   }
-  func entityControllerTest()
+  func testEntityController()
   {
     let testEDC = KVEntityDataController<KVEntity>()
     testEDC.PSK = self.SUT_PSK!
-    let entityTestItem = testEDC.createEntityInContext(testEDC.PSK.viewContext, type: "Entity")
+    let entityTestItem = testEDC.createEntityInContext(testEDC.PSK.viewContext, type: EntityTypes.Entity)
     
     XCTAssertNotNil((testEDC), "Failed to Create Entity Controller")
     XCTAssertNotNil(testEDC.PSK.viewContext, "Failed to Create MOC")
@@ -65,14 +66,14 @@ class OsirisTests: XCTestCase {
     
     pTVC.AllDataController.PSK = SUT_PSK!
     XCTAssertNotNil(pTVC.AllDataController.MOC, "No MOC")
-    pTVC.PDC.MOC = pTVC.AllDataController.MOC
+    pTVC.personDataController.MOC = pTVC.AllDataController.MOC
     
     XCTAssertEqual(0, pTVC.AllDataController.getAllEntities().count)
     _ = pTVC.AllDataController.createEntityInContext((SUT_PSK?.viewContext)!, type: EntityTypes.RootEntity)
     XCTAssertEqual(1, pTVC.AllDataController.getAllEntities().count)
     
     XCTAssertEqual(0, pTVC.people.count)
-    pTVC.PDC.makePerson()
+    pTVC.personDataController.makePerson()
     XCTAssertEqual(1, pTVC.people.count)
   }
   func testPDController()
@@ -82,9 +83,9 @@ class OsirisTests: XCTestCase {
     TVC.AllDataController.PSK = SUT_PSK!
     XCTAssertNotNil(TVC.AllDataController.MOC, "No MOC")
     
-    TVC.PDC.MOC = TVC.AllDataController.MOC
+    TVC.personDataController.MOC = TVC.AllDataController.MOC
     XCTAssertEqual(0, TVC.people.count)
-    TVC.PDC.makePerson()
+    TVC.personDataController.makePerson()
     XCTAssertEqual(1, TVC.people.count)
     // Currently only testing the one ivar from graphics, location and physics
     let joe = TVC.people[0]
@@ -96,17 +97,17 @@ class OsirisTests: XCTestCase {
     XCTAssertEqual(joe, joe.location?.owner)
     XCTAssertEqual(joe, joe.physics?.owner)
   }
-  func testVendorCon () {
-    let pTVC = KVPrimeTVController()
-    //
-    pTVC.AllDataController.PSK = SUT_PSK!
-    XCTAssertNotNil(pTVC.AllDataController.MOC, "No MOC")
-    let tKhan = KVVendorDataController()
-    tKhan.MOC = SUT_PSK?.viewContext
-    XCTAssertEqual(0, tKhan.getAllEntities().count)
-    XCTAssertNotNil(tKhan.createEntityInContext(tKhan.MOC!, type: EntityTypes.Vendor), "No Vendor")
-    _ = tKhan.createEntityInContext((SUT_PSK?.viewContext)!, type: EntityTypes.Vendor )
-//    tKhan.saveContext()
-//    XCTAssertNotEqual(0, tKhan.getAllEntities().count)
+  func testVendorCon()
+  {
+    let vue = KVPrimeTVController()
+    let sst = vue.vendorDataController
+    sst.PSK = SUT_PSK!
+    sst.MOC = SUT_PSK?.viewContext
+    XCTAssertEqual(0, sst.getAllEntities().count)
+    let tj = sst.createEntityInContext((sst.MOC)!, type: EntityTypes.Vendor)
+    XCTAssertNotNil(tj)
+    let bob = sst.getAllEntities()[0]
+    XCTAssertNotNil(bob)
+    XCTAssertEqual(1, sst.getAllEntities().count)
   }
 }
