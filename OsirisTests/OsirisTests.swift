@@ -70,21 +70,21 @@ class OsirisTests: XCTestCase {
     
     XCTAssertNotNil(pTVC.AllDataController.MOC, "No MOC")
     pTVC.personDataController.MOC = pTVC.AllDataController.MOC
-    
-    XCTAssertEqual(0, pTVC.AllDataController.getAllEntities().count)
+    let testDataController = pTVC.AllDataController // Shorthand Mod
+    XCTAssertEqual(0, testDataController.getAllEntities().count)
     _ = pTVC.AllDataController.createEntityInContext((SUT_PSK?.viewContext)!, type: EntityTypes.RootEntity)
-    XCTAssertEqual(1, pTVC.AllDataController.getAllEntities().count)
+    XCTAssertEqual(1, testDataController.getAllEntities().count)
     
     XCTAssertEqual(0, pTVC.people.count)
     pTVC.personDataController.makePerson()
     XCTAssertEqual(1, pTVC.people.count)
     
-    XCTAssertNotNil(pTVC.AllDataController.makeRandomNumber(2))
-    XCTAssertNotNil(pTVC.AllDataController.makeRandomNumberCurve(2, 6))
-    XCTAssertNotNil(pTVC.AllDataController.makeRandomPhoneNumber())
-    XCTAssertNotNil(pTVC.AllDataController.makeRandomHexQuad())
-    XCTAssertNil(pTVC.AllDataController.saveEntities().message)
-    XCTAssertNil(pTVC.AllDataController.saveEntity(entity: (pTVC.AllDataController.getAllEntities()[0])).message)
+    XCTAssertNotNil(testDataController.makeRandomNumber(2))
+    XCTAssertNotNil(testDataController.makeRandomNumberCurve(2, 6))
+    XCTAssertNotNil(testDataController.makeRandomPhoneNumber())
+    XCTAssertNotNil(testDataController.makeRandomHexQuad())
+    XCTAssertNil(testDataController.saveEntities().message)
+    XCTAssertNil(testDataController.saveEntity(entity: (pTVC.AllDataController.getAllEntities()[0])).message)
 //    XCTAssertNil(pTVC.AllDataController.saveCurrentContext((SUT_PSK?.viewContext)!))
     
   }
