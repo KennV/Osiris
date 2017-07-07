@@ -62,9 +62,12 @@ class OsirisTests: XCTestCase {
   }
   func testADController()
   {
-    let pTVC = KVPrimeTVController()
+//    var jx = KVOsirisDataController((SUT_PSK?.viewContext)!)
+    XCTAssertNotNil(KVOsirisDataController((SUT_PSK?.viewContext)!), "Combi")
     
+    let pTVC = KVPrimeTVController()
     pTVC.AllDataController.PSK = SUT_PSK!
+    
     XCTAssertNotNil(pTVC.AllDataController.MOC, "No MOC")
     pTVC.personDataController.MOC = pTVC.AllDataController.MOC
     
@@ -75,11 +78,20 @@ class OsirisTests: XCTestCase {
     XCTAssertEqual(0, pTVC.people.count)
     pTVC.personDataController.makePerson()
     XCTAssertEqual(1, pTVC.people.count)
+    
+    XCTAssertNotNil(pTVC.AllDataController.makeRandomNumber(2))
+    XCTAssertNotNil(pTVC.AllDataController.makeRandomNumberCurve(2, 6))
+    XCTAssertNotNil(pTVC.AllDataController.makeRandomPhoneNumber())
+    XCTAssertNotNil(pTVC.AllDataController.makeRandomHexQuad())
+    XCTAssertNil(pTVC.AllDataController.saveEntities().message)
+    XCTAssertNil(pTVC.AllDataController.saveEntity(entity: (pTVC.AllDataController.getAllEntities()[0])).message)
+//    XCTAssertNil(pTVC.AllDataController.saveCurrentContext((SUT_PSK?.viewContext)!))
+    
   }
   func testPDController()
   {
     let TVC = KVPrimeTVController()
-
+    
     TVC.AllDataController.PSK = SUT_PSK!
     XCTAssertNotNil(TVC.AllDataController.MOC, "No MOC")
     
@@ -108,6 +120,11 @@ class OsirisTests: XCTestCase {
     XCTAssertNotNil(tj)
     let bob = sst.getAllEntities()[0]
     XCTAssertNotNil(bob)
+    XCTAssertEqual(1, sst.getAllEntities().count)
+    //
+    sst.deleteEntityInContext((sst.MOC)!, entity: bob)
+    XCTAssertEqual(0, sst.getAllEntities().count)
+    sst.makeVendor()
     XCTAssertEqual(1, sst.getAllEntities().count)
   }
 }

@@ -22,19 +22,6 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
     self.entityClassName = EntityTypes.Person
     self.MOC = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
   }
-  convenience init(_ ctx: NSManagedObjectContext)
-  {
-    self.init()
-    self.entityClassName = EntityTypes.Person
-    self.MOC = ctx
-  }
-  override func createEntityInContext(_ context: NSManagedObjectContext, type: String) -> T
-  {
-    let entityDescription = NSEntityDescription.entity(forEntityName: self.entityClassName!, in: context)
-    let e = NSManagedObject(entity: entityDescription!, insertInto: context) as! T
-//    self.saveContext()
-    return e
-  }
   func createPersonInContext(_ context: NSManagedObjectContext) -> T
   {
     let pDescription = NSEntityDescription.entity(forEntityName: (self.entityClassName)!, in: self.PSK.viewContext)
@@ -65,7 +52,6 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
     self.setupLocation(l: t.location!)
     self.setupPhysics(p: t.physics!)
   }
-  
   /**
   
   */
