@@ -15,7 +15,9 @@ class KVPrimeTVController: UITableViewController {
   var AllDataController = KVOsirisDataController()
   var personDataController = KVPersonDataController()
   var vendorDataController = KVVendorDataController()
-
+  var allItemsDataController = KVItemDataController()
+  var sessionDataController = KVSessionDataController()
+  
   var people : Array <KVPerson> {
     get {
       return personDataController.getAllEntities()
