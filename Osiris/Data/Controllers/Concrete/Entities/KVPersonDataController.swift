@@ -43,14 +43,8 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
     person.physics = physx
     person.location = loc
     //
-    self.setupPerson(person)
+    self.setupEntity(person)
     return person
-  }
-  func setupPerson(_ t: T)
-  {
-    self.setupGraphics(g: t.graphics!)
-    self.setupLocation(l: t.location!)
-    self.setupPhysics(p: t.physics!)
   }
   /**
   
@@ -58,7 +52,7 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
   func makePerson()
   {
     let newPerson = self.createPersonInContext(self.PSK.viewContext)
-    setupPerson(newPerson)
+    setupEntity(newPerson)
 	// Now what can I assert in unit tests
   }
 }
