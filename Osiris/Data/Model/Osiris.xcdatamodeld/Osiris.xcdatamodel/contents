@@ -13,7 +13,7 @@
     </entity>
     <entity name="KVItem" representedClassName="KVItem" parentEntity="KVRootEntity" syncable="YES" codeGenerationType="class">
         <attribute name="cost" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="isCompleteIfYes" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isCompleteIfYes" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="skuID" optional="YES" attributeType="String" defaultValueString="UNSET" syncable="YES"/>
         <attribute name="tax" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
@@ -81,17 +81,17 @@
         <relationship name="inventoryStack" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KVItem" inverseName="seller" inverseEntity="KVItem" syncable="YES"/>
     </entity>
     <elements>
-        <element name="KVEntity" positionX="263" positionY="423" width="128" height="43"/>
+        <element name="KVEntity" positionX="263" positionY="423" width="128" height="45"/>
         <element name="KVGoods" positionX="1044" positionY="126" width="128" height="58"/>
         <element name="KVGraphics" positionX="-74" positionY="105" width="128" height="118"/>
-        <element name="KVItem" positionX="738" positionY="200" width="128" height="148"/>
+        <element name="KVItem" positionX="738" positionY="200" width="128" height="150"/>
         <element name="KVLocation" positionX="-218" positionY="81" width="128" height="178"/>
         <element name="KVPerson" positionX="747" positionY="551" width="128" height="178"/>
         <element name="KVPhysics" positionX="-218" positionY="270" width="128" height="118"/>
         <element name="KVRootEntity" positionX="259" positionY="186" width="128" height="163"/>
         <element name="KVService" positionX="1053" positionY="261" width="128" height="58"/>
         <element name="KVSession" positionX="1051" positionY="360" width="128" height="148"/>
-        <element name="KVTransaction" positionX="565" positionY="686" width="128" height="43"/>
+        <element name="KVTransaction" positionX="565" positionY="686" width="128" height="45"/>
         <element name="KVVendor" positionX="576" positionY="386" width="128" height="133"/>
     </elements>
 </model>
