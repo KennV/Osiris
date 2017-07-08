@@ -5,8 +5,16 @@
  Created by Kenn Villegas on 6/13/17.
  Copyright © 2017 dubian. All rights reserved.
 */
-
+/**
+20170708@12:30
+OK in its basic form I will need 3 sections in some table view
+I already have a Peron/People/Owner and Vendor. So i Added
+Sessions, and its parent controller.
+Also sort of undocumented, I have it at about 50% test coverage. which
+I really enjoy.
+*/
 import UIKit
+import CoreLocation
 
 class KVPrimeTVController: UITableViewController {
 
@@ -27,6 +35,13 @@ class KVPrimeTVController: UITableViewController {
   var vendors : Array <KVVendor> {
     get {
       return vendorDataController.getAllEntities()
+    }
+    set { }
+  }
+  
+  var sessions : Array <KVSession> {
+    get {
+      return sessionDataController.getAllEntities()
     }
     set { }
   }
@@ -74,23 +89,63 @@ class KVPrimeTVController: UITableViewController {
     }
   }
   // MARK: - Table View
+    /**
+  Set for Owner, Vendors, and Sessions 
+  */
   override func numberOfSections(in tableView: UITableView) -> Int
   {
-    return 1
+    return 3
   }
   override func tableView(_ tableView: UITableView,
                           numberOfRowsInSection section: Int) -> Int
   {
-    return(people.count)
+    var rowCount = 0
+    if (section == 0) {
+      rowCount = people.count
+    }
+    if (section == 1) {
+      rowCount = vendors.count
+    }
+    if (section == 2) {
+      rowCount = sessions.count
+    }
+    return(rowCount)
+    
   }
   override func tableView(_ tableView: UITableView,
                           cellForRowAt indexPath: IndexPath) -> UITableViewCell
   {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-    let person = people[indexPath.row]
-    cell.textLabel!.text = person.incepDate?.description
-    return cell
-  }
+    
+    if (indexPath.section == 0)
+    {
+      let c = tableView.dequeueReusableCell(withIdentifier: "OwnerCell", for: indexPath)
+          let person = people[indexPath.row]
+          c.textLabel!.text = person.incepDate?.description
+      return c
+    }
+    if (indexPath.section == 1)
+    {
+      let f = tableView.dequeueReusableCell(withIdentifier: "VendorCell", for: indexPath) //as! KVBasicCustomCell
+      let item = vendors[(indexPath as NSIndexPath).row]
+//      f.nameLabel!.text = item.qName
+      return f
+    }
+    if (indexPath.section == 2)
+    {
+      let d = tableView.dequeueReusableCell(withIdentifier: "sessionCell", for: indexPath) //as! KVBasicCustomCell
+      let item = sessions[(indexPath as NSIndexPath).row]
+//      d.nameLabel!.text = item.qName
+      return d
+    }
+    
+    /*
+     return cell c,d,e,f or return an empty one
+     */
+    return (UITableViewCell())//cell!
+  }  
+//    let cell =
+//    return cell
+  
   override func tableView(_ tableView: UITableView,
                           canEditRowAt indexPath: IndexPath) -> Bool
   {
