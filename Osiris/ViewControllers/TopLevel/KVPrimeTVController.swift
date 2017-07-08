@@ -12,6 +12,9 @@ I already have a Peron/People/Owner and Vendor. So i Added
 Sessions, and its parent controller.
 Also sort of undocumented, I have it at about 50% test coverage. which
 I really enjoy.
+
+I am not sure what I will get in the DVC if I have no object. That is one reason to have a setup function. ~ ~ I will need just some basic logic to make a person if the array is empty when I delete the person - so the array cannot be empty. Next I have to see if Person<T> has types - - Nope that is in root so I will be testing if the item at people[0] is "Owner" or "Friend"
+ACTUALLY if I tink about it for a moment, I can hide this window and _only_ present the detail if the arrays are empty. Then in the detail I can set the state/isVisible on everything except a setupButton. This will pound through getting the data and setting owner. So Back to the _PDC Class
 */
 import UIKit
 import CoreLocation
@@ -89,8 +92,8 @@ class KVPrimeTVController: UITableViewController {
     }
   }
   // MARK: - Table View
-    /**
-  Set for Owner, Vendors, and Sessions 
+  /**
+  Set for Owner, Vendors, and Sessions
   */
   override func numberOfSections(in tableView: UITableView) -> Int
   {
@@ -143,9 +146,7 @@ class KVPrimeTVController: UITableViewController {
      */
     return (UITableViewCell())//cell!
   }  
-//    let cell =
-//    return cell
-  
+
   override func tableView(_ tableView: UITableView,
                           canEditRowAt indexPath: IndexPath) -> Bool
   {
@@ -160,6 +161,11 @@ class KVPrimeTVController: UITableViewController {
       tableView.deleteRows(at: [indexPath], with: .fade)
     } else if editingStyle == .insert {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+    }
+    if personDataController.getAllEntities().count == 0
+    {
+              self.personDataController.makePerson()
+              tableView.reloadData()
     }
   }
 }

@@ -73,8 +73,8 @@
 		38233C371EF83BC00000DEC1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		38233C391EF83C250000DEC1 /* KVAbstractDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVAbstractDataController.swift; sourceTree = "<group>"; };
 		38233C3B1EF83CC20000DEC1 /* KVOsirisDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVOsirisDataController.swift; sourceTree = "<group>"; };
-		38441FCD1F1144AA00197FE4 /* KVBasicCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KVBasicCustomCell.swift; path = ViewObjects/TableCell/KVBasicCustomCell.swift; sourceTree = "<group>"; };
-		38441FCE1F1144AA00197FE4 /* KVRatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KVRatingView.swift; path = ViewObjects/TableCell/KVRatingView.swift; sourceTree = "<group>"; };
+		38441FCD1F1144AA00197FE4 /* KVBasicCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVBasicCustomCell.swift; sourceTree = "<group>"; };
+		38441FCE1F1144AA00197FE4 /* KVRatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVRatingView.swift; sourceTree = "<group>"; };
 		3853D43D1F0FE75A00104CC4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/HouseCall.storyboard; sourceTree = "<group>"; };
 		38AFEF6F1F10BF5000FC52CE /* KVSessionDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KVSessionDataController.swift; path = Concrete/Items/Sessions/KVSessionDataController.swift; sourceTree = "<group>"; };
 		38DFA1991EF9A51C00954CCF /* KVVendorDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KVVendorDataController.swift; path = Concrete/Entities/KVVendorDataController.swift; sourceTree = "<group>"; };
@@ -203,7 +203,6 @@
 		38233C1E1EF837F80000DEC1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				38441FCC1F11447A00197FE4 /* New Group */,
 				38233C211EF837F80000DEC1 /* TopLevel */,
 				38233C1F1EF837F80000DEC1 /* SetupScreens */,
 				38233C241EF837F80000DEC1 /* ViewObjects */,
@@ -262,6 +261,8 @@
 		38233C271EF837F80000DEC1 /* TableCell */ = {
 			isa = PBXGroup;
 			children = (
+				38441FCD1F1144AA00197FE4 /* KVBasicCustomCell.swift */,
+				38441FCE1F1144AA00197FE4 /* KVRatingView.swift */,
 			);
 			path = TableCell;
 			sourceTree = "<group>";
@@ -297,15 +298,6 @@
 				38233C2F1EF83B9C0000DEC1 /* MapKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		38441FCC1F11447A00197FE4 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-				38441FCD1F1144AA00197FE4 /* KVBasicCustomCell.swift */,
-				38441FCE1F1144AA00197FE4 /* KVRatingView.swift */,
-			);
-			name = "New Group";
 			sourceTree = "<group>";
 		};
 		38DFA1961EF9A40100954CCF /* Concrete */ = {
