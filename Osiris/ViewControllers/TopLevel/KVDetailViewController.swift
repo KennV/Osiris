@@ -5,7 +5,9 @@
   Created by Kenn Villegas on 6/13/17.
   Copyright © 2017 dubian. All rights reserved.
 */
-
+/**
+Yes, this _does_ need map/location/health imported, BUT it also needs to have a way to pop that back over to prime setup might need to go into a sub nav controller.
+*/
 import UIKit
 
 class KVDetailViewController: UIViewController {
@@ -42,9 +44,9 @@ class KVDetailViewController: UIViewController {
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?)
   {
-    if segue.identifier == "showSetup" {
-  
-  }
+    if segue.identifier == "ShowLicense" {
+      //I would need to make is and set it to conform to a protocol on the PVC
+    }
   }
 }
 

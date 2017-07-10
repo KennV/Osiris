@@ -15,6 +15,7 @@ I really enjoy.
 
 I am not sure what I will get in the DVC if I have no object. That is one reason to have a setup function. ~ ~ I will need just some basic logic to make a person if the array is empty when I delete the person - so the array cannot be empty. Next I have to see if Person<T> has types - - Nope that is in root so I will be testing if the item at people[0] is "Owner" or "Friend"
 ACTUALLY if I tink about it for a moment, I can hide this window and _only_ present the detail if the arrays are empty. Then in the detail I can set the state/isVisible on everything except a setupButton. This will pound through getting the data and setting owner. So Back to the _PDC Class
+OK I have set the DetailView as top in the App Delegate. All I need to do is hide the UI and only have an setup button See. the Split view Tag in appDeli
 */
 import UIKit
 import CoreLocation
@@ -73,11 +74,12 @@ class KVPrimeTVController: UITableViewController {
   }
   func insertNewObject(_ sender: Any)
   {
-    //    PDC.createPersonInContext(PDC.MOC!)
     self.personDataController.makePerson()
     let indexPath = IndexPath(row: 0, section: 0)
     tableView.insertRows(at: [indexPath], with: .automatic)
+    self.detailViewController?.detailItem = (people[0])
   }
+  
   // MARK: - Segues
   override func prepare(for segue: UIStoryboardSegue, sender: Any?)
   {
@@ -164,8 +166,8 @@ class KVPrimeTVController: UITableViewController {
     }
     if personDataController.getAllEntities().count == 0
     {
-              self.personDataController.makePerson()
-              tableView.reloadData()
+      self.insertNewObject(self)
+      tableView.reloadData()
     }
   }
 }
