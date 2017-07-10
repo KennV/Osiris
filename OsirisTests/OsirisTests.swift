@@ -63,7 +63,7 @@ class OsirisTests: XCTestCase {
   func testADController()
   {
 //    var jx = KVOsirisDataController((SUT_PSK?.viewContext)!)
-    XCTAssertNotNil(KVOsirisDataController((SUT_PSK?.viewContext)!), "Combi")
+    XCTAssertNotNil(KVOsirisDataController(ctx: (SUT_PSK?.viewContext)!), "Combi")
     
     let pTVC = KVPrimeTVController()
     pTVC.AllDataController.PSK = SUT_PSK!
@@ -126,5 +126,18 @@ class OsirisTests: XCTestCase {
     XCTAssertEqual(0, sst.getAllEntities().count)
     sst.makeVendor()
     XCTAssertEqual(1, sst.getAllEntities().count)
+  }
+  
+  func testV13() {
+    let TVC = KVPrimeTVController()
+    TVC.AllDataController.PSK = SUT_PSK!
+    XCTAssertNotNil(TVC.AllDataController.MOC, "No MOC")
+//    
+//    TVC.personDataController.MOC = TVC.AllDataController.MOC
+//    XCTAssertEqual(0, TVC.people.count)
+    let PDC = KVPersonDataController(ctx: (SUT_PSK?.viewContext)!)
+    for _ in 0 ... 1000 {
+      PDC.makePerson()
+    }
   }
 }

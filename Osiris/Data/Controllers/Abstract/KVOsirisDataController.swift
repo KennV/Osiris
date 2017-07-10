@@ -51,7 +51,7 @@ class KVOsirisDataController<T : KVRootEntity > : KVAbstractDataController<T>
     self.entityClassName = "KVRootEntity"
     self.MOC = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
   }
-  convenience init(_ ctx: NSManagedObjectContext)
+  convenience init(ctx: NSManagedObjectContext)
   {
     self.init()
     self.entityClassName = EntityTypes.RootEntity
@@ -234,6 +234,21 @@ class KVOsirisDataController<T : KVRootEntity > : KVAbstractDataController<T>
       hex.append(x)
     }
     return hex
+  }
+  func makeUniqueHexQuad(_ t: T)
+  {
+//    var c = 0
+    let candidate = makeRandomHexQuad()
+    var arr = Array <String>()
+    for p in self.getAllEntities() {
+//      arr.append(p.unitID!)
+    }
+    if !(arr.contains(candidate)) {
+//      t.unitID = candidate
+    } else {
+      print("collision:")
+      //      self.makeUniqueHexQuad(t)
+    }
   }
   /*
   Geocoder

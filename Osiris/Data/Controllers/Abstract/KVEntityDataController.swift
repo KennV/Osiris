@@ -22,8 +22,7 @@ class KVEntityDataController<T : KVEntity > : KVOsirisDataController<T>
     self.setupGraphics(g: t.graphics!)
     self.setupLocation(l: t.location!)
     self.setupPhysics(p: t.physics!)
-  }
-  
+  }  
   func setupGraphics(g :KVGraphics)
   {
     g.caption = "New"
