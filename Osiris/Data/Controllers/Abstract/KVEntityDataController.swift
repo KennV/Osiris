@@ -17,11 +17,12 @@ import UIKit
 
 class KVEntityDataController<T : KVEntity > : KVOsirisDataController<T>
 {
-  func setupEntity(_ t: T)
+  func setupEntity(_ KVEntity: T)
   {
-    self.setupGraphics(g: t.graphics!)
-    self.setupLocation(l: t.location!)
-    self.setupPhysics(p: t.physics!)
+    KVEntity.unitID = NSUUID().uuidString
+    self.setupGraphics(g: KVEntity.graphics!)
+    self.setupLocation(l: KVEntity.location!)
+    self.setupPhysics(p: KVEntity.physics!)
   }  
   func setupGraphics(g :KVGraphics)
   {

@@ -58,6 +58,7 @@ class KVOsirisDataController<T : KVRootEntity > : KVAbstractDataController<T>
     self.MOC = ctx
   }
   // MARK: - Entities
+  // MARK TODO: ADD unitID
   /**
   ## Should be set to Default
    
@@ -234,21 +235,6 @@ class KVOsirisDataController<T : KVRootEntity > : KVAbstractDataController<T>
       hex.append(x)
     }
     return hex
-  }
-  func makeUniqueHexQuad(_ t: T)
-  {
-//    var c = 0
-    let candidate = makeRandomHexQuad()
-    var arr = Array <String>()
-    for p in self.getAllEntities() {
-//      arr.append(p.unitID!)
-    }
-    if !(arr.contains(candidate)) {
-//      t.unitID = candidate
-    } else {
-      print("collision:")
-      //      self.makeUniqueHexQuad(t)
-    }
   }
   /*
   Geocoder

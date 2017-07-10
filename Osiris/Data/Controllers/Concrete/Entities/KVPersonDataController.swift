@@ -57,44 +57,44 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
     setupRandomPerson(newPerson)
 	// Now what can I assert in unit tests
   }
-  func resetPersonDefaults(_ t: T)
+  //MARK TODO: Add Health specific Datas
+  func resetPersonDefaults(_ person: T)
   {
-    t.firstName = maleNames[1]
-    t.middleName = femaleNames[1]
-    t.lastName = lastNames[1]
-    t.emailID = t.firstName! + (".") + t.lastName! + "pony.edu"
-    t.phoneNumber = "(555)abc-defg"
-    t.textID  = t.firstName! + ("_") + t.lastName!
+    self.setupEntity(person)
+    person.firstName = maleNames[1]
+    person.middleName = femaleNames[1]
+    person.lastName = lastNames[1]
+    person.emailID = person.firstName! + (".") + person.lastName! + "pony.edu"
+    person.phoneNumber = "(555)abc-defg"
+    person.textID  = person.firstName! + ("_") + person.lastName!
   }
-  func setupRandomPerson(_ t: T)
+  func setupRandomPerson(_ rndPerson: T)
   {
-    setupRandomPersonName(t)
-    makeUniqueHexQuad(t)
-    t.phoneNumber = makeRandomPhoneNumber()
-//    var arr = [String]()
-//    for p in self.getAllEntities() {
-//      arr.append(p.unitID!)
-//    }
-//    jiveDose(set: (NSSet(array: arr)), t: t)
+    setupRandomPersonName(rndPerson)
+    rndPerson.phoneNumber = makeRandomPhoneNumber()
   }
-  func setupRandomPersonName(_ t: T)
+  func setupRandomPersonName(_ rndNamedPerson: T)
   {
     if (makeRandomNumber(100)) > 50 {
-      t.firstName = femaleNames[makeRandomNumber(20)]
+      rndNamedPerson.firstName = femaleNames[makeRandomNumber(20)]
     } else {
-      t.firstName = maleNames[makeRandomNumber(20)]
+      rndNamedPerson.firstName = maleNames[makeRandomNumber(20)]
     }
     if (makeRandomNumber(100)) > 80 {
       if (makeRandomNumber(100) < 25) {
-        t.middleName = femaleNames[makeRandomNumber(20)]
+        rndNamedPerson.middleName = femaleNames[makeRandomNumber(20)]
       } else {
-        t.middleName = maleNames[makeRandomNumber(20)]
+        rndNamedPerson.middleName = maleNames[makeRandomNumber(20)]
       }
     } else {
-      t.middleName = ""
+      rndNamedPerson.middleName = ""
     }
-    
   }
+  /** ## Almost ##
+   - Parameters:
+     - set: _all().hexID_
+     - t: \<T\>
+  */
   func jiveDose(set: NSSet,t: T) {
     let hq = makeRandomHexQuad()
     while (!(set.contains(hq))) {
