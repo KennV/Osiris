@@ -26,33 +26,6 @@
             </objects>
             <point key="canvasLocation" x="-38" y="-630"/>
         </scene>
-        <!--Detail View Controller-->
-        <scene sceneID="v5l-wr-x58">
-            <objects>
-                <viewController id="c09-M1-GSd" customClass="KVDetailViewController" customModule="Osiris" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="FhA-jR-XyV"/>
-                        <viewControllerLayoutGuide type="bottom" id="vhd-mq-S92"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="6vp-Hd-zCU">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eFK-OZ-B5h">
-                                <rect key="frame" x="166" y="323" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aUr-aX-iyR" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1673" y="-630"/>
-        </scene>
         <!--Detail-->
         <scene sceneID="yUG-lL-AsK">
             <objects>
@@ -65,35 +38,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Detail view content goes here" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="0XM-y9-sOw">
-                                <rect key="frame" x="20" y="325" width="335" height="17"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" size="system"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mZh-9D-6iY">
-                                <rect key="frame" x="114" y="264" width="147" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="c09-M1-GSd" kind="show" identifier="ShowLicense" id="UiD-jO-j9H"/>
-                                </connections>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6dw-dO-avv">
+                                <rect key="frame" x="16" y="64" width="343" height="603"/>
+                                <subviews>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Gzr-Xg-lY3">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="603"/>
+                                    </mapView>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E5u-zy-ApG">
+                                <rect key="frame" x="147" y="343" width="81" height="46"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <state key="normal" title="Setup!"/>
                             </button>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPw-Me-yp2">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem title="Item" id="ipB-hu-mtS"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="0XM-y9-sOw" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" constant="20" symbolic="YES" id="Tsc-yG-G1q"/>
-                            <constraint firstItem="0XM-y9-sOw" firstAttribute="centerY" secondItem="svH-Pt-448" secondAttribute="centerY" id="jWN-iV-94e"/>
-                            <constraint firstAttribute="trailing" secondItem="0XM-y9-sOw" secondAttribute="trailing" constant="20" symbolic="YES" id="tHV-ZD-HQj"/>
+                            <constraint firstItem="6dw-dO-avv" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" id="9Hp-K2-GuY"/>
+                            <constraint firstItem="6dw-dO-avv" firstAttribute="centerX" secondItem="E5u-zy-ApG" secondAttribute="centerX" id="Bmh-Nm-dou"/>
+                            <constraint firstItem="6dw-dO-avv" firstAttribute="centerY" secondItem="E5u-zy-ApG" secondAttribute="centerY" id="GZw-ey-T0p"/>
+                            <constraint firstItem="E5u-zy-ApG" firstAttribute="centerX" secondItem="cPw-Me-yp2" secondAttribute="centerX" id="TJh-Fl-7cJ"/>
+                            <constraint firstItem="cPw-Me-yp2" firstAttribute="bottom" secondItem="GAO-Cl-Wes" secondAttribute="top" id="hGL-7z-V43"/>
+                            <constraint firstItem="6dw-dO-avv" firstAttribute="top" secondItem="SYR-Wa-9uf" secondAttribute="bottom" id="kNo-Ek-cbZ"/>
+                            <constraint firstItem="6dw-dO-avv" firstAttribute="bottom" secondItem="GAO-Cl-Wes" secondAttribute="top" id="q0p-7T-5DH"/>
+                            <constraint firstAttribute="trailing" secondItem="cPw-Me-yp2" secondAttribute="trailing" id="yzZ-Vg-yKy"/>
+                            <constraint firstItem="cPw-Me-yp2" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" id="zeX-nf-Nf3"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM"/>
-                    <connections>
-                        <outlet property="detailDescriptionLabel" destination="0XM-y9-sOw" id="deQ-Na-JPF"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
             </objects>

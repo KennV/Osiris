@@ -9,6 +9,7 @@
 Yes, this _does_ need map/location/health imported, BUT it also needs to have a way to pop that back over to prime setup might need to go into a sub nav controller.
 */
 import UIKit
+import MapKit
 
 class KVDetailViewController: UIViewController {
 

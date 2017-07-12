@@ -18,7 +18,11 @@ ACTUALLY if I tink about it for a moment, I can hide this window and _only_ pres
 OK I have set the DetailView as top in the App Delegate. All I need to do is hide the UI and only have an setup button See. the Split view Tag in appDeli
 */
 import UIKit
+import CoreData
 import CoreLocation
+import MapKit
+import HealthKit
+import HealthKitUI
 
 class KVPrimeTVController: UITableViewController {
 
