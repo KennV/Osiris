@@ -14,9 +14,10 @@ Also sort of undocumented, I have it at about 50% test coverage. which
 I really enjoy.
 
 I am not sure what I will get in the DVC if I have no object. That is one reason to have a setup function. ~ ~ I will need just some basic logic to make a person if the array is empty when I delete the person - so the array cannot be empty. Next I have to see if Person<T> has types - - Nope that is in root so I will be testing if the item at people[0] is "Owner" or "Friend"
-ACTUALLY if I tink about it for a moment, I can hide this window and _only_ present the detail if the arrays are empty. Then in the detail I can set the state/isVisible on everything except a setupButton. This will pound through getting the data and setting owner. So Back to the _PDC Class
+ACTUALLY if I think about it for a moment, I can hide this window and _only_ present the detail if the arrays are empty. Then in the detail I can set the state/isVisible on everything except a setupButton. This will pound through getting the data and setting owner. So Back to the _PDC Class
 OK I have set the DetailView as top in the App Delegate. All I need to do is hide the UI and only have an setup button See. the Split view Tag in appDeli
-*/
+Well I *Do* need to add a protocol here for the setup to init an owner and all that this entails, _BUT_ I do not need one per se for the regular<T> inits/save/load.
+ */
 import UIKit
 import CoreData
 import CoreLocation
@@ -24,7 +25,7 @@ import MapKit
 import HealthKit
 import HealthKitUI
 
-class KVPrimeTVController: UITableViewController {
+class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate {
 
   var detailViewController: KVDetailViewController? = nil
 
@@ -33,7 +34,8 @@ class KVPrimeTVController: UITableViewController {
   var vendorDataController = KVVendorDataController()
   var allItemsDataController = KVItemDataController()
   var sessionDataController = KVSessionDataController()
-  
+  var locationManager : CLLocationManager? = CLLocationManager()
+  // kNew
   var people : Array <KVPerson> {
     get {
       return personDataController.getAllEntities()
@@ -58,7 +60,7 @@ class KVPrimeTVController: UITableViewController {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     navigationItem.leftBarButtonItem = editButtonItem
-
+    self.setupCLManager()
     let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
     navigationItem.rightBarButtonItem = addButton
     if let split = splitViewController {
@@ -174,5 +176,107 @@ class KVPrimeTVController: UITableViewController {
       tableView.reloadData()
     }
   }
+  //
+  
+  func setupCLManager ()
+  {
+    self.locationManager?.delegate = self
+    setupCLAuthState()
+    locationManager?.distanceFilter = kCLDistanceFilterNone
+    // According to BestPractices I was OK but now I am modern
+    locationManager?.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+    //looking into a no-init bug
+    //    locationManager?.activityType = .otherNavigation
+    locationManager?.startUpdatingLocation()
+    findLocation()
+  }
+  func setupCLAuthState()
+  {
+    if (CLLocationManager.authorizationStatus() == .notDetermined) {
+      locationManager?.requestAlwaysAuthorization() // then set energy states
+    }
+    
+  }
+  // TODO: Update the RSRC string/URL in here
+  func locationManager(_ manager: CLLocationManager,
+                       didChangeAuthorization status: CLAuthorizationStatus)
+  {
+    switch status {
+    case .authorizedAlways:
+      break
+    case .notDetermined:
+      manager.requestAlwaysAuthorization()
+    case .authorizedWhenInUse, .restricted, .denied:
+      
+      let alertVC = UIAlertController(
+        title: "Background Location Services are Not Enabled",
+        message: "In order to better determine usage and data patterns, please open this app's settings and set location access to 'Always'.",
+        preferredStyle: .alert)
+      //      let cancelAction = UIAlertAction (title: "Cancel", style: .cancel, handler: nil)
+      alertVC.addAction(UIAlertAction (title: "Cancel", style: .cancel, handler: nil))
+      
+      let openAction = UIAlertAction(title: "Open Settings", style: .default) { (action) in
+        UIApplication.shared.open((URL(string:UIApplicationOpenSettingsURLString)!), options: [ : ], completionHandler: (nil))
+      }
+      alertVC.addAction(openAction)
+      
+      present(
+        alertVC,
+        animated: true,
+        completion: nil)
+    }
+    
+  }
+  func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
+  {
+    print("No-Loc")
+  }
+  func locationManager(_ manager: CLLocationManager,
+                       didUpdateLocations locations: [CLLocation])
+  {
+    foundLocation()
+  }
+  func findLocation()
+  {
+    let defLat : Double = 37.33115792
+    let defLon : Double = -122.03076853
+    ///These locations are from gdb output,
+    // They should be revised to reflect "home"
+    print(locationManager?.location?.coordinate.latitude ?? defLat)
+    print(locationManager?.location?.coordinate.longitude ?? defLon)
+  }
+  func foundLocation()
+  {
+    locationManager?.stopUpdatingLocation()
+  }
+  // moved the coder to the AresDataController
+  func forwardGeocoding(address: String)
+  {
+    CLGeocoder().geocodeAddressString(address, completionHandler: { (placemarks, error) in
+      if error != nil
+      {
+        print(error!) //force unwrapped
+        return
+      }
+      if (placemarks?.count)! > 0
+      {
+        let placemark = placemarks?[0]
+        let location = placemark?.location
+        let coordinate = location?.coordinate
+        print("\nlat: \(coordinate!.latitude), long: \(coordinate!.longitude)")
+        if (placemark?.areasOfInterest?.count)! > 0
+        {
+          let areaOfInterest = placemark!.areasOfInterest![0]
+          print(areaOfInterest)
+        }
+        else
+        {
+          print("No area of interest found.")
+        }
+      }
+    })
+    //I seriously Better Know What I am doing Next time I see this code: (count 0)
+  } // OK it is not what I want (YET)
+  
 }
 
