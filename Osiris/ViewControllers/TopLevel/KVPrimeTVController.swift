@@ -25,10 +25,16 @@ import MapKit
 import HealthKit
 import HealthKitUI
 
-class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate {
+class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, MapKhanDelegate {
 
   var detailViewController: KVDetailViewController? = nil
-
+  var currentPerson: KVPerson?
+  {
+    didSet {
+      // Update the view.
+      //        configureView()
+    }
+  }
   var AllDataController = KVOsirisDataController()
   var personDataController = KVPersonDataController()
   var vendorDataController = KVVendorDataController()
@@ -66,6 +72,7 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate {
     if let split = splitViewController {
         let controllers = split.viewControllers
         detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? KVDetailViewController
+      detailViewController?.delegate = self
     }
   }
   override func viewWillAppear(_ animated: Bool)
@@ -277,6 +284,50 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate {
     })
     //I seriously Better Know What I am doing Next time I see this code: (count 0)
   } // OK it is not what I want (YET)
-  
+//MARK: - Conformance is Complinace!
+  //
+  // MARK: Protocol Conformance
+  //
+  func didChangePerson(_ entity: KVPerson)
+  {
+    personDataController.saveCurrentContext(personDataController.MOC!)
+    tableView.reloadData()
+  }
+  func willAddPerson(_ deli: Any?)
+  {
+    self.insertNewObject(self)
+  }
+  func didChangeGraphicsOn(_ entity: KVGraphics)
+  {
+    if currentPerson?.graphics != entity {
+      currentPerson?.graphics = entity
+    }
+//    configureView()
+    // pass it to the other deli
+//    delegate?.didChangePerson(currentPerson!)
+  }
+  // Protocol Usage
+  @IBAction func addPerson(_ sender: AnyObject)
+  {
+//    delegate?.willAddPerson(delegate)
+//    currentPerson = pdc.getAllEntities()[0]
+//    configureView()
+  }
+  @IBAction func addMessage()
+  {
+    /**
+     OK I had to clean this up in Both places
+     */
+//    delegate?.willMakeMessageFromPerson(currentPerson!) //It needs to reload table data
+  }
+  @IBAction func AddPlace()
+  {
+//    delegate?.willMakeNewPlaceHere(delegate)
+//    configureView()
+  }
+  @IBAction func addEvent()
+  {
+//    delegate?.willAddNewEvent(self)
+  }
 }
 

@@ -7,12 +7,25 @@
 */
 /**
 Yes, this _does_ need map/location/health imported, BUT it also needs to have a way to pop that back over to prime setup might need to go into a sub nav controller.
+
+20170715@0000
+well, yes.
 */
+protocol MapKhanDelegate {
+  func didChangePerson(_ entity: KVPerson)
+  func willAddPerson(_ deli: Any?)
+//  func willMakeMessageFromPerson(_ person: KVPerson?)
+//  func willMakeNewPlaceHere(deli: Any?) -> ()
+//  func willAddNewEvent( _ deli: Any?)
+}
+
 import UIKit
 import MapKit
 
 class KVDetailViewController: UIViewController {
 
+  var delegate: MapKhanDelegate?
+  
   @IBOutlet weak var detailDescriptionLabel: UILabel!
 
 
