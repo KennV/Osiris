@@ -26,7 +26,9 @@
 		38441FCF1F1144AA00197FE4 /* KVBasicCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38441FCD1F1144AA00197FE4 /* KVBasicCustomCell.swift */; };
 		38441FD01F1144AA00197FE4 /* KVRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38441FCE1F1144AA00197FE4 /* KVRatingView.swift */; };
 		38441FD21F13EC1000197FE4 /* KVLicenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38441FD11F13EC1000197FE4 /* KVLicenseViewController.swift */; };
-		3853D43E1F0FE75A00104CC4 /* HouseCall.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3853D43C1F0FE75A00104CC4 /* HouseCall.storyboard */; };
+		387DEE721F1E82FD00578AE3 /* KVPersonDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387DEE711F1E82FD00578AE3 /* KVPersonDetailViewController.swift */; };
+		387DEE741F1E831D00578AE3 /* KVSessionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387DEE731F1E831D00578AE3 /* KVSessionDetailViewController.swift */; };
+		387DEE761F1E837800578AE3 /* KVVendorDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387DEE751F1E837800578AE3 /* KVVendorDetailViewController.swift */; };
 		38AFEF701F10BF5000FC52CE /* KVSessionDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFEF6F1F10BF5000FC52CE /* KVSessionDataController.swift */; };
 		38DFA19A1EF9A51C00954CCF /* KVVendorDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DFA1991EF9A51C00954CCF /* KVVendorDataController.swift */; };
 		38DFA19C1EF9A53400954CCF /* KVPersonDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DFA19B1EF9A53400954CCF /* KVPersonDataController.swift */; };
@@ -77,7 +79,9 @@
 		38441FCD1F1144AA00197FE4 /* KVBasicCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVBasicCustomCell.swift; sourceTree = "<group>"; };
 		38441FCE1F1144AA00197FE4 /* KVRatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVRatingView.swift; sourceTree = "<group>"; };
 		38441FD11F13EC1000197FE4 /* KVLicenseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVLicenseViewController.swift; sourceTree = "<group>"; };
-		3853D43D1F0FE75A00104CC4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/HouseCall.storyboard; sourceTree = "<group>"; };
+		387DEE711F1E82FD00578AE3 /* KVPersonDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KVPersonDetailViewController.swift; path = EditorViews/KVPersonDetailViewController.swift; sourceTree = "<group>"; };
+		387DEE731F1E831D00578AE3 /* KVSessionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KVSessionDetailViewController.swift; path = EditorViews/KVSessionDetailViewController.swift; sourceTree = "<group>"; };
+		387DEE751F1E837800578AE3 /* KVVendorDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KVVendorDetailViewController.swift; path = EditorViews/KVVendorDetailViewController.swift; sourceTree = "<group>"; };
 		38AFEF6F1F10BF5000FC52CE /* KVSessionDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KVSessionDataController.swift; path = Concrete/Items/Sessions/KVSessionDataController.swift; sourceTree = "<group>"; };
 		38DFA1991EF9A51C00954CCF /* KVVendorDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KVVendorDataController.swift; path = Concrete/Entities/KVVendorDataController.swift; sourceTree = "<group>"; };
 		38DFA19B1EF9A53400954CCF /* KVPersonDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KVPersonDataController.swift; path = Concrete/Entities/KVPersonDataController.swift; sourceTree = "<group>"; };
@@ -178,7 +182,6 @@
 		3806F9A91EF031C70070B103 /* GUI */ = {
 			isa = PBXGroup;
 			children = (
-				3853D43C1F0FE75A00104CC4 /* HouseCall.storyboard */,
 				3806F97E1EF031A50070B103 /* Main.storyboard */,
 				3806F9831EF031A50070B103 /* LaunchScreen.storyboard */,
 			);
@@ -206,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				38233C211EF837F80000DEC1 /* TopLevel */,
+				387DEE6E1F1E821E00578AE3 /* EditorViews */,
 				38233C1F1EF837F80000DEC1 /* SetupScreens */,
 				38233C241EF837F80000DEC1 /* ViewObjects */,
 			);
@@ -301,6 +305,16 @@
 				38233C2F1EF83B9C0000DEC1 /* MapKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		387DEE6E1F1E821E00578AE3 /* EditorViews */ = {
+			isa = PBXGroup;
+			children = (
+				387DEE711F1E82FD00578AE3 /* KVPersonDetailViewController.swift */,
+				387DEE731F1E831D00578AE3 /* KVSessionDetailViewController.swift */,
+				387DEE751F1E837800578AE3 /* KVVendorDetailViewController.swift */,
+			);
+			name = EditorViews;
 			sourceTree = "<group>";
 		};
 		38DFA1961EF9A40100954CCF /* Concrete */ = {
@@ -443,7 +457,6 @@
 				3806F9851EF031A50070B103 /* LaunchScreen.storyboard in Resources */,
 				3806F9821EF031A50070B103 /* Assets.xcassets in Resources */,
 				3806F9801EF031A50070B103 /* Main.storyboard in Resources */,
-				3853D43E1F0FE75A00104CC4 /* HouseCall.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,8 +492,11 @@
 				38441FD01F1144AA00197FE4 /* KVRatingView.swift in Sources */,
 				38DFA19C1EF9A53400954CCF /* KVPersonDataController.swift in Sources */,
 				38233C3C1EF83CC20000DEC1 /* KVOsirisDataController.swift in Sources */,
+				387DEE761F1E837800578AE3 /* KVVendorDetailViewController.swift in Sources */,
 				38233C3A1EF83C250000DEC1 /* KVAbstractDataController.swift in Sources */,
 				38DFA19A1EF9A51C00954CCF /* KVVendorDataController.swift in Sources */,
+				387DEE741F1E831D00578AE3 /* KVSessionDetailViewController.swift in Sources */,
+				387DEE721F1E82FD00578AE3 /* KVPersonDetailViewController.swift in Sources */,
 				38233C281EF837F80000DEC1 /* KVDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -531,14 +547,6 @@
 				3806F9841EF031A50070B103 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		3853D43C1F0FE75A00104CC4 /* HouseCall.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3853D43D1F0FE75A00104CC4 /* Base */,
-			);
-			name = HouseCall.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

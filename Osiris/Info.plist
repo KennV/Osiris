@@ -16,10 +16,12 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
-	<key>CFBundleVersion</key>
-	<string>1</string>
 	<key>CFBundleSignature</key>
 	<string>k3nv</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Using Camera access to enable photos</string>
 	<key>NSLocationAlwaysUsageDescription</key>
@@ -28,8 +30,6 @@
 	<string>Always Set to always, Please!</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Using Library</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -51,8 +51,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
