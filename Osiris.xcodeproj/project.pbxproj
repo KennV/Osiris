@@ -30,6 +30,7 @@
 		387DEE741F1E831D00578AE3 /* KVSessionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387DEE731F1E831D00578AE3 /* KVSessionDetailViewController.swift */; };
 		387DEE761F1E837800578AE3 /* KVVendorDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387DEE751F1E837800578AE3 /* KVVendorDetailViewController.swift */; };
 		38AFEF701F10BF5000FC52CE /* KVSessionDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFEF6F1F10BF5000FC52CE /* KVSessionDataController.swift */; };
+		38C744751F290D6900955A2B /* KVMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C744741F290D6900955A2B /* KVMapTableViewCell.swift */; };
 		38DFA19A1EF9A51C00954CCF /* KVVendorDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DFA1991EF9A51C00954CCF /* KVVendorDataController.swift */; };
 		38DFA19C1EF9A53400954CCF /* KVPersonDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DFA19B1EF9A53400954CCF /* KVPersonDataController.swift */; };
 		38F5DA5C1EF982AA0062CDD5 /* KVEntityDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F5DA5B1EF982AA0062CDD5 /* KVEntityDataController.swift */; };
@@ -83,6 +84,7 @@
 		387DEE731F1E831D00578AE3 /* KVSessionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KVSessionDetailViewController.swift; path = EditorViews/KVSessionDetailViewController.swift; sourceTree = "<group>"; };
 		387DEE751F1E837800578AE3 /* KVVendorDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KVVendorDetailViewController.swift; path = EditorViews/KVVendorDetailViewController.swift; sourceTree = "<group>"; };
 		38AFEF6F1F10BF5000FC52CE /* KVSessionDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KVSessionDataController.swift; path = Concrete/Items/Sessions/KVSessionDataController.swift; sourceTree = "<group>"; };
+		38C744741F290D6900955A2B /* KVMapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KVMapTableViewCell.swift; path = MapViewTableCell/KVMapTableViewCell.swift; sourceTree = "<group>"; };
 		38DFA1991EF9A51C00954CCF /* KVVendorDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KVVendorDataController.swift; path = Concrete/Entities/KVVendorDataController.swift; sourceTree = "<group>"; };
 		38DFA19B1EF9A53400954CCF /* KVPersonDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KVPersonDataController.swift; path = Concrete/Entities/KVPersonDataController.swift; sourceTree = "<group>"; };
 		38F5DA5B1EF982AA0062CDD5 /* KVEntityDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVEntityDataController.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 		38233C261EF837F80000DEC1 /* MapView */ = {
 			isa = PBXGroup;
 			children = (
+				38C744731F290B5B00955A2B /* MapTableCell */,
 			);
 			path = MapView;
 			sourceTree = "<group>";
@@ -315,6 +318,14 @@
 				387DEE751F1E837800578AE3 /* KVVendorDetailViewController.swift */,
 			);
 			name = EditorViews;
+			sourceTree = "<group>";
+		};
+		38C744731F290B5B00955A2B /* MapTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				38C744741F290D6900955A2B /* KVMapTableViewCell.swift */,
+			);
+			name = MapTableCell;
 			sourceTree = "<group>";
 		};
 		38DFA1961EF9A40100954CCF /* Concrete */ = {
@@ -482,6 +493,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				38441FCF1F1144AA00197FE4 /* KVBasicCustomCell.swift in Sources */,
+				38C744751F290D6900955A2B /* KVMapTableViewCell.swift in Sources */,
 				38233C291EF837F80000DEC1 /* KVPrimeTVController.swift in Sources */,
 				38F5DA5C1EF982AA0062CDD5 /* KVEntityDataController.swift in Sources */,
 				3806F9AE1EF032470070B103 /* Osiris.xcdatamodeld in Sources */,
