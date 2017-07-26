@@ -17,6 +17,19 @@ I am not sure what I will get in the DVC if I have no object. That is one reason
 ACTUALLY if I think about it for a moment, I can hide this window and _only_ present the detail if the arrays are empty. Then in the detail I can set the state/isVisible on everything except a setupButton. This will pound through getting the data and setting owner. So Back to the _PDC Class
 OK I have set the DetailView as top in the App Delegate. All I need to do is hide the UI and only have an setup button See. the Split view Tag in appDeli
 Well I *Do* need to add a protocol here for the setup to init an owner and all that this entails, _BUT_ I do not need one per se for the regular<T> inits/save/load.
+ 
+20170726@1330
+
+So I tok a moment to fully rewrite the GUI and it should work but it is not compatible with the given code that I am looking at; therefore I will need to add the following element Custom TableViewCell with a stack view that has a MKMapView and another stack view with three buttons. One for each available Seque: 
+*But* Beyond that Will need to add a new Custom TableViewCell similar to the one for ratings that implements a MapvView with MKAnnotations, MapViewTableCell - - > AND
+
+AND to do this I need to have the cells as "Dynamic Prototypes this broke everything. For obvious and fixable reasons - But the fun thing to fix and the item of note is that the size of the cells was the default, and the one that was visible was set to that size (along with my vies and buttons) this is set in the insector for the TableView, Set all of the cells to 128 px and you can then set the custom for the other cells sizes to a "custom" 48 px. this is indeterminate because I cannot see these, IF IT DOES NOT WORK THEN I WILL HAVE TO SET THIS IN CODE
+
+ 
+[See also ~/Developer/02/Dev2/Alt/pub/Tricorder/Tricorder/Tricorder/Views/MapView/KVMapViewCon.swift/ and ~/Developer/../MapObjects/KVAnnotationItem.swift 
+AND /Users/Kenn/Developer/02/Dev2/Alt/pub/Tricorder/Tricorder/Tricorder/Views/PrimeTVC/tvcOBJ
+ ]
+
  */
 import UIKit
 import CoreData
@@ -40,6 +53,7 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Map
   var vendorDataController = KVVendorDataController()
   var allItemsDataController = KVItemDataController()
   var sessionDataController = KVSessionDataController()
+  var mapViewTableCell = KVMapTableViewCell()
   var locationManager : CLLocationManager? = CLLocationManager()
   // kNew
   var people : Array <KVPerson> {
