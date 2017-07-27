@@ -10,7 +10,10 @@
 More on basic architecture.
 The bulk of this code has been tweaked and tuned for a while. long and short is I trust it. I am inside of 11 weeks to ship this and I need it to be the kind of code that I can work with in 15 weeks. It is, at this point more like a template. So the largest part of this refactoring was breaking the functionality into groups where I use them, not where I wrote them.
 *But!* As a strange benefit I do get it about the array being immutable.
-
+ 
+ static let Vehicle = "KVService"
+ static let Package = "KVSession"
+ static let Message = "KVTransaction"
 */
 
 struct EntityTypes {
@@ -22,9 +25,9 @@ struct EntityTypes {
   static let Person = "KVPerson"
   static let Physics = "KVPhysics"
   static let RootEntity = "KVRootEntity"
-  static let Vehicle = "KVService"
-  static let Package = "KVSession"
-  static let Message = "KVTransaction"
+  static let Service = "KVService"
+  static let Session = "KVSession"
+  static let Transaction = "KVTransaction"
   static let Vendor = "KVVendor"
 }
 
