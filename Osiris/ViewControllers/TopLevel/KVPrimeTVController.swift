@@ -23,12 +23,9 @@ Well I *Do* need to add a protocol here for the setup to init an owner and all t
 So I tok a moment to fully rewrite the GUI and it should work but it is not compatible with the given code that I am looking at; therefore I will need to add the following element Custom TableViewCell with a stack view that has a MKMapView and another stack view with three buttons. One for each available Seque: 
 *But* Beyond that Will need to add a new Custom TableViewCell similar to the one for ratings that implements a MapvView with MKAnnotations, MapViewTableCell - - > AND
 
-AND to do this I need to have the cells as "Dynamic Prototypes this broke everything. For obvious and fixable reasons - But the fun thing to fix and the item of note is that the size of the cells was the default, and the one that was visible was set to that size (along with my vies and buttons) this is set in the insector for the TableView, Set all of the cells to 128 px and you can then set the custom for the other cells sizes to a "custom" 48 px. this is indeterminate because I cannot see these, IF IT DOES NOT WORK THEN I WILL HAVE TO SET THIS IN CODE
-
- 
-[See also ~/Developer/02/Dev2/Alt/pub/Tricorder/Tricorder/Tricorder/Views/MapView/KVMapViewCon.swift/ and ~/Developer/../MapObjects/KVAnnotationItem.swift 
-AND /Users/Kenn/Developer/02/Dev2/Alt/pub/Tricorder/Tricorder/Tricorder/Views/PrimeTVC/tvcOBJ
- ]
+AND to do this I need to have the cells as "Dynamic Prototypes this broke everything. For obvious and fixable reasons - But the fun thing to fix and the item of note is that the size of the cells was the default, and the one that was visible was set to that size (along with my views and buttons) this is set in the insector for the TableView, Set all of the cells to 128 px and you can then set the custom for the other cells sizes to a "custom" 48 px. this is indeterminate because I cannot see these, IF IT DOES NOT WORK THEN I WILL HAVE TO SET THIS IN CODE [See also ~/Developer/02/Dev2/Alt/pub/Tricorder/Tricorder/Tricorder/Views/MapView/KVMapViewCon.swift/ and ~/Developer/../MapObjects/KVAnnotationItem.swift _AND_ /Users/Kenn/Developer/02/Dev2/Alt/pub/Tricorder/Tricorder/Tricorder/Views/PrimeTVC/tvcOBJ ]
+~%@@1530
+OK that starts a fairly good commit for the edit view controllers I really suppose the next step is to wire them up
 
  */
 import UIKit
@@ -79,6 +76,7 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Map
   {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
+    self.setupDummyLoad()
     navigationItem.leftBarButtonItem = editButtonItem
     self.setupCLManager()
     let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
@@ -144,6 +142,7 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Map
     return(rowCount)
     
   }
+  // MARK: - Update Cells
   override func tableView(_ tableView: UITableView,
                           cellForRowAt indexPath: IndexPath) -> UITableViewCell
   {
@@ -164,7 +163,7 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Map
     }
     if (indexPath.section == 2)
     {
-      let d = tableView.dequeueReusableCell(withIdentifier: "sessionCell", for: indexPath) //as! KVBasicCustomCell
+      let d = tableView.dequeueReusableCell(withIdentifier: "SessionCell", for: indexPath) //as! KVBasicCustomCell
       let item = sessions[(indexPath as NSIndexPath).row]
 //      d.nameLabel!.text = item.qName
       return d
@@ -198,7 +197,16 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Map
     }
   }
   //
-  
+  // MARK: - Dummy Load
+  func setupDummyLoad()
+  {
+    if (vendors.isEmpty) {
+      self.vendorDataController.makeVendor()
+    }
+    if (sessions.isEmpty) {
+      self.sessionDataController.makeSession()
+    }
+  }
   func setupCLManager ()
   {
     self.locationManager?.delegate = self
