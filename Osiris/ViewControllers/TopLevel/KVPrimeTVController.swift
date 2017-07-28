@@ -26,6 +26,11 @@ So I tok a moment to fully rewrite the GUI and it should work but it is not comp
 AND to do this I need to have the cells as "Dynamic Prototypes this broke everything. For obvious and fixable reasons - But the fun thing to fix and the item of note is that the size of the cells was the default, and the one that was visible was set to that size (along with my views and buttons) this is set in the insector for the TableView, Set all of the cells to 128 px and you can then set the custom for the other cells sizes to a "custom" 48 px. this is indeterminate because I cannot see these, IF IT DOES NOT WORK THEN I WILL HAVE TO SET THIS IN CODE [See also ~/Developer/02/Dev2/Alt/pub/Tricorder/Tricorder/Tricorder/Views/MapView/KVMapViewCon.swift/ and ~/Developer/../MapObjects/KVAnnotationItem.swift _AND_ /Users/Kenn/Developer/02/Dev2/Alt/pub/Tricorder/Tricorder/Tricorder/Views/PrimeTVC/tvcOBJ ]
 ~%@@1530
 OK that starts a fairly good commit for the edit view controllers I really suppose the next step is to wire them up
+ 
+Switch case for sectionHeight?
+
+Add A setupGUI() and setupData()
+Install custom views
 
  */
 import UIKit
@@ -42,7 +47,6 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Map
   {
     didSet {
       // Update the view.
-      //        configureView()
     }
   }
   var AllDataController = KVOsirisDataController()
@@ -52,26 +56,23 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Map
   var sessionDataController = KVSessionDataController()
   var mapViewTableCell = KVMapTableViewCell()
   var locationManager : CLLocationManager? = CLLocationManager()
-  // kNew
+  // New ++ I don' think that I will be using setters on the array
   var people : Array <KVPerson> {
     get {
       return personDataController.getAllEntities()
     }
-    set { }
   }
   var vendors : Array <KVVendor> {
     get {
       return vendorDataController.getAllEntities()
     }
-    set { }
   }
-  
   var sessions : Array <KVSession> {
     get {
       return sessionDataController.getAllEntities()
     }
-    set { }
   }
+  // TODO: Run Setup if people.isEmpty
   override func viewDidLoad()
   {
     super.viewDidLoad()
@@ -143,10 +144,10 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Map
     
   }
   // MARK: - Update Cells
+  // FIXME: - These are NOT custom in the XIB and Are Barely Costom Here:
   override func tableView(_ tableView: UITableView,
                           cellForRowAt indexPath: IndexPath) -> UITableViewCell
   {
-    
     if (indexPath.section == 0)
     {
       let c = tableView.dequeueReusableCell(withIdentifier: "OwnerCell", for: indexPath)
@@ -168,10 +169,9 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Map
 //      d.nameLabel!.text = item.qName
       return d
     }
-    
     /*
-     return cell c,d,e,f or return an empty one
-     */
+    return cell c,d,e,f or return an empty one
+    */
     return (UITableViewCell())//cell!
   }  
 
@@ -180,13 +180,25 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Map
   {
     return true
   }
+  // MARK: - Deleter
   override func tableView(_ tableView: UITableView,
                           commit editingStyle: UITableViewCellEditingStyle,
                           forRowAt indexPath: IndexPath)
   {
     if editingStyle == .delete {
-      self.personDataController.deleteEntityInContext(self.personDataController.PSK.viewContext, entity: (people[indexPath.row]))
-      tableView.deleteRows(at: [indexPath], with: .fade)
+      switch indexPath.section {
+      case 0:
+        self.personDataController.deleteEntityInContext(self.personDataController.PSK.viewContext, entity: (people[indexPath.row]))
+        tableView.deleteRows(at: [indexPath], with: .fade)
+      case 1:
+        self.vendorDataController.deleteEntityInContext(self.vendorDataController.PSK.viewContext, entity: (vendors[indexPath.row]))
+        tableView.deleteRows(at: [indexPath], with: .fade);
+      case 2:
+        self.sessionDataController.deleteEntityInContext(self.sessionDataController.PSK.viewContext, entity: (sessions[indexPath.row]))
+        tableView.deleteRows(at: [indexPath], with: .fade)
+      default:
+        break
+      }
     } else if editingStyle == .insert {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
@@ -197,7 +209,7 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Map
     }
   }
   //
-  // MARK: - Dummy Load
+  // MARK: - Set Application State
   func setupDummyLoad()
   {
     if (vendors.isEmpty) {
@@ -214,8 +226,7 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Map
     locationManager?.distanceFilter = kCLDistanceFilterNone
     // According to BestPractices I was OK but now I am modern
     locationManager?.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-    //looking into a no-init bug
-    //    locationManager?.activityType = .otherNavigation
+
     locationManager?.startUpdatingLocation()
     findLocation()
   }
@@ -306,10 +317,8 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Map
     })
     //I seriously Better Know What I am doing Next time I see this code: (count 0)
   } // OK it is not what I want (YET)
-//MARK: - Conformance is Complinace!
   //
-  // MARK: Protocol Conformance
-  //
+  // MARK: - Protocol Conformance
   func didChangePerson(_ entity: KVPerson)
   {
     personDataController.saveCurrentContext(personDataController.MOC!)
@@ -328,6 +337,8 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Map
     // pass it to the other deli
 //    delegate?.didChangePerson(currentPerson!)
   }
+  // MARK: - Conformance is Complinace!
+  //
   // Protocol Usage
   @IBAction func addPerson(_ sender: AnyObject)
   {
