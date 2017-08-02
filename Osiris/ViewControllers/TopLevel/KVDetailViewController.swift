@@ -12,6 +12,9 @@ Yes, this _does_ need map/location/health imported, BUT it also needs to have a 
 well, yes.
  
 OK Can I operate the corner buttons w/o a stack view, Or Do I _rilly_ do it on stack01..04?
+
+OK if I am in SetupMode the buttons and map need to be invisible
+ AND if i am in Landscape then I need to swallow the side view for wide / non compact layouts.
 */
 
 import UIKit
