@@ -14,10 +14,6 @@ well, yes.
 OK Can I operate the corner buttons w/o a stack view, Or Do I _rilly_ do it on stack01..04?
 */
 
-//FIXME: Put this in the correct personKhan OK?
-
-
-
 import UIKit
 import MapKit
 
@@ -62,9 +58,37 @@ class KVDetailViewController: UIViewController {
   }
   override func prepare(for segue: UIStoryboardSegue, sender: Any?)
   {
-    if segue.identifier == "ShowLicense" {
-      //I would need to make is and set it to conform to a protocol on the PVC
+    let identifier = segue.identifier!
+    switch identifier {
+    case "ShowPerson":
+      break
+    case "ShowSession":
+      break
+    case "ShowVendor":
+      break
+    case "ShowSetup":
+      break
+    default:
+      break
     }
+//    if segue.identifier == "ShowLicense" {
+//      //I would need to make is and set it to conform to a protocol on the PVC
+//    }
+  }
+  func ZZprepare(for segue: UIStoryboardSegue, sender: Any?)
+  {
+    let identifier = segue.identifier!
+    switch identifier {
+    case "ShowPerson":
+      break
+    case "ShowSession":
+      break
+    case "ShowVendor":
+      break
+    default:
+      break
+    }
+    
   }
   // MARK: - Powa
   func setupInitialState() {
@@ -72,5 +96,4 @@ class KVDetailViewController: UIViewController {
     sessionsButton.isEnabled = false
     sessionsButton.alpha = 0
   }
-  
 }

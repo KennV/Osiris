@@ -69,14 +69,14 @@ class OsirisTests: XCTestCase {
     pTVC.AllDataController.PSK = SUT_PSK!
     
     XCTAssertNotNil(pTVC.AllDataController.MOC, "No MOC")
-    pTVC.personDataController.MOC = pTVC.AllDataController.MOC
+    pTVC.pdc.MOC = pTVC.AllDataController.MOC
     let testDataController = pTVC.AllDataController // Shorthand Mod
     XCTAssertEqual(0, testDataController.getAllEntities().count)
     _ = pTVC.AllDataController.createEntityInContext((SUT_PSK?.viewContext)!, type: EntityTypes.RootEntity)
     XCTAssertEqual(1, testDataController.getAllEntities().count)
     
     XCTAssertEqual(0, pTVC.people.count)
-    pTVC.personDataController.makePerson()
+    pTVC.pdc.makePerson()
     XCTAssertEqual(1, pTVC.people.count)
     
     XCTAssertNotNil(testDataController.makeRandomNumber(2))
@@ -95,9 +95,9 @@ class OsirisTests: XCTestCase {
     TVC.AllDataController.PSK = SUT_PSK!
     XCTAssertNotNil(TVC.AllDataController.MOC, "No MOC")
     
-    TVC.personDataController.MOC = TVC.AllDataController.MOC
+    TVC.pdc.MOC = TVC.AllDataController.MOC
     XCTAssertEqual(0, TVC.people.count)
-    TVC.personDataController.makePerson()
+    TVC.pdc.makePerson()
     XCTAssertEqual(1, TVC.people.count)
     // Currently only testing the one ivar from graphics, location and physics
     let joe = TVC.people[0]
@@ -112,7 +112,7 @@ class OsirisTests: XCTestCase {
   func testVendorCon()
   {
     let vue = KVPrimeTVController()
-    let sst = vue.vendorDataController
+    let sst = vue.vdc
     sst.PSK = SUT_PSK!
     sst.MOC = SUT_PSK?.viewContext
     XCTAssertEqual(0, sst.getAllEntities().count)

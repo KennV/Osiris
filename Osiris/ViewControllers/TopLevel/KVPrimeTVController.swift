@@ -50,33 +50,38 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
     }
   }
   var AllDataController = KVOsirisDataController()
-  var personDataController = KVPersonDataController()
-  var vendorDataController = KVVendorDataController()
   var allItemsDataController = KVItemDataController()
-  var sessionDataController = KVSessionDataController()
   var mapViewTableCell = KVMapTableViewCell()
   var locationManager : CLLocationManager? = CLLocationManager()
-  // New ++ I don' think that I will be using setters on the array
+  
+  var pdc = KVPersonDataController()
+  var vdc = KVVendorDataController()
+  var sdc = KVSessionDataController()
+  
   var people : Array <KVPerson> {
     get {
-      return personDataController.getAllEntities()
+      return pdc.getAllEntities()
     }
   }
   var vendors : Array <KVVendor> {
     get {
-      return vendorDataController.getAllEntities()
+      return vdc.getAllEntities()
     }
   }
   var sessions : Array <KVSession> {
     get {
-      return sessionDataController.getAllEntities()
+      return sdc.getAllEntities()
     }
   }
   // TODO: Run Setup if people.isEmpty
   override func viewDidLoad()
   {
+    if (self.AllDataController.getAllEntities().isEmpty) {
+      print("Nope")
+    }
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
+    pdc.delegate = self
     self.setupDummyLoad()
     navigationItem.leftBarButtonItem = editButtonItem
     self.setupCLManager()
@@ -100,7 +105,10 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
   }
   func insertNewObject(_ sender: Any)
   {
-    self.personDataController.makePerson()
+//    personDataController.delegate?.willAddPerson(self)
+    self.pdc.makePerson()
+//    let _ = self.personDataController.saveEntities()
+    self.pdc.saveCurrentContext(pdc.MOC!)
     let indexPath = IndexPath(row: 0, section: 0)
     tableView.insertRows(at: [indexPath], with: .automatic)
     self.detailViewController?.detailItem = (people[0])
@@ -191,13 +199,13 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
     if editingStyle == .delete {
       switch indexPath.section {
       case 0:
-        self.personDataController.deleteEntityInContext(self.personDataController.PSK.viewContext, entity: (people[indexPath.row]))
+        self.pdc.deleteEntityInContext(self.pdc.PSK.viewContext, entity: (people[indexPath.row]))
         tableView.deleteRows(at: [indexPath], with: .fade)
       case 1:
-        self.vendorDataController.deleteEntityInContext(self.vendorDataController.PSK.viewContext, entity: (vendors[indexPath.row]))
+        self.vdc.deleteEntityInContext(self.vdc.PSK.viewContext, entity: (vendors[indexPath.row]))
         tableView.deleteRows(at: [indexPath], with: .fade);
       case 2:
-        self.sessionDataController.deleteEntityInContext(self.sessionDataController.PSK.viewContext, entity: (sessions[indexPath.row]))
+        self.sdc.deleteEntityInContext(self.sdc.PSK.viewContext, entity: (sessions[indexPath.row]))
         tableView.deleteRows(at: [indexPath], with: .fade)
       default:
         break
@@ -205,7 +213,7 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
     } else if editingStyle == .insert {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
-    if personDataController.getAllEntities().count == 0
+    if pdc.getAllEntities().count == 0
     {
       self.insertNewObject(self)
       tableView.reloadData()
@@ -216,10 +224,10 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
   func setupDummyLoad()
   {
     if (vendors.isEmpty) {
-      self.vendorDataController.makeVendor()
+      self.vdc.makeVendor()
     }
     if (sessions.isEmpty) {
-      self.sessionDataController.makeSession()
+      self.sdc.makeSession()
     }
   }
   func setupCLManager ()
@@ -324,7 +332,7 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
   // MARK: - Protocol Conformance
   func didChangePerson(_ entity: KVPerson)
   {
-    personDataController.saveCurrentContext(personDataController.MOC!)
+    pdc.saveCurrentContext(pdc.MOC!)
     tableView.reloadData()
   }
   func willAddPerson(_ deli: Any?)
@@ -345,9 +353,7 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
   // Protocol Usage
   @IBAction func addPerson(_ sender: AnyObject)
   {
-//    delegate?.willAddPerson(delegate)
-//    currentPerson = pdc.getAllEntities()[0]
-//    configureView()
+    pdc.delegate?.willAddPerson(self)
   }
   @IBAction func addMessage()
   {
