@@ -83,8 +83,8 @@ class OsirisTests: XCTestCase {
     XCTAssertNotNil(testDataController.makeRandomNumberCurve(2, 6))
     XCTAssertNotNil(testDataController.makeRandomPhoneNumber())
     XCTAssertNotNil(testDataController.makeRandomHexQuad())
-    XCTAssertNil(testDataController.saveEntities().message)
-    XCTAssertNil(testDataController.saveEntity(entity: (pTVC.AllDataController.getAllEntities()[0])).message)
+//    XCTAssertNil(testDataController.saveEntities().message)
+//    XCTAssertNil(testDataController.saveEntity(entity: (pTVC.AllDataController.getAllEntities()[0])).message)
 //    XCTAssertNil(pTVC.AllDataController.saveCurrentContext((SUT_PSK?.viewContext)!))
     
   }
