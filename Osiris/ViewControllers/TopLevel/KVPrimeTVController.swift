@@ -145,14 +145,17 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Map
   }
   // MARK: - Update Cells
   // FIXME: - These are NOT custom in the XIB and Are Barely Costom Here:
+  /**
+  OK the first view works but has no map
+  */
   override func tableView(_ tableView: UITableView,
                           cellForRowAt indexPath: IndexPath) -> UITableViewCell
   {
     if (indexPath.section == 0)
     {
-      let c = tableView.dequeueReusableCell(withIdentifier: "OwnerCell", for: indexPath)
-          let person = people[indexPath.row]
-          c.textLabel!.text = person.incepDate?.description
+      let c = tableView.dequeueReusableCell(withIdentifier: "OwnerCell", for: indexPath) as! KVMapTableViewCell
+//          let person = people[indexPath.row]
+//          c.textLabel!.text = person.incepDate?.description
       return c
     }
     if (indexPath.section == 1)
