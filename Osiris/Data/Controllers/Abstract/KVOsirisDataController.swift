@@ -122,9 +122,9 @@ class KVOsirisDataController<T : KVRootEntity > : KVAbstractDataController<T>
     var ss: saveState
     var saveMessage: String?
     //let context = persistentContainer.viewContext
-    let moc : NSManagedObjectContext = self.PSK.viewContext
+//    let moc : NSManagedObjectContext = self.PSK.viewContext
     
-    if moc.hasChanges {
+    if MOC!.hasChanges {
       ss = saveState.Error
       saveMessage = error?.description
     }

@@ -53,10 +53,11 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
   var allItemsDataController = KVItemDataController()
   var mapViewTableCell = KVMapTableViewCell()
   var locationManager : CLLocationManager? = CLLocationManager()
-  
+
   var pdc = KVPersonDataController()
   var vdc = KVVendorDataController()
   var sdc = KVSessionDataController()
+
   
   var people : Array <KVPerson> {
     get {
@@ -76,13 +77,14 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
   // TODO: Run Setup if people.isEmpty
   override func viewDidLoad()
   {
+    self.setupDataControllers()
     if (self.AllDataController.getAllEntities().isEmpty) {
       print("Nope")
     }
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     pdc.delegate = self
-    self.setupDummyLoad()
+//    self.setupDummyLoad()
     navigationItem.leftBarButtonItem = editButtonItem
     self.setupCLManager()
     let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
@@ -107,8 +109,8 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
   {
 //    personDataController.delegate?.willAddPerson(self)
     self.pdc.makePerson()
-//    let _ = self.personDataController.saveEntities()
     self.pdc.saveCurrentContext(pdc.MOC!)
+
     let indexPath = IndexPath(row: 0, section: 0)
     tableView.insertRows(at: [indexPath], with: .automatic)
     self.detailViewController?.detailItem = (people[0])
@@ -200,16 +202,18 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
       switch indexPath.section {
       case 0:
         self.pdc.deleteEntityInContext(self.pdc.PSK.viewContext, entity: (people[indexPath.row]))
-        tableView.deleteRows(at: [indexPath], with: .fade)
+//        tableView.deleteRows(at: [indexPath], with: .fade)
       case 1:
         self.vdc.deleteEntityInContext(self.vdc.PSK.viewContext, entity: (vendors[indexPath.row]))
-        tableView.deleteRows(at: [indexPath], with: .fade);
+//        tableView.deleteRows(at: [indexPath], with: .fade);
       case 2:
         self.sdc.deleteEntityInContext(self.sdc.PSK.viewContext, entity: (sessions[indexPath.row]))
-        tableView.deleteRows(at: [indexPath], with: .fade)
+//        tableView.deleteRows(at: [indexPath], with: .fade)
       default:
         break
       }
+      tableView.deleteRows(at: [indexPath], with: .fade)
+      self.pdc.saveCurrentContext(pdc.MOC!)
     } else if editingStyle == .insert {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
@@ -221,6 +225,24 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
   }
   //
   // MARK: - Set Application State
+  func setupDataControllers()
+  {
+    if self.pdc.MOC != self.AllDataController.PSK.viewContext {
+      self.pdc.MOC = self.AllDataController.PSK.viewContext
+    }
+    if self.sdc.MOC != self.AllDataController.PSK.viewContext {
+      self.sdc.MOC = self.AllDataController.PSK.viewContext
+    }
+    if self.vdc.MOC != self.AllDataController.PSK.viewContext {
+      self.vdc.MOC = self.AllDataController.PSK.viewContext
+    }
+    
+    
+    //    c.pdc.MOC = c.AllDataController.PSK.viewContext
+    //    c.vdc.MOC = c.AllDataController.PSK.viewContext
+    //    c.sdc.MOC = c.AllDataController.PSK.viewContext
+  }
+  
   func setupDummyLoad()
   {
     if (vendors.isEmpty) {
