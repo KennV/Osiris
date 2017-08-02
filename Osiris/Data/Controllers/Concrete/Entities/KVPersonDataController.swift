@@ -5,7 +5,13 @@
   Created by Kenn Villegas on 6/20/17.
   Copyright © 2017 dubian. All rights reserved.
 */
-
+protocol PersonConDelegate {
+  func didChangePerson(_ entity: KVPerson)
+  func willAddPerson(_ deli: Any?)
+  //  func willMakeMessageFromPerson(_ person: KVPerson?)
+  //  func willMakeNewPlaceHere(deli: Any?) -> ()
+  //  func willAddNewEvent( _ deli: Any?)
+}
 import CoreLocation
 import CoreData
 import UIKit
@@ -16,6 +22,7 @@ enum PersonTypes {
 }
 class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
 {
+  var delegate: PersonConDelegate?
   override init()
   {
     super.init()

@@ -16,13 +16,7 @@ OK Can I operate the corner buttons w/o a stack view, Or Do I _rilly_ do it on s
 
 //FIXME: Put this in the correct personKhan OK?
 
-protocol MapKhanDelegate {
-  func didChangePerson(_ entity: KVPerson)
-  func willAddPerson(_ deli: Any?)
-//  func willMakeMessageFromPerson(_ person: KVPerson?)
-//  func willMakeNewPlaceHere(deli: Any?) -> ()
-//  func willAddNewEvent( _ deli: Any?)
-}
+
 
 import UIKit
 import MapKit
@@ -30,7 +24,7 @@ import MapKit
 class KVDetailViewController: UIViewController {
 
   @IBOutlet weak var mapView: MKMapView!
-  var delegate: MapKhanDelegate?
+
   @IBOutlet weak var setupButton: UIButton!
 //  @IBOutlet weak var detailDescriptionLabel: UILabel!
   @IBOutlet weak var sessionsLabel: UILabel!

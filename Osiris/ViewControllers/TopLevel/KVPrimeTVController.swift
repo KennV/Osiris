@@ -40,7 +40,7 @@ import MapKit
 import HealthKit
 import HealthKitUI
 
-class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, MapKhanDelegate {
+class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, PersonConDelegate {
 
   var detailViewController: KVDetailViewController? = nil
   var currentPerson: KVPerson?
@@ -85,7 +85,7 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Map
     if let split = splitViewController {
         let controllers = split.viewControllers
         detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? KVDetailViewController
-      detailViewController?.delegate = self
+//      detailViewController?.delegate = self
     }
   }
   override func viewWillAppear(_ animated: Bool)
