@@ -434,6 +434,18 @@
                             <constraint firstItem="tsp-qw-BOn" firstAttribute="centerY" secondItem="j7E-Ep-PZk" secondAttribute="centerY" id="rIB-AU-KBD"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="costLabel" destination="NoJ-ea-Xo8" id="Cfa-wO-6jQ"/>
+                        <outlet property="costTextField" destination="lLA-8N-Aen" id="d2r-SU-Xs1"/>
+                        <outlet property="placesLabel" destination="S31-S6-nPD" id="xnk-1y-YGk"/>
+                        <outlet property="placesTextField" destination="Bo7-Gs-kWU" id="r2M-HV-Di7"/>
+                        <outlet property="servicesButton" destination="Rrn-t2-6fH" id="Jmb-YP-fbi"/>
+                        <outlet property="servicesButtonLabel" destination="vCW-Lk-D3p" id="UrT-VR-EBO"/>
+                        <outlet property="timeLabel" destination="A8T-X0-jpj" id="ebo-J8-Sb0"/>
+                        <outlet property="timeTextField" destination="Hxf-El-Kwe" id="meD-gt-6E6"/>
+                        <outlet property="toolbarButton01" destination="xf1-AF-AGO" id="Ely-oX-aTW"/>
+                        <outlet property="vendorMapView" destination="4Ei-dw-B3F" id="NHZ-fi-92r"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QC9-oR-Q1c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

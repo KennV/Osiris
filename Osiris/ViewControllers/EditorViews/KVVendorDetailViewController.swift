@@ -7,10 +7,27 @@
 //
 
 import UIKit
+import MapKit
 
-class KVVendorDetailViewController: KVDetailViewController {
+class KVVendorDetailViewController: KVDetailViewController
+{
 
-    override func viewDidLoad() {
+  @IBOutlet weak var vendorMapView: MKMapView!
+  @IBOutlet weak var servicesButtonLabel: UILabel!
+  @IBOutlet weak var servicesButton: UIButton!
+
+  @IBOutlet weak var placesLabel: UILabel!
+  @IBOutlet weak var placesTextField: UITextField!
+
+  @IBOutlet weak var timeLabel: UILabel!
+  @IBOutlet weak var timeTextField: UITextField!
+  
+  @IBOutlet weak var costTextField: UITextField!
+  @IBOutlet weak var costLabel: UILabel!
+  
+  @IBOutlet weak var toolbarButton01: UIBarButtonItem!
+
+  override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
