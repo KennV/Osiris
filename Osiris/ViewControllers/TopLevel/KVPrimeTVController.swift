@@ -29,8 +29,12 @@ OK that starts a fairly good commit for the edit view controllers I really suppo
  
 Switch case for sectionHeight?
 
-Add A setupGUI() and setupData()
-Install custom views
+Add setupData()
+OK that was not terrible. I wired up the two interfaces and then all of teh segues to empty views. And it works surprisingly well. Of course I may have issuse with Autolayout and Stacks but that is not impossible. SO I have the first half of Detail-Controllers and DataTests. That next bit is going to be a little bit more work
+Add setupGUI()
+Install custom views:
+I like the work with the views but these custom sliders and junk will need to be a different type of view and I need to get to the Q&D of getting a map in a cell.
+BUT also important is getting these views to init with a color palette in code. So that I can see the design and layout in HW
 
  */
 import UIKit
