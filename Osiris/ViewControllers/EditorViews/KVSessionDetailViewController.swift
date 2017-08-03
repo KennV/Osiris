@@ -8,23 +8,35 @@
 
 import UIKit
 
-class KVSessionDetailViewController: KVDetailViewController {
-
+class KVSessionDetailViewController: KVDetailViewController
+{
+//  @IBOutlet weak var
+  @IBOutlet weak var smallLabel01: UILabel!
+  @IBOutlet weak var smallButton01: UIButton!
+  
+  @IBOutlet weak var textField02: UITextField!
+  @IBOutlet weak var textFieldLabel02: UILabel!
+  
+  @IBOutlet weak var serviceStatusLabel03: UILabel!
+  @IBOutlet weak var largeTextView05: UITextView!
+  
+  @IBOutlet weak var typesSelectorLeft06: UIButton!
+  @IBOutlet weak var typesSelectorRight06: UIButton!
+  
+  @IBOutlet weak var view07: UIView!
+  
+  
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
     /*
     // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.

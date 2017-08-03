@@ -463,7 +463,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2tF-rj-SSI">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2tF-rj-SSI" userLabel="smallButton01">
                                                 <rect key="frame" x="53.666666666666686" y="0.0" width="46" height="30"/>
                                                 <state key="normal" title="Button"/>
                                             </button>
@@ -642,6 +642,19 @@
                             <constraint firstItem="9GA-1d-pTc" firstAttribute="top" secondItem="8LZ-gf-EKi" secondAttribute="bottom" constant="10" id="lvr-7n-GQp"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="label01" destination="vsT-o9-76s" id="9So-zw-mFF"/>
+                        <outlet property="largeTextView05" destination="J9O-eb-qMY" id="reI-MC-5uA"/>
+                        <outlet property="samllButton01" destination="2tF-rj-SSI" id="2WU-i4-HCh"/>
+                        <outlet property="serviceStatusLabel03" destination="uzU-cc-47d" id="UBv-FR-PvN"/>
+                        <outlet property="smallButton01" destination="2tF-rj-SSI" id="k3c-Fh-hgK"/>
+                        <outlet property="smallLabel01" destination="vsT-o9-76s" id="pXL-f2-f0E"/>
+                        <outlet property="textField02" destination="xbl-Wv-fIO" id="603-SO-x72"/>
+                        <outlet property="textFieldLabel02" destination="1lZ-NG-cV9" id="jvh-Pv-mCG"/>
+                        <outlet property="typesSelectorLeft06" destination="Gxn-Y0-6dC" id="SDm-rt-3e7"/>
+                        <outlet property="typesSelectorRight06" destination="3Zv-eG-bVJ" id="x45-qB-auO"/>
+                        <outlet property="view07" destination="26c-3L-7pp" id="gXf-RS-pHa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fst-NS-jWf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
