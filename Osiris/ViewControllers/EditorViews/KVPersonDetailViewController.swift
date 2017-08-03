@@ -7,9 +7,20 @@
 */
 
 import UIKit
+import MapKit
 
 class KVPersonDetailViewController: KVDetailViewController
 {
+  @IBOutlet weak var toolBarButton: UIBarButtonItem!
+  @IBOutlet weak var personsMapView: MKMapView!
+  @IBOutlet weak var personsNameTextField: UITextField!
+  @IBOutlet weak var midInitialTextField: UITextField!
+  @IBOutlet weak var personsAddressTextField: UITextField!
+  @IBOutlet weak var personsTypeTextField: UITextField!
+  @IBOutlet weak var currentFilterLabel: UILabel!
+  @IBOutlet weak var currentFilterTextField: UITextField!
+  
+  
     override func viewDidLoad()
     {
         super.viewDidLoad()
