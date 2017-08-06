@@ -655,10 +655,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="label01" destination="vsT-o9-76s" id="9So-zw-mFF"/>
-                        <outlet property="largeTextView05" destination="J9O-eb-qMY" id="reI-MC-5uA"/>
-                        <outlet property="samllButton01" destination="2tF-rj-SSI" id="2WU-i4-HCh"/>
-                        <outlet property="serviceStatusLabel03" destination="uzU-cc-47d" id="UBv-FR-PvN"/>
                         <outlet property="smallButton01" destination="2tF-rj-SSI" id="k3c-Fh-hgK"/>
                         <outlet property="smallLabel01" destination="vsT-o9-76s" id="pXL-f2-f0E"/>
                         <outlet property="textField02" destination="xbl-Wv-fIO" id="603-SO-x72"/>
@@ -946,7 +942,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bJR-cy-QmQ">
-                                            <rect key="frame" x="15" y="13.999999999999998" width="33.333333333333336" height="20.333333333333332"/>
+                                            <rect key="frame" x="20.000000000000004" y="13.999999999999998" width="33.333333333333336" height="20.333333333333332"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -970,7 +966,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Mww-xb-lOB">
-                                            <rect key="frame" x="15" y="13.999999999999998" width="33.333333333333336" height="20.333333333333332"/>
+                                            <rect key="frame" x="20.000000000000004" y="13.999999999999998" width="33.333333333333336" height="20.333333333333332"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>

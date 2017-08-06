@@ -1,10 +1,10 @@
-//
-//  KVSessionDetailViewController.swift
-//  Osiris
-//
-//  Created by Kenn Villegas on 7/18/17.
-//  Copyright © 2017 dubian. All rights reserved.
-//
+/**
+  KVSessionDetailViewController.swift
+  Osiris
+
+  Created by Kenn Villegas on 7/18/17.
+  Copyright © 2017 dubian. All rights reserved.
+*/
 
 import UIKit
 
