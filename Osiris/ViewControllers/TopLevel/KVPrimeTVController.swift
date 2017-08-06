@@ -88,7 +88,7 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     pdc.delegate = self
-//    self.setupDummyLoad()
+
     navigationItem.leftBarButtonItem = editButtonItem
     self.setupCLManager()
     let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
@@ -96,12 +96,17 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
     if let split = splitViewController {
         let controllers = split.viewControllers
         detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? KVDetailViewController
-//      detailViewController?.delegate = self
+
+    }
+    if (pdc.getAllEntities().isEmpty) {
+      //DON'T Do it Here
+//      detailViewController?.setupModeForDVC()
     }
   }
   override func viewWillAppear(_ animated: Bool)
   {
     clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
+//    setupDetailViewController()
     super.viewWillAppear(animated)
   }
   override func didReceiveMemoryWarning()
@@ -109,17 +114,15 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
+  /** 
+  ## insert a new object of Type ##
+
+  - Parameter sender: An *Any*
+  */
   func insertNewObject(_ sender: Any)
   {
-//    personDataController.delegate?.willAddPerson(self)
-    self.pdc.makePerson()
-    self.pdc.saveCurrentContext(pdc.MOC!)
-
-    let indexPath = IndexPath(row: 0, section: 0)
-    tableView.insertRows(at: [indexPath], with: .automatic)
-    self.detailViewController?.detailItem = (people[0])
+    pdc.delegate?.willAddPerson(self)
   }
-  
   // MARK: - Segues
   override func prepare(for segue: UIStoryboardSegue, sender: Any?)
   {
@@ -130,6 +133,7 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
             controller.detailItem = person
             controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
             controller.navigationItem.leftItemsSupplementBackButton = true
+//          controller.personsArr = pdc.getAllEntities()
         }
     }
   }
@@ -245,8 +249,7 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
     //    c.pdc.MOC = c.AllDataController.PSK.viewContext
     //    c.vdc.MOC = c.AllDataController.PSK.viewContext
     //    c.sdc.MOC = c.AllDataController.PSK.viewContext
-  }
-  
+  }  
   func setupDummyLoad()
   {
     if (vendors.isEmpty) {
@@ -363,7 +366,15 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
   }
   func willAddPerson(_ deli: Any?)
   {
-    self.insertNewObject(self)
+//    self.insertNewObject(self)
+    pdc.makePerson()
+    pdc.saveCurrentContext(pdc.MOC!)
+    /**
+    setup the person
+    */
+    let indexPath = IndexPath(row: 0, section: 0)
+    tableView.insertRows(at: [indexPath], with: .automatic)
+    detailViewController?.detailItem = (people[0])
   }
   func didChangeGraphicsOn(_ entity: KVGraphics)
   {
@@ -379,7 +390,7 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
   // Protocol Usage
   @IBAction func addPerson(_ sender: AnyObject)
   {
-    pdc.delegate?.willAddPerson(self)
+//    pdc.delegate?.willAddPerson(self)
   }
   @IBAction func addMessage()
   {
@@ -398,4 +409,3 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
 //    delegate?.willAddNewEvent(self)
   }
 }
-
