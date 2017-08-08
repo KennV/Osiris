@@ -6,36 +6,8 @@
  Copyright © 2017 dubian. All rights reserved.
 */
 /**
-20170708@12:30
-OK in its basic form I will need 3 sections in some table view
-I already have a Peron/People/Owner and Vendor. So i Added
-Sessions, and its parent controller.
-Also sort of undocumented, I have it at about 50% test coverage. which
-I really enjoy.
-
-I am not sure what I will get in the DVC if I have no object. That is one reason to have a setup function. ~ ~ I will need just some basic logic to make a person if the array is empty when I delete the person - so the array cannot be empty. Next I have to see if Person<T> has types - - Nope that is in root so I will be testing if the item at people[0] is "Owner" or "Friend"
-ACTUALLY if I think about it for a moment, I can hide this window and _only_ present the detail if the arrays are empty. Then in the detail I can set the state/isVisible on everything except a setupButton. This will pound through getting the data and setting owner. So Back to the _PDC Class
-OK I have set the DetailView as top in the App Delegate. All I need to do is hide the UI and only have an setup button See. the Split view Tag in appDeli
-Well I *Do* need to add a protocol here for the setup to init an owner and all that this entails, _BUT_ I do not need one per se for the regular<T> inits/save/load.
- 
-20170726@1330
-
-So I tok a moment to fully rewrite the GUI and it should work but it is not compatible with the given code that I am looking at; therefore I will need to add the following element Custom TableViewCell with a stack view that has a MKMapView and another stack view with three buttons. One for each available Seque: 
-*But* Beyond that Will need to add a new Custom TableViewCell similar to the one for ratings that implements a MapvView with MKAnnotations, MapViewTableCell - - > AND
-
-AND to do this I need to have the cells as "Dynamic Prototypes this broke everything. For obvious and fixable reasons - But the fun thing to fix and the item of note is that the size of the cells was the default, and the one that was visible was set to that size (along with my views and buttons) this is set in the insector for the TableView, Set all of the cells to 128 px and you can then set the custom for the other cells sizes to a "custom" 48 px. this is indeterminate because I cannot see these, IF IT DOES NOT WORK THEN I WILL HAVE TO SET THIS IN CODE [See also ~/Developer/02/Dev2/Alt/pub/Tricorder/Tricorder/Tricorder/Views/MapView/KVMapViewCon.swift/ and ~/Developer/../MapObjects/KVAnnotationItem.swift _AND_ /Users/Kenn/Developer/02/Dev2/Alt/pub/Tricorder/Tricorder/Tricorder/Views/PrimeTVC/tvcOBJ ]
-~%@@1530
-OK that starts a fairly good commit for the edit view controllers I really suppose the next step is to wire them up
- 
-Switch case for sectionHeight?
-
-Add setupData()
-OK that was not terrible. I wired up the two interfaces and then all of teh segues to empty views. And it works surprisingly well. Of course I may have issuse with Autolayout and Stacks but that is not impossible. SO I have the first half of Detail-Controllers and DataTests. That next bit is going to be a little bit more work
-Add setupGUI()
-Install custom views:
-I like the work with the views but these custom sliders and junk will need to be a different type of view and I need to get to the Q&D of getting a map in a cell.
-BUT also important is getting these views to init with a color palette in code. So that I can see the design and layout in HW
-
+Cleaned out this and put it into the .rad file
+This class is still hella big.
  */
 import UIKit
 import CoreData
@@ -46,7 +18,11 @@ import HealthKitUI
 
 class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, PersonConDelegate {
 
+  /** 
+  */
   var detailViewController: KVDetailViewController? = nil
+  /**
+  */
   var currentPerson: KVPerson?
   {
     didSet {
@@ -62,9 +38,9 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
   var vdc = KVVendorDataController()
   var sdc = KVSessionDataController()
 
-  
   var people : Array <KVPerson> {
     get {
+      detailViewController?.personsArr = pdc.getAllEntities()
       return pdc.getAllEntities()
     }
   }
@@ -96,11 +72,6 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
     if let split = splitViewController {
         let controllers = split.viewControllers
         detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? KVDetailViewController
-
-    }
-    if (pdc.getAllEntities().isEmpty) {
-      //DON'T Do it Here
-//      detailViewController?.setupModeForDVC()
     }
   }
   override func viewWillAppear(_ animated: Bool)
@@ -129,10 +100,10 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
     if segue.identifier == "showDetail" {
         if let indexPath = tableView.indexPathForSelectedRow {
             let person = people[indexPath.row] //as! NSDate
-            let controller = (segue.destination as! UINavigationController).topViewController as! KVDetailViewController
-            controller.detailItem = person
-            controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-            controller.navigationItem.leftItemsSupplementBackButton = true
+            let dvc = (segue.destination as! UINavigationController).topViewController as! KVDetailViewController
+            dvc.detailItem = person
+            dvc.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+            dvc.navigationItem.leftItemsSupplementBackButton = true
 //          controller.personsArr = pdc.getAllEntities()
         }
     }
@@ -145,6 +116,8 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
   {
     return 3
   }
+  /**
+  */
   override func tableView(_ tableView: UITableView,
                           numberOfRowsInSection section: Int) -> Int
   {
@@ -162,9 +135,9 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
     
   }
   // MARK: - Update Cells
-  // FIXME: - These are NOT custom in the XIB and Are Barely Costom Here:
+  // FIXME: - These are NOT custom in the XIB and Are Barely custom Here:
   /**
-  OK the first view works but has no map
+  
   */
   override func tableView(_ tableView: UITableView,
                           cellForRowAt indexPath: IndexPath) -> UITableViewCell
@@ -202,6 +175,9 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
     return true
   }
   // MARK: - Deleter
+  /**
+  Assure that there is a save: here OR save in the Osiris Class' delete()
+  */
   override func tableView(_ tableView: UITableView,
                           commit editingStyle: UITableViewCellEditingStyle,
                           forRowAt indexPath: IndexPath)
@@ -233,6 +209,8 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
   }
   //
   // MARK: - Set Application State
+  /**
+  */
   func setupDataControllers()
   {
     if self.pdc.MOC != self.AllDataController.PSK.viewContext {
@@ -244,12 +222,9 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
     if self.vdc.MOC != self.AllDataController.PSK.viewContext {
       self.vdc.MOC = self.AllDataController.PSK.viewContext
     }
-    
-    
-    //    c.pdc.MOC = c.AllDataController.PSK.viewContext
-    //    c.vdc.MOC = c.AllDataController.PSK.viewContext
-    //    c.sdc.MOC = c.AllDataController.PSK.viewContext
-  }  
+  }
+  /**
+  */
   func setupDummyLoad()
   {
     if (vendors.isEmpty) {
@@ -259,6 +234,8 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
       self.sdc.makeSession()
     }
   }
+  /**
+  */
   func setupCLManager ()
   {
     self.locationManager?.delegate = self
@@ -270,9 +247,12 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
     locationManager?.startUpdatingLocation()
     findLocation()
   }
+  /**
+  */
   func setupCLAuthState()
   {
-    if (CLLocationManager.authorizationStatus() == .notDetermined) {
+    if (CLLocationManager.authorizationStatus() == .notDetermined)
+    {
       locationManager?.requestAlwaysAuthorization() // then set energy states
     }
     
@@ -316,6 +296,9 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
   {
     foundLocation()
   }
+  /**
+  Find out where we are and then stop
+  */
   func findLocation()
   {
     let defLat : Double = 37.33115792
@@ -325,11 +308,16 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
     print(locationManager?.location?.coordinate.latitude ?? defLat)
     print(locationManager?.location?.coordinate.longitude ?? defLon)
   }
+  /**
+  Yippe
+  */
   func foundLocation()
   {
     locationManager?.stopUpdatingLocation()
   }
   // moved the coder to the AresDataController
+  /**
+  */
   func forwardGeocoding(address: String)
   {
     CLGeocoder().geocodeAddressString(address, completionHandler: { (placemarks, error) in
@@ -359,11 +347,15 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
   } // OK it is not what I want (YET)
   //
   // MARK: - Protocol Conformance
+  /**
+  */
   func didChangePerson(_ entity: KVPerson)
   {
     pdc.saveCurrentContext(pdc.MOC!)
     tableView.reloadData()
   }
+  /**
+  */
   func willAddPerson(_ deli: Any?)
   {
 //    self.insertNewObject(self)
@@ -376,6 +368,8 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
     tableView.insertRows(at: [indexPath], with: .automatic)
     detailViewController?.detailItem = (people[0])
   }
+  /**
+  */
   func didChangeGraphicsOn(_ entity: KVGraphics)
   {
     if currentPerson?.graphics != entity {
@@ -388,10 +382,14 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
   // MARK: - Conformance is Complinace!
   //
   // Protocol Usage
+  /**
+  */
   @IBAction func addPerson(_ sender: AnyObject)
   {
 //    pdc.delegate?.willAddPerson(self)
   }
+  /**
+  */
   @IBAction func addMessage()
   {
     /**
@@ -399,11 +397,15 @@ class KVPrimeTVController: UITableViewController, CLLocationManagerDelegate, Per
      */
 //    delegate?.willMakeMessageFromPerson(currentPerson!) //It needs to reload table data
   }
+  /**
+  */
   @IBAction func AddPlace()
   {
 //    delegate?.willMakeNewPlaceHere(delegate)
 //    configureView()
   }
+  /**
+  */
   @IBAction func addEvent()
   {
 //    delegate?.willAddNewEvent(self)

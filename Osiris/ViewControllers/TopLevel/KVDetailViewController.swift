@@ -33,9 +33,10 @@ class KVDetailViewController: UIViewController {
   @IBOutlet weak var vendorsButton: UIButton!
   @IBOutlet weak var personsButton: UIButton!
   @IBOutlet weak var personsLabel: UILabel!
-  // FIXME: WTF to Get this as T?
-//  weak var personsArr: NSArray!
-  
+  /**
+  Ok it's `<KVPerson>! = nil` because Then I don't need an initializer, so when I change / edit it in the PVC it needs to update in the DVC _here_
+  */
+  var personsArr: Array <KVPerson>! = nil
   
   func configureView() {
     // Update the user interface for the detail item.
