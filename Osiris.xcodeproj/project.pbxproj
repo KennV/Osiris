@@ -239,9 +239,8 @@
 		38233C211EF837F80000DEC1 /* TopLevel */ = {
 			isa = PBXGroup;
 			children = (
-				38233C221EF837F80000DEC1 /* KVDetailViewController.swift */,
-				38233C231EF837F80000DEC1 /* KVPrimeTVController.swift */,
-				38C0D8C61F3A1025007D850E /* KVPrimeTVC_Ext.swift */,
+				38C0D8C91F3A1600007D850E /* detail */,
+				38C0D8C81F3A15F9007D850E /* prime */,
 			);
 			path = TopLevel;
 			sourceTree = "<group>";
@@ -321,6 +320,23 @@
 				387DEE751F1E837800578AE3 /* KVVendorDetailViewController.swift */,
 			);
 			name = EditorViews;
+			sourceTree = "<group>";
+		};
+		38C0D8C81F3A15F9007D850E /* prime */ = {
+			isa = PBXGroup;
+			children = (
+				38233C231EF837F80000DEC1 /* KVPrimeTVController.swift */,
+				38C0D8C61F3A1025007D850E /* KVPrimeTVC_Ext.swift */,
+			);
+			name = prime;
+			sourceTree = "<group>";
+		};
+		38C0D8C91F3A1600007D850E /* detail */ = {
+			isa = PBXGroup;
+			children = (
+				38233C221EF837F80000DEC1 /* KVDetailViewController.swift */,
+			);
+			name = detail;
 			sourceTree = "<group>";
 		};
 		38C744731F290B5B00955A2B /* MapTableCell */ = {
