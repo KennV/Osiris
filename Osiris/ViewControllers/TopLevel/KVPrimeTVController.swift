@@ -93,20 +93,6 @@ class KVPrimeTVController: UITableViewController  {
   {
     pdc.delegate?.willAddPerson(self)
   }
-  // MARK: - Segues
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
-    if segue.identifier == "showDetail" {
-      if let indexPath = tableView.indexPathForSelectedRow {
-        let person = people[indexPath.row] //as! NSDate
-        let dvc = (segue.destination as! UINavigationController).topViewController as! KVDetailViewController
-        dvc.detailItem = person
-        dvc.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-        dvc.navigationItem.leftItemsSupplementBackButton = true
-        //          controller.personsArr = pdc.getAllEntities()
-      }
-    }
-  }
   // MARK: - Table View
   /**
    Set for Owner, Vendors, and Sessions

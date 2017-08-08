@@ -65,7 +65,20 @@ extension KVPrimeTVController: PersonConDelegate, CLLocationManagerDelegate
     }
     
   }
-  
+  // MARK: - Segues
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+  {
+    if segue.identifier == "showDetail" {
+      if let indexPath = tableView.indexPathForSelectedRow {
+        let person = people[indexPath.row] //as! NSDate
+        let dvc = (segue.destination as! UINavigationController).topViewController as! KVDetailViewController
+        dvc.detailItem = person
+        dvc.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+        dvc.navigationItem.leftItemsSupplementBackButton = true
+        //          controller.personsArr = pdc.getAllEntities()
+      }
+    }
+  }
   // MARK: - Protocol Conformance
   /**
   */
