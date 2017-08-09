@@ -56,7 +56,9 @@ class KVPrimeTVController: UITableViewController  {
   // TODO: Run Setup if people.isEmpty
   override func viewDidLoad()
   {
-    self.setupDataControllers()
+    setupCLManager()
+    findLocation()
+    setupDataControllers()
     if (self.AllDataController.getAllEntities().isEmpty) {
       print("Nope")
     }
@@ -65,7 +67,7 @@ class KVPrimeTVController: UITableViewController  {
     pdc.delegate = self
     
     navigationItem.leftBarButtonItem = editButtonItem
-    self.setupCLManager()
+    
     let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
     navigationItem.rightBarButtonItem = addButton
     if let split = splitViewController {

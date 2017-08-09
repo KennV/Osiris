@@ -5,7 +5,15 @@
  Created by Kenn Villegas on 6/13/17.
  Copyright © 2017 dubian. All rights reserved.
  
- */
+SINGLE RESPONSIBILITY
+
+for testing purposes I need to be able to 
+Make an owner
+Make a vendor
+Make a Service/Session With an Owner and a Vendor
+for it to work I might use some Factory +session:(_ s vendor:v owner:o)
+
+*/
 
 import UIKit
 import CoreData
@@ -14,7 +22,7 @@ import MapKit
 import HealthKit
 import HealthKitUI
 
-extension KVPrimeTVController: PersonConDelegate, CLLocationManagerDelegate
+extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate
 {
   // MARK: - Set Application State
   /**
@@ -65,6 +73,45 @@ extension KVPrimeTVController: PersonConDelegate, CLLocationManagerDelegate
     }
     
   }
+  // TODO: Update the RSRC string/URL in here
+  func locationManager(_ manager: CLLocationManager,
+                       didChangeAuthorization status: CLAuthorizationStatus)
+  {
+    switch status {
+    case .authorizedAlways:
+      break
+    case .notDetermined:
+      manager.requestAlwaysAuthorization()
+    case .authorizedWhenInUse, .restricted, .denied:
+      
+      let alertVC = UIAlertController(
+        title: "Background Location Services are Not Enabled",
+        message: "In order to better determine usage and data patterns, please open this app's settings and set location access to 'Always'.",
+        preferredStyle: .alert)
+      //      let cancelAction = UIAlertAction (title: "Cancel", style: .cancel, handler: nil)
+      alertVC.addAction(UIAlertAction (title: "Cancel", style: .cancel, handler: nil))
+      
+      let openAction = UIAlertAction(title: "Open Settings", style: .default) { (action) in
+        UIApplication.shared.open((URL(string:UIApplicationOpenSettingsURLString)!), options: [ : ], completionHandler: (nil))
+      }
+      alertVC.addAction(openAction)
+      
+      present(
+        alertVC,
+        animated: true,
+        completion: nil)
+    }
+    
+  }
+  func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
+  {
+    print("No-Loc")
+  }
+  func locationManager(_ manager: CLLocationManager,
+                       didUpdateLocations locations: [CLLocation])
+  {
+    foundLocation()
+  }
   // MARK: - Segues
   override func prepare(for segue: UIStoryboardSegue, sender: Any?)
   {
@@ -112,47 +159,10 @@ extension KVPrimeTVController: PersonConDelegate, CLLocationManagerDelegate
     // pass it to the other deli
     //    delegate?.didChangePerson(currentPerson!)
   }
-  // TODO: Update the RSRC string/URL in here
-  func locationManager(_ manager: CLLocationManager,
-                       didChangeAuthorization status: CLAuthorizationStatus)
-  {
-    switch status {
-    case .authorizedAlways:
-      break
-    case .notDetermined:
-      manager.requestAlwaysAuthorization()
-    case .authorizedWhenInUse, .restricted, .denied:
-      
-      let alertVC = UIAlertController(
-        title: "Background Location Services are Not Enabled",
-        message: "In order to better determine usage and data patterns, please open this app's settings and set location access to 'Always'.",
-        preferredStyle: .alert)
-      //      let cancelAction = UIAlertAction (title: "Cancel", style: .cancel, handler: nil)
-      alertVC.addAction(UIAlertAction (title: "Cancel", style: .cancel, handler: nil))
-      
-      let openAction = UIAlertAction(title: "Open Settings", style: .default) { (action) in
-        UIApplication.shared.open((URL(string:UIApplicationOpenSettingsURLString)!), options: [ : ], completionHandler: (nil))
-      }
-      alertVC.addAction(openAction)
-      
-      present(
-        alertVC,
-        animated: true,
-        completion: nil)
-    }
-    
-  }
-  func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
-  {
-    print("No-Loc")
-  }
-  func locationManager(_ manager: CLLocationManager,
-                       didUpdateLocations locations: [CLLocation])
-  {
-    foundLocation()
-  }
+  
+//  FIXME: Fix and verify ogay?
   /**
-   Find out where we are and then stop
+  Find out where we are and then stop
    */
   func findLocation()
   {
@@ -164,15 +174,15 @@ extension KVPrimeTVController: PersonConDelegate, CLLocationManagerDelegate
     print(locationManager?.location?.coordinate.longitude ?? defLon)
   }
   /**
-   Yippe
-   */
+  Yippe
+  */
   func foundLocation()
   {
     locationManager?.stopUpdatingLocation()
   }
   // moved the coder to the AresDataController
   /**
-   */
+  */
   func forwardGeocoding(address: String)
   {
     CLGeocoder().geocodeAddressString(address, completionHandler: { (placemarks, error) in
@@ -200,9 +210,7 @@ extension KVPrimeTVController: PersonConDelegate, CLLocationManagerDelegate
     })
     //I seriously Better Know What I am doing Next time I see this code: (count 0)
   } // OK it is not what I want (YET)
-  //
-
-  
+  //TODO: Make API for all types
   // MARK: - Conformance is Complinace!
   //
   // Protocol Usage
@@ -214,7 +222,11 @@ extension KVPrimeTVController: PersonConDelegate, CLLocationManagerDelegate
   }
   /**
   */
-  @IBAction func addMessage()
+  func addVendor()
+  {
+    
+  }
+  func addSession()
   {
     /**
      OK I had to clean this up in Both places
@@ -223,14 +235,14 @@ extension KVPrimeTVController: PersonConDelegate, CLLocationManagerDelegate
   }
   /**
   */
-  @IBAction func AddPlace()
+  func AddPlace()
   {
     //    delegate?.willMakeNewPlaceHere(delegate)
     //    configureView()
   }
   /**
   */
-  @IBAction func addEvent()
+  func addEvent()
   {
     //    delegate?.willAddNewEvent(self)
   }

@@ -7,6 +7,7 @@ So I tok a moment to fully rewrite the GUI and it should work but it is not comp
 
 AND to do this I need to have the cells as "Dynamic Prototypes this broke everything. For obvious and fixable reasons - But the fun thing to fix and the item of note is that the size of the cells was the default, and the one that was visible was set to that size (along with my views and buttons) this is set in the insector for the TableView, Set all of the cells to 128 px and you can then set the custom for the other cells sizes to a "custom" 48 px. this is indeterminate because I cannot see these, IF IT DOES NOT WORK THEN I WILL HAVE TO SET THIS IN CODE [See also ~/Developer/02/Dev2/Alt/pub/Tricorder/Tricorder/Tricorder/Views/MapView/KVMapViewCon.swift/ and ~/Developer/../MapObjects/KVAnnotationItem.swift _AND_ /Users/Kenn/Developer/02/Dev2/Alt/pub/Tricorder/Tricorder/Tricorder/Views/PrimeTVC/tvcOBJ ]
 ~%@@1530
+
 OK that starts a fairly good commit for the edit view controllers I really suppose the next step is to wire them up
  
 Switch case for sectionHeight?
