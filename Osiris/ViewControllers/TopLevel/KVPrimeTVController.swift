@@ -33,24 +33,24 @@ class KVPrimeTVController: UITableViewController  {
   var mapViewTableCell = KVMapTableViewCell()
   var locationManager : CLLocationManager? = CLLocationManager()
   
-  var pdc = KVPersonDataController()
-  var vdc = KVVendorDataController()
-  var sdc = KVSessionDataController()
+  var personDataController = KVPersonDataController()
+  var vendorDataController = KVVendorDataController()
+  var sessionDataController = KVSessionDataController()
   
   var people : Array <KVPerson> {
     get {
-      detailViewController?.personsArr = pdc.getAllEntities()
-      return pdc.getAllEntities()
+      detailViewController?.personsArr = personDataController.getAllEntities()
+      return personDataController.getAllEntities()
     }
   }
   var vendors : Array <KVVendor> {
     get {
-      return vdc.getAllEntities()
+      return vendorDataController.getAllEntities()
     }
   }
   var sessions : Array <KVSession> {
     get {
-      return sdc.getAllEntities()
+      return sessionDataController.getAllEntities()
     }
   }
   // TODO: Run Setup if people.isEmpty
@@ -64,7 +64,7 @@ class KVPrimeTVController: UITableViewController  {
     }
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
-    pdc.delegate = self
+    personDataController.delegate = self
     
     navigationItem.leftBarButtonItem = editButtonItem
     
@@ -73,6 +73,7 @@ class KVPrimeTVController: UITableViewController  {
     if let split = splitViewController {
       let controllers = split.viewControllers
       detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? KVDetailViewController
+      detailViewController?.personsArr = self.people
     }
   }
   override func viewWillAppear(_ animated: Bool)
@@ -93,7 +94,7 @@ class KVPrimeTVController: UITableViewController  {
    */
   func insertNewObject(_ sender: Any)
   {
-    pdc.delegate?.willAddPerson(self)
+    personDataController.delegate?.willAddPerson(self)
   }
   // MARK: - Table View
   /**
@@ -172,23 +173,23 @@ class KVPrimeTVController: UITableViewController  {
     if editingStyle == .delete {
       switch indexPath.section {
       case 0:
-        self.pdc.deleteEntityInContext(self.pdc.PSK.viewContext, entity: (people[indexPath.row]))
+        self.personDataController.deleteEntityInContext(self.personDataController.PSK.viewContext, entity: (people[indexPath.row]))
       //        tableView.deleteRows(at: [indexPath], with: .fade)
       case 1:
-        self.vdc.deleteEntityInContext(self.vdc.PSK.viewContext, entity: (vendors[indexPath.row]))
+        self.vendorDataController.deleteEntityInContext(self.vendorDataController.PSK.viewContext, entity: (vendors[indexPath.row]))
       //        tableView.deleteRows(at: [indexPath], with: .fade);
       case 2:
-        self.sdc.deleteEntityInContext(self.sdc.PSK.viewContext, entity: (sessions[indexPath.row]))
+        self.sessionDataController.deleteEntityInContext(self.sessionDataController.PSK.viewContext, entity: (sessions[indexPath.row]))
       //        tableView.deleteRows(at: [indexPath], with: .fade)
       default:
         break
       }
       tableView.deleteRows(at: [indexPath], with: .fade)
-      self.pdc.saveCurrentContext(pdc.MOC!)
+      self.personDataController.saveCurrentContext(personDataController.MOC!)
     } else if editingStyle == .insert {
       // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
-    if pdc.getAllEntities().count == 0
+    if personDataController.getAllEntities().count == 0
     {
       self.insertNewObject(self)
       tableView.reloadData()

@@ -29,14 +29,14 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate
    */
   func setupDataControllers()
   {
-    if self.pdc.MOC != self.AllDataController.PSK.viewContext {
-      self.pdc.MOC = self.AllDataController.PSK.viewContext
+    if self.personDataController.MOC != self.AllDataController.PSK.viewContext {
+      self.personDataController.MOC = self.AllDataController.PSK.viewContext
     }
-    if self.sdc.MOC != self.AllDataController.PSK.viewContext {
-      self.sdc.MOC = self.AllDataController.PSK.viewContext
+    if self.sessionDataController.MOC != self.AllDataController.PSK.viewContext {
+      self.sessionDataController.MOC = self.AllDataController.PSK.viewContext
     }
-    if self.vdc.MOC != self.AllDataController.PSK.viewContext {
-      self.vdc.MOC = self.AllDataController.PSK.viewContext
+    if self.vendorDataController.MOC != self.AllDataController.PSK.viewContext {
+      self.vendorDataController.MOC = self.AllDataController.PSK.viewContext
     }
   }
   /**
@@ -44,10 +44,11 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate
   func setupDummyLoad()
   {
     if (vendors.isEmpty) {
-      self.vdc.makeVendor()
+      self.vendorDataController.makeVendor()
     }
     if (sessions.isEmpty) {
-      self.sdc.makeSession()
+      let _ = self.sessionDataController.createSessionInContext(sessionDataController.MOC!)
+//      sessionDataController.makeSession()
     }
   }
   /**
@@ -119,6 +120,7 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate
       if let indexPath = tableView.indexPathForSelectedRow {
         let person = people[indexPath.row] //as! NSDate
         let dvc = (segue.destination as! UINavigationController).topViewController as! KVDetailViewController
+        dvc.personsArr = people
         dvc.detailItem = person
         dvc.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
         dvc.navigationItem.leftItemsSupplementBackButton = true
@@ -131,7 +133,7 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate
   */
   func didChangePerson(_ entity: KVPerson)
   {
-    pdc.saveCurrentContext(pdc.MOC!)
+    personDataController.saveCurrentContext(personDataController.MOC!)
     tableView.reloadData()
   }
   /**
@@ -139,8 +141,8 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate
   func willAddPerson(_ deli: Any?)
   {
     //    self.insertNewObject(self)
-    pdc.makePerson()
-    pdc.saveCurrentContext(pdc.MOC!)
+    personDataController.makePerson()
+    personDataController.saveCurrentContext(personDataController.MOC!)
     /**
      setup the person
      */

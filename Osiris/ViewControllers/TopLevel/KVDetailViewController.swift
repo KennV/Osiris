@@ -36,7 +36,7 @@ class KVDetailViewController: UIViewController {
   /**
   Ok it's `<KVPerson>! = nil` because Then I don't need an initializer, so when I change / edit it in the PVC it needs to update in the DVC _here_
   */
-  var personsArr: Array <KVPerson>! = nil
+  var personsArr: Array <KVPerson>!
   
   func configureView() {
     // Update the user interface for the detail item.
@@ -47,7 +47,7 @@ class KVDetailViewController: UIViewController {
     }
   }
   override func viewDidLoad() {
-    self.setupModeForDVC()
+    self.setupInitialState()
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     configureView()
@@ -87,36 +87,26 @@ class KVDetailViewController: UIViewController {
   // MARK: - Powa
   /** 
   Setup the inital State of the Buttons
+  _if the PDC…isEmpty do the buttons for ONLY setup_
   */
   func setupInitialState()
   {
+    if (personsArr.isEmpty) {
+    self.mapView.alpha = 0.0
+    self.sessionsButton.isHidden = false
+    self.sessionsButton.isHidden = true
+    self.sessionsButton.isEnabled = false
+    self.sessionsLabel.isHidden = true
+    self.personsLabel.isHidden = true
+    self.personsButton.isHidden = true
+    self.personsButton.isEnabled = false
+    self.vendorsLabel.isHidden = true
+    self.vendorsButton.isEnabled = false
+    self.vendorsButton.isHidden = true
+    self.configureView()
+    }
     /**
-    OK Since this does not work then I will need to set for UIState.normal
+    OK I will need to set for UIState.normal; etc …
     */
-    sessionsLabel.alpha = 0
-    sessionsButton.isEnabled = false
-    sessionsButton.alpha = 0
   }
-  /** 
-  if the PDC…isEmpty do the buttons for ONLY setup
-  */
-  func setupModeForDVC()
-  {
-//    do it either way BUT it does not work *dammit*
-//    if (pdc.getAllEntities().isEmpty) {
-      self.mapView.alpha = 0.0
-      self.sessionsButton.isHidden = false
-      self.sessionsButton.isHidden = true
-      self.sessionsButton.isEnabled = false
-      self.sessionsLabel.isHidden = true
-      self.personsLabel.isHidden = true
-      self.personsButton.isHidden = true
-      self.personsButton.isEnabled = false
-      self.vendorsLabel.isHidden = true
-      self.vendorsButton.isEnabled = false
-      self.vendorsButton.isHidden = true
-      self.configureView()
-//    }
-  }
-
 }
