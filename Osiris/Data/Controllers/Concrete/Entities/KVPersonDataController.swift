@@ -5,6 +5,12 @@
   Created by Kenn Villegas on 6/20/17.
   Copyright © 2017 dubian. All rights reserved.
 */
+
+
+import CoreLocation
+import CoreData
+import UIKit
+
 protocol PersonConDelegate {
   func didChangePerson(_ entity: KVPerson)
   func willAddPerson(_ deli: Any?)
@@ -12,9 +18,10 @@ protocol PersonConDelegate {
   //  func willMakeNewPlaceHere(deli: Any?) -> ()
   //  func willAddNewEvent( _ deli: Any?)
 }
-import CoreLocation
-import CoreData
-import UIKit
+
+extension KVPerson {
+
+}
 //https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Enumerations.html
 enum PersonTypes {
   case owner, friend, vendor
@@ -29,6 +36,13 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
     self.entityClassName = EntityTypes.Person
     self.MOC = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
   }
+  
+  /** 
+  ## Make a People ##
+
+  - Parameter context: MOC
+  - Returns: T: \<T\>
+  */
   func createPersonInContext(_ context: NSManagedObjectContext) -> T
   {
     let pDescription = NSEntityDescription.entity(forEntityName: (EntityTypes.Person), in: self.PSK.viewContext)
@@ -96,18 +110,5 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
     } else {
       rndNamedPerson.middleName = ""
     }
-  }
-  /** ## Almost ##
-   - Parameters:
-     - set: _all().hexID_
-     - t: \<T\>
-  */
-  func jiveDose(set: NSSet,t: T) {
-    let hq = makeRandomHexQuad()
-    while (!(set.contains(hq))) {
-//      t.unitID = hq 
-    }
-    
-    
   }
 }
