@@ -20,9 +20,9 @@ class KVEntityDataController<T : KVEntity > : KVOsirisDataController<T>
   func setupEntity(_ KVEntity: T)
   {
     KVEntity.unitID = NSUUID().uuidString
-    self.setupGraphics(g: KVEntity.graphics!)
-    self.setupLocation(l: KVEntity.location!)
-    self.setupPhysics(p: KVEntity.physics!)
+    setupGraphics(g: KVEntity.graphics!)
+    setupLocation(l: KVEntity.location!)
+    setupPhysics(p: KVEntity.physics!)
   }  
   func setupGraphics(g :KVGraphics)
   {

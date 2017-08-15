@@ -51,14 +51,14 @@ class KVOsirisDataController<T : KVRootEntity > : KVAbstractDataController<T>
   override init()
   {
     super.init()
-    self.entityClassName = "KVRootEntity"
-    self.MOC = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+    entityClassName = EntityTypes.RootEntity
+    MOC = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
   }
   convenience init(ctx: NSManagedObjectContext)
   {
     self.init()
-    self.entityClassName = EntityTypes.RootEntity
-    self.MOC = ctx
+    entityClassName = EntityTypes.RootEntity
+    MOC = ctx
   }
   // MARK: - Entities
   // MARK TODO: ADD unitID
@@ -121,10 +121,8 @@ class KVOsirisDataController<T : KVRootEntity > : KVAbstractDataController<T>
   {
     var ss: saveState
     var saveMessage: String?
-    //let context = persistentContainer.viewContext
-//    let moc : NSManagedObjectContext = self.PSK.viewContext
-    
-    if MOC!.hasChanges {
+    if MOC!.hasChanges
+    {
       ss = saveState.Error
       saveMessage = error?.description
     }
@@ -133,15 +131,6 @@ class KVOsirisDataController<T : KVRootEntity > : KVAbstractDataController<T>
       ss = saveState.SaveComplete
       saveMessage = "Good"
     }
-//  if let moc : NSManagedObjectContext = self.PSK.viewContext
-//    {
-//      if moc.hasChanges {…}
-//    }
-//    else
-//    {
-//      ss = saveState.Error
-//      saveMessage = "Database error"
-//    }
     return (ss, saveMessage)
   }
   /// optional businessRules
@@ -318,19 +307,19 @@ class KVOsirisDataController<T : KVRootEntity > : KVAbstractDataController<T>
   {
     let areaCodes : [String : NSNumber] = ["Philadelphia1" : 217 , "Philadelphia2" : 267 , "Bronx1" : 718 , "Bronx2" : 347 , "Bronx3" : 929 , "Connecticut1" : 203 , "Connecticut2" : 860 , "Connecticut3" : 475 , "Portland1" : 503 , "Portland2" : 541 , "Portland3" : 971 , "Portland4" : 458 , "Manhattan1" : 212 , "Manhattan2" : 646 , "Manhattan3" : 332 , "Baltimore1" : 410 , "Baltimore2" : 443 , "Austin1" : 512 , "Austin2" : 737 , "Phoenix1" : 602 , "Phoenix2" : 480 , "Phoenix3" : 520 , "Phoenix4" : 928 , "Phoenix5" : 623 , "Chicago1" : 312 , "Chicago2" : 847 , "Chicago3" : 773 , "Chicago4" : 630 , "Chicago5" : 815 ]
     // there was a 2 line situation but I Have a Randomizer
-    let zone = Array(areaCodes.values)[self.makeRandomNumber(UInt32(areaCodes.count))]
+    let zone = Array(areaCodes.values)[makeRandomNumber(UInt32(areaCodes.count))]
     
     var pnum = ("(" + zone.stringValue + ") " ) //Trailing Space
     
-    pnum.append(hexDigits[self.makeRandomNumber(4) + 4]) //first digit
+    pnum.append(hexDigits[makeRandomNumber(4) + 4]) //first digit
     for _ in 1...2 // tirst Triplet
     {
-      pnum.append(hexDigits[self.makeRandomNumber(8) + 1])
+      pnum.append(hexDigits[makeRandomNumber(8) + 1])
     }
     pnum.append("-")
     for _ in 1...4
     {
-      pnum.append(hexDigits[self.makeRandomNumber(9)])
+      pnum.append(hexDigits[makeRandomNumber(9)])
     }
     return (pnum) 
   }

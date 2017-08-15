@@ -33,8 +33,8 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
   override init()
   {
     super.init()
-    self.entityClassName = EntityTypes.Person
-    self.MOC = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+    entityClassName = EntityTypes.Person
+    MOC = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
   }
   
   /** 
@@ -45,10 +45,10 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
   */
   func createPersonInContext(_ context: NSManagedObjectContext) -> T
   {
-    let pDescription = NSEntityDescription.entity(forEntityName: (EntityTypes.Person), in: self.PSK.viewContext)
-    let gDescription = NSEntityDescription.entity(forEntityName: (EntityTypes.Graphics), in: self.PSK.viewContext)
-    let lDescription = NSEntityDescription.entity(forEntityName: (EntityTypes.Location), in: self.PSK.viewContext)
-    let pxDescription = NSEntityDescription.entity(forEntityName: (EntityTypes.Physics), in: self.PSK.viewContext)
+    let pDescription = NSEntityDescription.entity(forEntityName: (EntityTypes.Person), in: PSK.viewContext)
+    let gDescription = NSEntityDescription.entity(forEntityName: (EntityTypes.Graphics), in: PSK.viewContext)
+    let lDescription = NSEntityDescription.entity(forEntityName: (EntityTypes.Location), in: PSK.viewContext)
+    let pxDescription = NSEntityDescription.entity(forEntityName: (EntityTypes.Physics), in: PSK.viewContext)
     
     let person = KVPerson(entity: pDescription!, insertInto: context) as! T
     person.incepDate = NSDate()
@@ -64,7 +64,7 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
     person.physics = physx
     person.location = loc
     //
-    self.setupEntity(person)
+    setupEntity(person)
     return person
   }
   /**
@@ -72,7 +72,7 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
   */
   func makePerson()
   {
-    let newPerson = self.createPersonInContext(self.PSK.viewContext)
+    let newPerson = createPersonInContext(PSK.viewContext)
     setupEntity(newPerson)
 //    resetPersonDefaults(newPerson)
     setupRandomPerson(newPerson)
@@ -81,7 +81,7 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
   //MARK TODO: Add Health specific Datas
   func resetPersonDefaults(_ person: T)
   {
-    self.setupEntity(person)
+    setupEntity(person)
     person.firstName = maleNames[1]
     person.middleName = femaleNames[1]
     person.lastName = lastNames[1]

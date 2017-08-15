@@ -62,7 +62,7 @@ class KVPrimeTVController: UITableViewController  {
     setupCLManager()
     findLocation()
     setupDataControllers()
-    if (self.AllDataController.getAllEntities().isEmpty) {
+    if (AllDataController.getAllEntities().isEmpty) {
       print("Nope")
     }
     super.viewDidLoad()
@@ -76,7 +76,7 @@ class KVPrimeTVController: UITableViewController  {
     if let split = splitViewController {
       let controllers = split.viewControllers
       detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? KVDetailViewController
-      detailViewController?.personsArr = self.people
+      detailViewController?.personsArr = people
     }
   }
   override func viewWillAppear(_ animated: Bool)
@@ -176,25 +176,25 @@ class KVPrimeTVController: UITableViewController  {
     if editingStyle == .delete {
       switch indexPath.section {
       case 0:
-        self.personDataController.deleteEntityInContext(self.personDataController.PSK.viewContext, entity: (people[indexPath.row]))
+        personDataController.deleteEntityInContext(personDataController.PSK.viewContext, entity: (people[indexPath.row]))
       //        tableView.deleteRows(at: [indexPath], with: .fade)
       case 1:
-        self.vendorDataController.deleteEntityInContext(self.vendorDataController.PSK.viewContext, entity: (vendors[indexPath.row]))
+        vendorDataController.deleteEntityInContext(vendorDataController.PSK.viewContext, entity: (vendors[indexPath.row]))
       //        tableView.deleteRows(at: [indexPath], with: .fade);
       case 2:
-        self.sessionDataController.deleteEntityInContext(self.sessionDataController.PSK.viewContext, entity: (sessions[indexPath.row]))
+        sessionDataController.deleteEntityInContext(sessionDataController.PSK.viewContext, entity: (sessions[indexPath.row]))
       //        tableView.deleteRows(at: [indexPath], with: .fade)
       default:
         break
       }
       tableView.deleteRows(at: [indexPath], with: .fade)
-      self.personDataController.saveCurrentContext(personDataController.MOC!)
+      personDataController.saveCurrentContext(personDataController.MOC!)
     } else if editingStyle == .insert {
       // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
     if personDataController.getAllEntities().count == 0
     {
-      self.insertNewObject(self)
+      insertNewObject(self)
       tableView.reloadData()
     }
   }

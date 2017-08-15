@@ -12,7 +12,7 @@
  this gets called from the App Deli
  let controller = masterNavigationController.topViewController as! MasterViewController
  OR A NavKhan!!!
- controller.managedObjectContext = self.persistentContainer.viewContext
+ controller.managedObjectContext = persistentContainer.viewContext
 -
 then the controller has an instance of person/vendor/entityDataController init:_MOC from this Master version in the Delegate. Or possibly even better would be to have this be totes abstract. And process everyting on Osiris Subclasses.
 

@@ -15,12 +15,12 @@ class KVSessionDataController<T : KVSession> : KVItemDataController <T>
   override init()
   {
     super.init()
-    self.entityClassName = EntityTypes.Session
-    self.MOC = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+    entityClassName = EntityTypes.Session
+    MOC = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
   }
   func makeSession()
   {
-    let _ = self.createSessionInContext(self.MOC)
+    let _ = createSessionInContext(MOC)
   }
   func createSessionInContext(_ context: NSManagedObjectContext) -> T
   {

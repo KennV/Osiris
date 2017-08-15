@@ -29,14 +29,14 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate
    */
   func setupDataControllers()
   {
-    if self.personDataController.MOC != self.AllDataController.PSK.viewContext {
-      self.personDataController.MOC = self.AllDataController.PSK.viewContext
+    if personDataController.MOC != AllDataController.PSK.viewContext {
+      personDataController.MOC = AllDataController.PSK.viewContext
     }
-    if self.sessionDataController.MOC != self.AllDataController.PSK.viewContext {
-      self.sessionDataController.MOC = self.AllDataController.PSK.viewContext
+    if sessionDataController.MOC != AllDataController.PSK.viewContext {
+      sessionDataController.MOC = AllDataController.PSK.viewContext
     }
-    if self.vendorDataController.MOC != self.AllDataController.PSK.viewContext {
-      self.vendorDataController.MOC = self.AllDataController.PSK.viewContext
+    if vendorDataController.MOC != AllDataController.PSK.viewContext {
+      vendorDataController.MOC = AllDataController.PSK.viewContext
     }
   }
   /**
@@ -47,7 +47,7 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate
    */
   func setupCLManager ()
   {
-    self.locationManager?.delegate = self
+    locationManager?.delegate = self
     setupCLAuthState()
     locationManager?.distanceFilter = kCLDistanceFilterNone
     // According to BestPractices I was OK but now I am modern
@@ -132,7 +132,7 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate
   */
   func willAddPerson(_ deli: Any?)
   {
-    //    self.insertNewObject(self)
+    //    insertNewObject(self)
     personDataController.makePerson()
     personDataController.saveCurrentContext(personDataController.MOC!)
     /**

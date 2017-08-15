@@ -28,8 +28,8 @@ class KVVendorDataController<T : KVVendor > : KVEntityDataController<T>
   override init()
   {
     super.init()
-    self.entityClassName = EntityTypes.Vendor
-    self.MOC = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+    entityClassName = EntityTypes.Vendor
+    MOC = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
   }
   
   /**
@@ -49,8 +49,8 @@ class KVVendorDataController<T : KVVendor > : KVEntityDataController<T>
   }
   func makeVendor()
   {
-    let entityDescription = NSEntityDescription.entity(forEntityName: self.entityClassName!, in: self.PSK.viewContext)
-    let _ = NSManagedObject(entity: entityDescription!, insertInto: self.PSK.viewContext) as! T
+    let entityDescription = NSEntityDescription.entity(forEntityName: entityClassName!, in: PSK.viewContext)
+    let _ = NSManagedObject(entity: entityDescription!, insertInto: PSK.viewContext) as! T
   }
   func resetVendorDefaults(_ vendor: T)
   {
