@@ -25,7 +25,7 @@ class KVPrimeTVController: UITableViewController  {
   var currentPerson: KVPerson?
   {
     didSet {
-      // Update the view.
+      detailViewController?.detailItem = (currentPerson)
     }
   }
   var AllDataController = KVOsirisDataController()
@@ -41,6 +41,9 @@ class KVPrimeTVController: UITableViewController  {
     get {
       detailViewController?.personsArr = personDataController.getAllEntities()
       return personDataController.getAllEntities()
+    }
+    set {
+      detailViewController?.personsArr  = people
     }
   }
   var vendors : Array <KVVendor> {

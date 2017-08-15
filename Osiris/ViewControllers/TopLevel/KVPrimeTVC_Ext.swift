@@ -40,17 +40,9 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate
     }
   }
   /**
-   */
-  func setupDummyLoad()
-  {
-    if (vendors.isEmpty) {
-      self.vendorDataController.makeVendor()
-    }
-    if (sessions.isEmpty) {
-      let _ = self.sessionDataController.createSessionInContext(sessionDataController.MOC!)
-//      sessionDataController.makeSession()
-    }
-  }
+  setupDummyLoad()
+  */
+
   /**
    */
   func setupCLManager ()
@@ -120,7 +112,7 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate
       if let indexPath = tableView.indexPathForSelectedRow {
         let person = people[indexPath.row] //as! NSDate
         let dvc = (segue.destination as! UINavigationController).topViewController as! KVDetailViewController
-        dvc.personsArr = people
+//        dvc.personsArr = people
         dvc.detailItem = person
         dvc.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
         dvc.navigationItem.leftItemsSupplementBackButton = true
@@ -148,7 +140,7 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate
      */
     let indexPath = IndexPath(row: 0, section: 0)
     tableView.insertRows(at: [indexPath], with: .automatic)
-    detailViewController?.detailItem = (people[0])
+    currentPerson = people[0]
   }
   /**
   */

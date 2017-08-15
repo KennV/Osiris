@@ -47,7 +47,11 @@ class KVDetailViewController: UIViewController {
     }
   }
   override func viewDidLoad() {
-    self.setupInitialState()
+    
+    if (personsArr.isEmpty)
+    {
+      setupInitialState()
+    }
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     configureView()
@@ -84,27 +88,25 @@ class KVDetailViewController: UIViewController {
 //      //I would need to make is and set it to conform to a protocol on the PVC
 //    }
   }
-  // MARK: - Powa
   /** 
   Setup the inital State of the Buttons
   _if the PDC…isEmpty do the buttons for ONLY setup_
   */
   func setupInitialState()
   {
-    if (personsArr.isEmpty) {
-    self.mapView.alpha = 0.0
-    self.sessionsButton.isHidden = false
-    self.sessionsButton.isHidden = true
-    self.sessionsButton.isEnabled = false
-    self.sessionsLabel.isHidden = true
-    self.personsLabel.isHidden = true
-    self.personsButton.isHidden = true
-    self.personsButton.isEnabled = false
-    self.vendorsLabel.isHidden = true
-    self.vendorsButton.isEnabled = false
-    self.vendorsButton.isHidden = true
-    self.configureView()
-    }
+    mapView.alpha = 0.0
+    sessionsButton.isHidden = false
+    sessionsButton.isHidden = true
+    sessionsButton.isEnabled = false
+    sessionsLabel.isHidden = true
+    personsLabel.isHidden = true
+    personsButton.isHidden = true
+    personsButton.isEnabled = false
+    vendorsLabel.isHidden = true
+    vendorsButton.isEnabled = false
+    vendorsButton.isHidden = true
+    configureView()
+
     /**
     OK I will need to set for UIState.normal; etc …
     */

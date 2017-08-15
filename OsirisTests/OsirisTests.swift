@@ -60,6 +60,12 @@ class OsirisTests: XCTestCase {
     PSK = nil
     super.tearDown()
   }
+  func testTableViewController()
+  {
+    XCTAssertNotEqual(0, SUT.numberOfSections(in: SUT.tableView))
+    XCTAssertNotEqual(0, SUT.numberOfSections(in: SUT.tableView))    
+  }
+  
   func testADController()
   {
     XCTAssertNotNil(KVOsirisDataController(ctx: (PSK?.viewContext)!), "Combi")
