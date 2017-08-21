@@ -44,7 +44,7 @@ class KVDetailViewController: UIViewController {
   func configureView() {
     setupGUIState()
     // Update the user interface for the detail item.
-    if let detail = detailItem
+    if let detail = detailPerson
     {
       title = detail.incepDate!.description
 //        if let label = detailDescriptionLabel {
@@ -69,7 +69,7 @@ class KVDetailViewController: UIViewController {
   /**
   The Person
   */
-  var detailItem: KVPerson? {
+  var detailPerson: KVPerson? {
     didSet {
         // Update the view.
         configureView()
