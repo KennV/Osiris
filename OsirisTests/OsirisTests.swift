@@ -60,17 +60,20 @@ class OsirisTests: XCTestCase {
     PSK = nil
     super.tearDown()
   }
+  
+  
   func testTableViewController()
   {
     XCTAssertNotEqual(0, SUT.numberOfSections(in: SUT.tableView))
     XCTAssertNotEqual(0, SUT.numberOfSections(in: SUT.tableView))    
   }
-  
   func testADController()
   {
     XCTAssertNotNil(KVOsirisDataController(ctx: (PSK?.viewContext)!), "Combi")
+
+    XCTAssertNil(SUT.AllDataController._fetchedResultsController, "the Bar one is reset to nil")
+    XCTAssertNotNil(SUT.AllDataController.fetchedResultsController, "This is constructed on the fly and should never be nil")
     
-//    let vue = KVPrimeTVController()
     XCTAssertNotNil(SUT.AllDataController.MOC, "No MOC")
     
     SUT.personDataController.MOC = SUT.AllDataController.MOC
