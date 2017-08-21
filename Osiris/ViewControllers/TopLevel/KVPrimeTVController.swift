@@ -16,6 +16,8 @@ import MapKit
 import HealthKit
 import HealthKitUI
 
+
+
 class KVPrimeTVController: UITableViewController  {
   /**
    */
@@ -39,12 +41,14 @@ class KVPrimeTVController: UITableViewController  {
   
   var people : Array <KVPerson> {
     get {
-      detailViewController?.personsArr = personDataController.getAllEntities()
-      return personDataController.getAllEntities()
+      let miPeople = personDataController.getAllEntities()
+      detailViewController?.personsArr = miPeople
+      detailViewController?.configureView()
+      return miPeople
     }
-    set {
-      detailViewController?.personsArr  = people
-    }
+//    set {
+//      detailViewController?.personsArr  = people
+//    } //Im Kinda unsure of this, as I _never_
   }
   var vendors : Array <KVVendor> {
     get {
@@ -73,7 +77,8 @@ class KVPrimeTVController: UITableViewController  {
     
     let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
     navigationItem.rightBarButtonItem = addButton
-    if let split = splitViewController {
+    if let split = splitViewController
+    {
       let controllers = split.viewControllers
       detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? KVDetailViewController
       detailViewController?.personsArr = people
@@ -83,6 +88,7 @@ class KVPrimeTVController: UITableViewController  {
   {
     clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
     //    setupDetailViewController()
+    detailViewController?.personsArr = people
     super.viewWillAppear(animated)
   }
   override func didReceiveMemoryWarning()
@@ -198,5 +204,21 @@ class KVPrimeTVController: UITableViewController  {
       tableView.reloadData()
     }
   }
-  //
+  /**
+  Activate Segue from Cell-Tapped
+
+  - Parameters:
+  - tableView: mi Table Vue
+  - indexPath: Section and Index of selection
+  */
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+  {
+    if (indexPath.section == 0 )
+    {
+      performSegue(withIdentifier: "showDetail", sender: nil)
+      
+    }
+    
+  }
+
 }

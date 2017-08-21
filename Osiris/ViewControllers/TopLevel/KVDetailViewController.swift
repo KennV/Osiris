@@ -15,51 +15,57 @@ OK Can I operate the corner buttons w/o a stack view, Or Do I _rilly_ do it on s
 
 OK if I am in SetupMode the buttons and map need to be invisible
  AND if i am in Landscape then I need to swallow the side view for wide / non compact layouts.
-OKAY I need a inference to the PeopleCon
- 
+OKAY I need a interface to the PeopleCon
+And It needs to be setup in the appDeli 
+OR I just set it in the TVC VWillAppear…
 */
 
 import UIKit
 import MapKit
 
 class KVDetailViewController: UIViewController {
-
-  @IBOutlet weak var mapView: MKMapView!
-  @IBOutlet weak var setupButton: UIButton!
-//  @IBOutlet weak var detailDescriptionLabel: UILabel!
-  @IBOutlet weak var sessionsLabel: UILabel!
-  @IBOutlet weak var sessionsButton: UIButton!
-  @IBOutlet weak var vendorsLabel: UILabel!
-  @IBOutlet weak var vendorsButton: UIButton!
-  @IBOutlet weak var personsButton: UIButton!
-  @IBOutlet weak var personsLabel: UILabel!
+  
+//  var hasBeenSetUpIfTrue: Bool! = true.
+  
+  @IBOutlet weak var mapView = MKMapView()
+  @IBOutlet weak var setupButton = UIButton()
+  @IBOutlet weak var detailDescriptionLabel = UILabel()
+  @IBOutlet weak var sessionsLabel = UILabel()
+  @IBOutlet weak var sessionsButton = UIButton()
+  @IBOutlet weak var vendorsLabel = UILabel()
+  @IBOutlet weak var vendorsButton = UIButton()
+  @IBOutlet weak var personsButton = UIButton()
+  @IBOutlet weak var personsLabel = UILabel()
   /**
   Ok it's `<KVPerson>! = nil` because Then I don't need an initializer, so when I change / edit it in the PVC it needs to update in the DVC _here_
   */
   var personsArr: Array <KVPerson>!
   
   func configureView() {
+    setupGUIState()
     // Update the user interface for the detail item.
-    if let detail = detailItem {
+    if let detail = detailItem
+    {
+      title = detail.incepDate!.description
 //        if let label = detailDescriptionLabel {
 //            label.text = detail.incepDate!.description
 //        }
     }
   }
-  override func viewDidLoad() {
-    
-    if (personsArr.isEmpty)
-    {
-      setupInitialState()
-    }
+  override func viewDidLoad()
+  {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     configureView()
   }
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
+  override func viewWillAppear(_ animated: Bool)
+  {
+//    setupInitialState()
   }
+//  override func didReceiveMemoryWarning() {
+//    super.didReceiveMemoryWarning()
+//    // Dispose of any resources that can be recreated.
+//  }
   /**
   The Person
   */
@@ -76,6 +82,7 @@ class KVDetailViewController: UIViewController {
     case "ShowPerson":
       break
     case "ShowSession":
+      
       break
     case "ShowVendor":
       break
@@ -92,23 +99,40 @@ class KVDetailViewController: UIViewController {
   Setup the inital State of the Buttons
   _if the PDC…isEmpty do the buttons for ONLY setup_
   */
-  func setupInitialState()
+  func setupGUIState()
   {
-    mapView.alpha = 0.0
-    sessionsButton.isHidden = false
-    sessionsButton.isHidden = true
-    sessionsButton.isEnabled = false
-    sessionsLabel.isHidden = true
-    personsLabel.isHidden = true
-    personsButton.isHidden = true
-    personsButton.isEnabled = false
-    vendorsLabel.isHidden = true
-    vendorsButton.isEnabled = false
-    vendorsButton.isHidden = true
-    configureView()
+    if personsArr != nil
+    {
+      if personsArr.isEmpty
+      {
+        mapView?.alpha = 0.0
+        sessionsButton?.isHidden = true
+        sessionsButton?.isEnabled = false
+        sessionsLabel?.isHidden = true
+        
+        personsLabel?.isHidden = true
+        personsButton?.isHidden = true
+        personsButton?.isEnabled = false
+        
+        vendorsLabel?.isHidden = true
+        vendorsButton?.isHidden = true
+        vendorsButton?.isEnabled = false
+      } else {
+        mapView?.alpha = 01.0
+      
+        sessionsButton?.isHidden = false
+        sessionsLabel?.isHidden = false
+        sessionsButton?.isEnabled = true
+        
+        personsLabel?.isHidden = false
+        personsButton?.isHidden = false
+        personsButton?.isEnabled = true
+        
+        vendorsLabel?.isHidden = false
+        vendorsButton?.isHidden = false
+        vendorsButton?.isEnabled = true
+      }
+    }
 
-    /**
-    OK I will need to set for UIState.normal; etc …
-    */
   }
 }
