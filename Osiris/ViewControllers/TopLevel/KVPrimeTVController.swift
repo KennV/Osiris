@@ -9,6 +9,7 @@
 Cleaned out this TopLevel Documentation and put it into the .rad file
  This class is still hella big. So I made an extension and I am moving all of the non TVC functions go over there
 */
+
 import UIKit
 import CoreData
 import CoreLocation
@@ -27,7 +28,7 @@ class KVPrimeTVController: UITableViewController  {
   var currentPerson: KVPerson?
   {
     didSet {
-      detailViewController?.detailItem = (currentPerson)
+      detailViewController?.detailPerson = (currentPerson)
     }
   }
   var AllDataController = KVOsirisDataController()

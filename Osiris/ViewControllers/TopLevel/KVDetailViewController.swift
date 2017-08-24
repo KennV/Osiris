@@ -23,10 +23,15 @@ OR I just set it in the TVC VWillAppear…
 import UIKit
 import MapKit
 
+protocol DetailVueDelegate
+{
+  func phaseTest(_ delegate :Any? )
+}
+
 class KVDetailViewController: UIViewController {
   
 //  var hasBeenSetUpIfTrue: Bool! = true.
-  
+  var delegate: DetailVueDelegate?
   @IBOutlet weak var mapView = MKMapView()
   @IBOutlet weak var setupButton = UIButton()
   @IBOutlet weak var detailDescriptionLabel = UILabel()
@@ -119,6 +124,9 @@ class KVDetailViewController: UIViewController {
         vendorsButton?.isEnabled = false
       } else {
         mapView?.alpha = 01.0
+        
+        setupButton?.isHidden = true
+        setupButton?.isEnabled = false
       
         sessionsButton?.isHidden = false
         sessionsLabel?.isHidden = false

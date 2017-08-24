@@ -78,6 +78,7 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
     setupRandomPerson(newPerson)
 	// Now what can I assert in unit tests
   }
+  
   //MARK TODO: Add Health specific Datas
   func resetPersonDefaults(_ person: T)
   {
@@ -88,6 +89,19 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
     person.emailID = person.firstName! + (".") + person.lastName! + "pony.edu"
     person.phoneNumber = "(555)abc-defg"
     person.textID  = person.firstName! + ("_") + person.lastName!
+  }
+
+  func resetPersonToEditMeState(_ person: T)
+  {
+    let edString = "Edit-Me"
+    setupEntity(person)
+    person.firstName = edString
+    person.middleName = edString
+    person.lastName = edString
+    person.qName = edString
+    person.emailID = edString + ("_") + edString
+    person.phoneNumber = "(555)" + edString
+    person.textID  = person.firstName! + ("-") + person.lastName!
   }
   func setupRandomPerson(_ rndPerson: T)
   {
@@ -111,4 +125,5 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
       rndNamedPerson.middleName = ""
     }
   }
+  
 }

@@ -22,8 +22,10 @@ import MapKit
 import HealthKit
 import HealthKitUI
 
-extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate
+extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, DetailVueDelegate
 {
+
+
   // MARK: - Set Application State
   /**
    */
@@ -111,17 +113,18 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate
     ///MANUALLY BOUND TO THIS VIEWS NAV CONTROLLER
     if segue.identifier == "showDetail"
     {
-      if let indexPath = tableView.indexPathForSelectedRow {
+      if let indexPath = tableView.indexPathForSelectedRow
+      {
         let person = people[indexPath.row] //as! NSDate
         let dvc = (segue.destination as! UINavigationController).topViewController as! KVDetailViewController
         dvc.personsArr = people
-        dvc.detailItem = person
+        dvc.detailPerson = person
+        dvc.delegate = self
         dvc.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
         dvc.navigationItem.leftItemsSupplementBackButton = true
       }
     }
   }
-
   // MARK: - Protocol Conformance
   /**
   */
@@ -132,23 +135,61 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate
   }
   /**
   */
-  func willAddPerson(_ deli: Any?)
+  func OLDwillAddPerson(_ deli: Any?)
   {
-    //    insertNewObject(self)
+    //insertNewObject(self)
     personDataController.makePerson()
     personDataController.saveCurrentContext(personDataController.MOC!)
     /**
-     setup the person
-     */
+    setup the person
+    */
+    currentPerson = people[0]
     let indexPath = IndexPath(row: 0, section: 0)
     tableView.insertRows(at: [indexPath], with: .automatic)
-    currentPerson = people[0]
+  }
+  /**
+  test DetailVueDelegate
+
+  - Parameter delegate: DetailVueDelegate
+  */
+  func phaseTest(_ delegate: Any?)
+  {
+    self.willAddPerson(delegate)
+  }
+  func willAddPersonTo(_ delegate :Any? )
+  {
+    self.willAddPerson(delegate)
+  }
+  func willAddPerson(_ deli: Any?)
+  {
+    /**
+    lets make an actual p
+    Then edit it
+    */
+    let _p = (personDataController.createPersonInContext(personDataController.MOC!))
+    personDataController.resetPersonToEditMeState(_p)
+    /**
+    then save it
+    */
+    _ = personDataController.saveEntity(entity: _p)
+    /**
+    POP THE TABLE
+    */
+//    currentPerson = people[0]
+    currentPerson = _p
+    let indexPath = IndexPath(row: 0, section: 0)
+    tableView.insertRows(at: [indexPath], with: .automatic)
+    /**
+    Optionally return it
+    */
+
   }
   /**
   */
   func didChangeGraphicsOn(_ entity: KVGraphics)
   {
-    if currentPerson?.graphics != entity {
+    if currentPerson?.graphics != entity
+    {
       currentPerson?.graphics = entity
     }
     //    configureView()
@@ -212,36 +253,36 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate
   // Protocol Usage
   /**
   */
-  @IBAction func addPerson(_ sender: AnyObject)
-  {
+//  @IBAction func addPerson(_ sender: AnyObject)
+//  {
     //    pdc.delegate?.willAddPerson(self)
-  }
+//  }
   /**
   */
-  func addVendor()
-  {
-    
-  }
-  func addSession()
-  {
+//  func addVendor()
+//  {
+  
+//  }
+//  func addSession()
+//  {
     /**
      OK I had to clean this up in Both places
      */
     //    delegate?.willMakeMessageFromPerson(currentPerson!) //It needs to reload table data
-  }
+//  }
   /**
   */
-  func AddPlace()
-  {
+//  func AddPlace()
+//  {
     //    delegate?.willMakeNewPlaceHere(delegate)
     //    configureView()
-  }
+//  }
   /**
   */
-  func addEvent()
-  {
+//  func addEvent()
+//  {
     //    delegate?.willAddNewEvent(self)
-  }
+//  }
 }
 
 
