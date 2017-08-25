@@ -29,6 +29,7 @@ class KVPrimeTVController: UITableViewController  {
   {
     didSet {
       detailViewController?.detailPerson = (currentPerson)
+      detailViewController?.configureView()
     }
   }
   var AllDataController = KVOsirisDataController()
@@ -82,6 +83,7 @@ class KVPrimeTVController: UITableViewController  {
     {
       let controllers = split.viewControllers
       detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? KVDetailViewController
+      detailViewController?.delegate = self
       detailViewController?.personsArr = people
     }
   }
@@ -108,29 +110,31 @@ class KVPrimeTVController: UITableViewController  {
   }
   // MARK: - Table View
   /**
-   Set for Owner, Vendors, and Sessions
-   */
+  Set for Owner, Vendors, and Sessions
+  */
   override func numberOfSections(in tableView: UITableView) -> Int
   {
     return 3
   }
   /**
-   */
+  */
   override func tableView(_ tableView: UITableView,
                           numberOfRowsInSection section: Int) -> Int
   {
     var rowCount = 0
-    if (section == 0) {
+    if (section == 0)
+    {
       rowCount = people.count
     }
-    if (section == 1) {
+    if (section == 1)
+    {
       rowCount = vendors.count
     }
-    if (section == 2) {
+    if (section == 2)
+    {
       rowCount = sessions.count
     }
     return(rowCount)
-    
   }
   // MARK: - Update Cells
   // FIXME: - These are NOT custom in the XIB and Are Barely custom Here:
@@ -162,11 +166,10 @@ class KVPrimeTVController: UITableViewController  {
       return d
     }
     /*
-     return cell c,d,e,f or return an empty one
-     */
+      return cell c,d,e,f or return an empty one
+    */
     return (UITableViewCell())//cell!
   }
-  
   override func tableView(_ tableView: UITableView,
                           canEditRowAt indexPath: IndexPath) -> Bool
   {
@@ -175,7 +178,7 @@ class KVPrimeTVController: UITableViewController  {
   // MARK: - Deleter
   /**
    Assure that there is a save: here OR save in the Osiris Class' delete()
-   */
+  */
   override func tableView(_ tableView: UITableView,
                           commit editingStyle: UITableViewCellEditingStyle,
                           forRowAt indexPath: IndexPath)
@@ -217,9 +220,6 @@ class KVPrimeTVController: UITableViewController  {
     if (indexPath.section == 0 )
     {
       performSegue(withIdentifier: "showDetail", sender: nil)
-      
     }
-    
   }
-
 }

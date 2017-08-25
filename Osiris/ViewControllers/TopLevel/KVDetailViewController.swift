@@ -41,10 +41,19 @@ class KVDetailViewController: UIViewController {
   @IBOutlet weak var vendorsButton = UIButton()
   @IBOutlet weak var personsButton = UIButton()
   @IBOutlet weak var personsLabel = UILabel()
+  
+  var personsArr: Array <KVPerson>!
+  var detailPerson: KVPerson? {
+    didSet {
+      // Update the view.
+      configureView()
+    }
+  }
+  
   /**
   Ok it's `<KVPerson>! = nil` because Then I don't need an initializer, so when I change / edit it in the PVC it needs to update in the DVC _here_
   */
-  var personsArr: Array <KVPerson>!
+  
   
   func configureView() {
     setupGUIState()
@@ -67,18 +76,18 @@ class KVDetailViewController: UIViewController {
   {
 //    setupInitialState()
   }
-//  override func didReceiveMemoryWarning() {
-//    super.didReceiveMemoryWarning()
-//    // Dispose of any resources that can be recreated.
-//  }
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+  // Dispose of any resources that can be recreated.
+  }
   /**
   The Person
   */
-  var detailPerson: KVPerson? {
-    didSet {
-        // Update the view.
-        configureView()
-    }
+  
+  @IBAction func startSetupAction(_ sender: UIButton) {
+    
+    delegate?.phaseTest(self.delegate)
+    
   }
   override func prepare(for segue: UIStoryboardSegue, sender: Any?)
   {
@@ -91,8 +100,9 @@ class KVDetailViewController: UIViewController {
       break
     case "ShowVendor":
       break
-    case "ShowSetup":
-      break
+//    case "ShowSetup":
+//      delegate?.phaseTest(self.delegate)
+//      break
     default:
       break
     }
@@ -143,4 +153,5 @@ class KVDetailViewController: UIViewController {
     }
 
   }
+  
 }

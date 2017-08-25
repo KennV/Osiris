@@ -154,7 +154,10 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Det
   */
   func phaseTest(_ delegate: Any?)
   {
+    print("\(delegate.debugDescription) from \(self.debugDescription) ")
     self.willAddPerson(delegate)
+//    detailViewController?.setupButton?.
+    detailViewController?.viewWillAppear(true)
   }
   func willAddPersonTo(_ delegate :Any? )
   {
@@ -175,14 +178,13 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Det
     /**
     POP THE TABLE
     */
-//    currentPerson = people[0]
+    //currentPerson = people[0]
     currentPerson = _p
     let indexPath = IndexPath(row: 0, section: 0)
     tableView.insertRows(at: [indexPath], with: .automatic)
     /**
     Optionally return it
     */
-
   }
   /**
   */
@@ -196,11 +198,10 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Det
     // pass it to the other deli
     //    delegate?.didChangePerson(currentPerson!)
   }
-  
-//  FIXME: Fix and verify ogay?
+  //  FIXME: Fix and verify ogay?
   /**
   Find out where we are and then stop
-   */
+  */
   func findLocation()
   {
     let defLat : Double = 37.33115792
