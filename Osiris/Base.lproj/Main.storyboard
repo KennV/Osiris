@@ -44,7 +44,7 @@
                                 <rect key="frame" x="20" y="32" width="374" height="672"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E5u-zy-ApG">
-                                <rect key="frame" x="166.66666666666666" y="343" width="81" height="46"/>
+                                <rect key="frame" x="167" y="343" width="81" height="46"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <state key="normal" title="Setup!"/>
                                 <connections>
@@ -101,7 +101,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zmo-At-ZWY" userLabel="PersonStack">
-                                <rect key="frame" x="36.000000000000007" y="638" width="87.666666666666686" height="42"/>
+                                <rect key="frame" x="36.000000000000007" y="638" width="89.666666666666686" height="42"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rqB-dZ-SNZ">
                                         <rect key="frame" x="0.0" y="0.0" width="41.666666666666671" height="42"/>
@@ -110,8 +110,8 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YDe-cY-WgQ">
-                                        <rect key="frame" x="41.666666666666671" y="0.0" width="46" height="42"/>
-                                        <state key="normal" title="Button"/>
+                                        <rect key="frame" x="41.666666666666671" y="0.0" width="48" height="42"/>
+                                        <state key="normal" title="Person"/>
                                         <connections>
                                             <segue destination="Vwc-CG-Oo6" kind="show" identifier="ShowPerson" id="N6g-vm-V98"/>
                                         </connections>
@@ -121,15 +121,15 @@
                                     <constraint firstAttribute="height" constant="42" id="VJt-qe-JBJ"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zm1-hs-UgI">
-                                <rect key="frame" x="290.33333333333326" y="638" width="0.0" height="42"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zm1-hs-UgI">
+                                <rect key="frame" x="290" y="638" width="88" height="42"/>
                                 <subviews>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zWU-Ak-2pV">
-                                        <rect key="frame" x="-378" y="-638" width="0.0" height="30"/>
+                                        <rect key="frame" x="-290" y="-638" width="0.0" height="30"/>
                                         <state key="normal" title="Button"/>
                                     </button>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJb-On-qkF">
-                                        <rect key="frame" x="-378" y="-638" width="0.0" height="30"/>
+                                        <rect key="frame" x="-290" y="-638" width="0.0" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -159,6 +159,7 @@
                             <constraint firstItem="Zmo-At-ZWY" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" constant="16" id="sUE-d7-RY7"/>
                             <constraint firstItem="E5u-zy-ApG" firstAttribute="centerY" secondItem="Gzr-Xg-lY3" secondAttribute="centerY" constant="-2" id="vhP-Bf-snz"/>
                             <constraint firstAttribute="trailing" secondItem="cPw-Me-yp2" secondAttribute="trailing" id="woP-ys-4jS"/>
+                            <constraint firstItem="zm1-hs-UgI" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" constant="290" id="x7n-0X-2Fq"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -860,6 +861,13 @@
                             <constraint firstAttribute="trailing" secondItem="crm-Az-1JP" secondAttribute="trailing" id="j6t-Al-kTT"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="midInitialTextField" destination="yyJ-aE-muU" id="uLX-rh-n4C"/>
+                        <outlet property="personsAddressTextField" destination="l0Q-Fb-LcI" id="nKl-eq-S3r"/>
+                        <outlet property="personsMapView" destination="fCz-Ph-cIp" id="sBw-rh-sgL"/>
+                        <outlet property="personsNameTextField" destination="j3b-fw-Xry" id="fU7-kr-aky"/>
+                        <outlet property="personsTypeTextField" destination="HSQ-c2-LpQ" id="wtI-VF-vwR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hji-BO-rFl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
