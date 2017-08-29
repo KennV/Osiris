@@ -1,10 +1,12 @@
-//
-//  AppDelegate.swift
-//  Osiris
-//
-//  Created by Kenn Villegas on 6/13/17.
-//  Copyright © 2017 dubian. All rights reserved.
-//
+/**
+  AppDelegate.swift
+  Osiris
+
+  Created by Kenn Villegas on 6/13/17.
+  Copyright © 2017 dubian. All rights reserved.
+
+
+*/
 
 import UIKit
 
@@ -61,10 +63,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
       if topAsDetailController.detailPerson == nil {
           // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
 //        return true // ** CHANGED true HERE TO DEBUG THE TVC
+        /**
+        Ok given the desire to have it open in 'setup mode'
+        */
+        //return true // 8 - 29
         return false
       }
     return true
-//      return false
+    //return false
   }
 /**
    */
