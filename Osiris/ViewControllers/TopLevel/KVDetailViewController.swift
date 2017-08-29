@@ -25,13 +25,12 @@ import MapKit
 
 protocol DetailVueDelegate
 {
-  func phaseTest(_ delegate :Any? )
+//  func phaseTest(_ delegate :Any? )
+  func didMakePersonFor(_ delegate :Any? ) -> Bool
 }
 
-class KVDetailViewController: UIViewController {
-  
-//  var hasBeenSetUpIfTrue: Bool! = true.
-  var delegate: DetailVueDelegate?
+class KVDetailViewController: UIViewController
+{
   @IBOutlet weak var mapView = MKMapView()
   @IBOutlet weak var setupButton = UIButton()
   @IBOutlet weak var detailDescriptionLabel = UILabel()
@@ -41,7 +40,8 @@ class KVDetailViewController: UIViewController {
   @IBOutlet weak var vendorsButton = UIButton()
   @IBOutlet weak var personsButton = UIButton()
   @IBOutlet weak var personsLabel = UILabel()
-  
+  //  var hasBeenSetUpIfTrue: Bool! = true.
+  var delegate: DetailVueDelegate?
   var personsArr: Array <KVPerson>!
   var detailPerson: KVPerson? {
     didSet {
@@ -49,18 +49,12 @@ class KVDetailViewController: UIViewController {
       configureView()
     }
   }
-  
-  /**
-  Ok it's `<KVPerson>! = nil` because Then I don't need an initializer, so when I change / edit it in the PVC it needs to update in the DVC _here_
-  */
-  
-  
   func configureView() {
     setupGUIState()
     // Update the user interface for the detail item.
-    if let detail = detailPerson
+    if let _p = detailPerson
     {
-      title = detail.incepDate!.description
+      title = _p.incepDate!.description
 //        if let label = detailDescriptionLabel {
 //            label.text = detail.incepDate!.description
 //        }
@@ -83,26 +77,29 @@ class KVDetailViewController: UIViewController {
   /**
   The Person
   */
-  
-  @IBAction func startSetupAction(_ sender: UIButton) {
-    
-    delegate?.phaseTest(self.delegate)
-    
+  @IBAction func startSetupAction(_ sender: UIButton)
+  {
+//    _ = delegate?.didMakePersonFor(self)
+//    self.reloadInputViews()
+//    
   }
   override func prepare(for segue: UIStoryboardSegue, sender: Any?)
   {
     let identifier = segue.identifier!
     switch identifier {
     case "ShowPerson":
+      let personEditor = segue.destination as! KVPersonDetailViewController
+      personEditor.editablePerson = detailPerson
       break
     case "ShowSession":
       
       break
     case "ShowVendor":
       break
-//    case "ShowSetup":
-//      delegate?.phaseTest(self.delegate)
-//      break
+    case "ShowSetup":
+      _ = delegate?.didMakePersonFor(self)
+      self.reloadInputViews()
+      break
     default:
       break
     }
@@ -151,7 +148,6 @@ class KVDetailViewController: UIViewController {
         vendorsButton?.isEnabled = true
       }
     }
-
   }
   
 }

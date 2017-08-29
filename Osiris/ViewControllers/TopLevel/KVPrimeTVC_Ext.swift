@@ -40,6 +40,10 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Det
     if vendorDataController.MOC != AllDataController.PSK.viewContext {
       vendorDataController.MOC = AllDataController.PSK.viewContext
     }
+//    if !(people.isEmpty)
+//    {
+//      detailViewController?.detailPerson = people.first
+//    }
   }
   /**
   setupDummyLoad()
@@ -135,33 +139,11 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Det
   }
   /**
   */
-  func OLDwillAddPerson(_ deli: Any?)
-  {
-    //insertNewObject(self)
-    personDataController.makePerson()
-    personDataController.saveCurrentContext(personDataController.MOC!)
-    /**
-    setup the person
-    */
-    currentPerson = people[0]
-    let indexPath = IndexPath(row: 0, section: 0)
-    tableView.insertRows(at: [indexPath], with: .automatic)
-  }
-  /**
-  test DetailVueDelegate
-
-  - Parameter delegate: DetailVueDelegate
-  */
-  func phaseTest(_ delegate: Any?)
+  func didMakePersonFor(_ delegate: Any?) -> Bool
   {
     print("\(delegate.debugDescription) from \(self.debugDescription) ")
     self.willAddPerson(delegate)
-//    detailViewController?.setupButton?.
-    detailViewController?.viewWillAppear(true)
-  }
-  func willAddPersonTo(_ delegate :Any? )
-  {
-    self.willAddPerson(delegate)
+    return true
   }
   func willAddPerson(_ deli: Any?)
   {
@@ -182,9 +164,12 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Det
     currentPerson = _p
     let indexPath = IndexPath(row: 0, section: 0)
     tableView.insertRows(at: [indexPath], with: .automatic)
+    //YES This Line is STILL Important
+    personDataController.saveCurrentContext(personDataController.MOC!)
     /**
     Optionally return it
     */
+    
   }
   /**
   */
@@ -198,7 +183,6 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Det
     // pass it to the other deli
     //    delegate?.didChangePerson(currentPerson!)
   }
-  //  FIXME: Fix and verify ogay?
   /**
   Find out where we are and then stop
   */
