@@ -1,5 +1,11 @@
 # Due to Time Constraints #
 
+20170828@2155
+Yes integration testing has made me a lil'nutty
+
+20170828@2152
+I'm going to start with a Fred Brooks quote that I agree with very much : Show me your flowcharts and conceal your tables, and I shall continue to be mystified. Show me your tables, and I won’t usually need your flowcharts; they’ll be obvious.
+
 20170726@1330
 
 So I tok a moment to fully rewrite the GUI and it should work but it is not compatible with the given code that I am looking at; therefore I will need to add the following element Custom TableViewCell with a stack view that has a MKMapView and another stack view with three buttons. One for each available Seque: 
