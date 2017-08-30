@@ -79,11 +79,9 @@ class KVPrimeTVController: UITableViewController  {
     setupCLManager()
     findLocation()
     setupDataControllers()
-    if (AllDataController.getAllEntities().isEmpty) {
-      print("Nope")
-    }
+
     super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
+    view.backgroundColor = UIColor.darkGray
     personDataController.delegate = self
     
     navigationItem.leftBarButtonItem = editButtonItem
@@ -164,7 +162,7 @@ class KVPrimeTVController: UITableViewController  {
     let headerVue = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: view.frame.size.width, height: 0)))
     let sectionLabel = UILabel(frame: CGRect(origin: CGPoint(x: 10, y: 10), size: CGSize(width: view.frame.size.width, height: 21)))
     sectionLabel.backgroundColor = UIColor.clear
-    sectionLabel.textColor = UIColor.blue
+    sectionLabel.textColor = UIColor.cyan
     sectionLabel.font = UIFont.boldSystemFont(ofSize: 17)
     
     let sectionButton = UIButton(frame: CGRect(x: 80, y: 10, width: 88, height: 21))
@@ -175,16 +173,17 @@ class KVPrimeTVController: UITableViewController  {
     {
     case 0:
       sectionLabel.text = NSLocalizedString("Person:", comment: "")
-      sectionButton.setTitle("Person --", for: .normal)
+      sectionButton.setTitle(" ++ ", for: .normal)
       
       sectionButton.addTarget(self, action: #selector(willAddPerson(_:)), for: .touchDown)
     case 1:
-      sectionLabel.text = NSLocalizedString("Message:", comment: "")
-      sectionButton.setTitle("Msgs ++", for: .normal)
+      sectionLabel.text = NSLocalizedString("Vendors:", comment: "")
+      sectionButton.setTitle(" ++ ", for: .normal)
       sectionButton.addTarget(self, action: #selector(willAddVendor(_:)), for: .touchDown)
+      
     case 2:
-      sectionLabel.text = NSLocalizedString("Events:", comment: "")
-      sectionButton.setTitle("Events ++", for: .normal)
+      sectionLabel.text = NSLocalizedString("Sessions:", comment: "")
+      sectionButton.setTitle(" ++ ", for: .normal)
     //
     default:
       return nil
@@ -194,6 +193,20 @@ class KVPrimeTVController: UITableViewController  {
     
     return headerVue
     
+  }
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    switch indexPath.section {
+    case 0:
+      return 96
+    case 1:
+      return 48
+    case 2:
+      return 48
+    default:
+      break
+    }
+    return 48
+  
   }
   
   override func tableView(_ tableView: UITableView,

@@ -137,6 +137,34 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
   }
   func willAddVendor(_ deli: Any?)
   {
+    mkNewVendor()
+    tableView.reloadData()
+  }
+  func willAddPerson(_ deli: Any?)
+  {
+    /**
+     lets make an actual p
+     Then edit it
+     */
+    let _p = (personDataController.createPersonInContext(personDataController.MOC!))
+    personDataController.resetPersonToEditMeState(_p)
+    /**
+     then save it
+     */
+    _ = personDataController.saveEntity(entity: _p)
+    /**
+     POP THE TABLE
+     */
+    //currentPerson = people[0]
+    // _Do I Need to fix it in the render cell?_
+    currentPerson = _p
+    let indexPath = IndexPath(row: 0, section: 0)
+    tableView.insertRows(at: [indexPath], with: .automatic)
+    //YES This Line is STILL Important
+    personDataController.saveCurrentContext(personDataController.MOC!)
+    /**
+     Optionally return it
+     */
     
   }
 
@@ -154,33 +182,7 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     self.willAddPerson(delegate)
     return true
   }
-  func willAddPerson(_ deli: Any?)
-  {
-    /**
-    lets make an actual p
-    Then edit it
-    */
-    let _p = (personDataController.createPersonInContext(personDataController.MOC!))
-    personDataController.resetPersonToEditMeState(_p)
-    /**
-    then save it
-    */
-    _ = personDataController.saveEntity(entity: _p)
-    /**
-    POP THE TABLE
-    */
-    //currentPerson = people[0]
-    // _Do I Need to fix it in the render cell?_
-    currentPerson = _p
-    let indexPath = IndexPath(row: 0, section: 0)
-    tableView.insertRows(at: [indexPath], with: .automatic)
-    //YES This Line is STILL Important
-    personDataController.saveCurrentContext(personDataController.MOC!)
-    /**
-    Optionally return it
-    */
-    
-  }
+
   /**
   */
   func didAddVendor(_ deli: Any?, svc: KVService, session :KVSession) -> Bool
@@ -189,7 +191,7 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     
     return(allTasksCompleteIfTrue)
   }
-  func willAddVendor()
+  func mkNewVendor()
   {
     let _v = (vendorDataController.createVendorInContext(vendorDataController.MOC!))
     _ = vendorDataController.saveEntity(entity: _v)
