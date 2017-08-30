@@ -58,15 +58,13 @@ class KVDetailViewController: UIViewController
       configureView()
     }
   }
-  func configureView() {
+  func configureView()
+  {
     setupGUIState()
-    // Update the user interface for the detail item.
+    //setupMapState
     if let _p = detailPerson
     {
       title = _p.incepDate!.description
-//        if let label = detailDescriptionLabel {
-//            label.text = detail.incepDate!.description
-//        }
     }
   }
   override func viewDidLoad()
@@ -77,7 +75,13 @@ class KVDetailViewController: UIViewController
   }
   override func viewWillAppear(_ animated: Bool)
   {
-//    setupInitialState()
+    if (personsArr.isEmpty == false)
+    {
+      if (detailPerson == nil)
+      {
+        detailPerson = personsArr.first
+      }
+    }
   }
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
