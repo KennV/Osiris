@@ -9,7 +9,8 @@ SINGLE RESPONSIBILITY
 
 for testing purposes I need to be able to 
 Make an owner
-Make a vendor
+Make a vendor 
+• makea section header for it
 Make a Service/Session With an Owner and a Vendor
 for it to work I might use some Factory +session:(_ s vendor:v owner:o)
 
@@ -22,7 +23,7 @@ import MapKit
 import HealthKit
 import HealthKitUI
 
-extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, DetailVueDelegate
+extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, VendorConDelegate, DetailVueDelegate
 {
 
 
@@ -125,15 +126,27 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Det
       }
     }
   }
-  // MARK: - Protocol Conformance
+//   MARK : - Protocol Conformance
+  // MARK: - Conformance is Complinace!
   /**
-  */
-  func didChangePerson(_ entity: KVPerson)
+  I have this one layer too deep.
+   */
+  func didChangeVendor(_ t: KVVendor)
+  {
+    
+  }
+  func willAddVendor(_ deli: Any?)
+  {
+    
+  }
+
+  func didChangePerson(_ t: KVPerson)
   {
     personDataController.saveCurrentContext(personDataController.MOC!)
     tableView.reloadData()
   }
   /**
+  Because it is not an IBAction it may be called from anywhere, so it is in a protocol and because that is the way we did it in cocoa I ref the delegate, and I return a Bool
   */
   func didMakePersonFor(_ delegate: Any?) -> Bool
   {
@@ -157,6 +170,7 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Det
     POP THE TABLE
     */
     //currentPerson = people[0]
+    // _Do I Need to fix it in the render cell?_
     currentPerson = _p
     let indexPath = IndexPath(row: 0, section: 0)
     tableView.insertRows(at: [indexPath], with: .automatic)
@@ -174,6 +188,26 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Det
     var allTasksCompleteIfTrue = false
     
     return(allTasksCompleteIfTrue)
+  }
+  func willAddVendor()
+  {
+    let _v = (vendorDataController.createVendorInContext(vendorDataController.MOC!))
+    _ = vendorDataController.saveEntity(entity: _v)
+    // is this an edit vendor / new vendor
+    // OR IS IT loaded from json? added and custom soem other way?
+    vendorDataController.saveCurrentContext(vendorDataController.MOC!)
+  }
+  /**
+   */
+  func mkSession() -> KVSession
+  {
+    let _s = (sessionDataController.createSessionInContext(sessionDataController.MOC!))
+    // for current or selected vendor
+    // when should it change for person and or owner
+    // is _that_ result saved or computed?
+    _ = sessionDataController.saveEntity(entity: _s)
+    sessionDataController.saveCurrentContext(sessionDataController.MOC!)
+    return(_s)
   }
   /**
   */
@@ -242,22 +276,6 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Det
     })
     //I seriously Better Know What I am doing Next time I see this code: (count 0)
   } // OK it is not what I want (YET)
-  //TODO: Make API for all types
-  // MARK: - Conformance is Complinace!
-  //
-  // Protocol Usage
-  /**
-  */
-//  @IBAction func addPerson(_ sender: AnyObject)
-//  {
-    //    pdc.delegate?.willAddPerson(self)
-//  }
-  /**
-  */
-//  func addVendor()
-//  {
-  
-//  }
 //  func addSession()
 //  {
     /**

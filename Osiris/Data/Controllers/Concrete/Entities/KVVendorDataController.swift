@@ -17,6 +17,8 @@ enum VendorTypes {
 }
 
 protocol VendorConDelegate {
+  func didChangeVendor(_ t: KVVendor)
+  func willAddVendor(_ deli: Any?)
   
 }
 extension KVVendor {
@@ -25,6 +27,7 @@ extension KVVendor {
 
 class KVVendorDataController<T : KVVendor > : KVEntityDataController<T>
 {
+  var delegate: VendorConDelegate?
   override init()
   {
     super.init()

@@ -17,7 +17,9 @@ import MapKit
 import HealthKit
 import HealthKitUI
 
-
+/**
+  Need vendor's accesor to be the selected cell here in TableView and an array in the MKNotation Array
+*/
 
 class KVPrimeTVController: UITableViewController  {
   /**
@@ -138,6 +140,8 @@ class KVPrimeTVController: UITableViewController  {
   }
   // MARK: - Update Cells
   // FIXME: - These are NOT custom in the XIB and Are Barely custom Here:
+  // FIXME: Override cell sizes
+  // FIXME: headers and footers
   /**
    
   */
