@@ -23,7 +23,10 @@ import HealthKitUI
 Stop and Fix it NAOW
 Deleting persons may cause error
 Expected to never do that 
- 
+75% replicable delete people out of order 
+Hell person[0] must be owner and logic will say that you can't delete this
+
+So if it is the first. can delete is false.
  
 */
 
@@ -165,8 +168,8 @@ class KVPrimeTVController: UITableViewController  {
     sectionLabel.font = UIFont.boldSystemFont(ofSize: 17)
     
     let sectionButton = UIButton(frame: CGRect(x: 80, y: 10, width: 88, height: 21))
-    sectionButton.backgroundColor = UIColor.cyan
-    sectionButton.titleLabel?.textColor = UIColor.black
+//    sectionButton.backgroundColor = UIColor.clear
+//    sectionButton.titleLabel!.textColor = UIColor.black
     
     switch section
     {
@@ -178,7 +181,7 @@ class KVPrimeTVController: UITableViewController  {
     case 1:
       sectionLabel.text = NSLocalizedString("Message:", comment: "")
       sectionButton.setTitle("Msgs ++", for: .normal)
-//      sectionButton.addTarget(self, action: #selector(insertNewMsgMO(_:)), for: .touchDown)
+      sectionButton.addTarget(self, action: #selector(willAddVendor(_:)), for: .touchDown)
     case 2:
       sectionLabel.text = NSLocalizedString("Events:", comment: "")
       sectionButton.setTitle("Events ++", for: .normal)
@@ -222,9 +225,24 @@ class KVPrimeTVController: UITableViewController  {
     */
     return (UITableViewCell())//cell!
   }
+  /**
+  #HELLA BIG NOTE #
+   OK now it can't do that crah thin and it corrects the 'setup-mode' in both portrait and lanscape. 
+  THEN IT SHALL ALWAYS BE TRUE THAT THERE IS A PERSON IN INDEX[0] AND THAT IS THE OWNER FROM THE SETUP
+   */
+  
   override func tableView(_ tableView: UITableView,
                           canEditRowAt indexPath: IndexPath) -> Bool
   {
+    switch indexPath.section {
+    case 0:
+     if people.count <= 1 // or selectedPerson.type != owner
+     {
+      return false;
+      }
+    default:
+      return true
+    }
     return true
   }
   // MARK: - Deleter

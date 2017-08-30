@@ -62,15 +62,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
       guard let topAsDetailController = secondaryAsNavController.topViewController as? KVDetailViewController else { return false }
       if topAsDetailController.detailPerson == nil {
           // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
-//        return true // ** CHANGED true HERE TO DEBUG THE TVC
         /**
-        Ok given the desire to have it open in 'setup mode'
+        Ok given the desire to have it open in 'setup mode' I cannot delete teh people array below, 1 that is the owner so if it is 0 or less than 1 then both halves of the GUI need to show setup
         */
-        //return true // 8 - 29
-        return false
+        return true
       }
-    return true
-    //return false
+    return false
+    /**
+    right now I need to tell the DVC to run setup if people.isEmpty #selector… 
+    */
   }
 /**
    */
