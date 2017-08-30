@@ -19,6 +19,12 @@ import HealthKitUI
 
 /**
   Need vendor's accesor to be the selected cell here in TableView and an array in the MKNotation Array
+ 
+Stop and Fix it NAOW
+Deleting persons may cause error
+Expected to never do that 
+ 
+ 
 */
 
 class KVPrimeTVController: UITableViewController  {
@@ -145,6 +151,48 @@ class KVPrimeTVController: UITableViewController  {
   /**
    
   */
+  override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
+  {
+    return (40)
+  }
+  override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+  {
+    //While Height 0 Override down thurr
+    let headerVue = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: view.frame.size.width, height: 0)))
+    let sectionLabel = UILabel(frame: CGRect(origin: CGPoint(x: 10, y: 10), size: CGSize(width: view.frame.size.width, height: 21)))
+    sectionLabel.backgroundColor = UIColor.clear
+    sectionLabel.textColor = UIColor.blue
+    sectionLabel.font = UIFont.boldSystemFont(ofSize: 17)
+    
+    let sectionButton = UIButton(frame: CGRect(x: 80, y: 10, width: 88, height: 21))
+    sectionButton.backgroundColor = UIColor.cyan
+    sectionButton.titleLabel?.textColor = UIColor.black
+    
+    switch section
+    {
+    case 0:
+      sectionLabel.text = NSLocalizedString("Person:", comment: "")
+      sectionButton.setTitle("Person --", for: .normal)
+      
+      sectionButton.addTarget(self, action: #selector(willAddPerson(_:)), for: .touchDown)
+    case 1:
+      sectionLabel.text = NSLocalizedString("Message:", comment: "")
+      sectionButton.setTitle("Msgs ++", for: .normal)
+//      sectionButton.addTarget(self, action: #selector(insertNewMsgMO(_:)), for: .touchDown)
+    case 2:
+      sectionLabel.text = NSLocalizedString("Events:", comment: "")
+      sectionButton.setTitle("Events ++", for: .normal)
+    //
+    default:
+      return nil
+    }
+    headerVue.addSubview(sectionButton) //
+    headerVue.addSubview(sectionLabel)
+    
+    return headerVue
+    
+  }
+  
   override func tableView(_ tableView: UITableView,
                           cellForRowAt indexPath: IndexPath) -> UITableViewCell
   {
