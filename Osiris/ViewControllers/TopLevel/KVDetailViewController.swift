@@ -27,6 +27,15 @@ protocol DetailVueDelegate
 {
 //  func phaseTest(_ delegate :Any? )
   func didMakePersonFor(_ delegate :Any? ) -> Bool
+  /**
+  these could probably go into the vendor and session controller's protocol
+  *Additionally* I may need a services controller 
+  Or the effect could be a cascaded protocol
+  these are at or around line 180 in the PrimeViewController
+  */
+  
+  func didAddVendor(_ deli: Any?, svc: KVService, session :KVSession) -> Bool
+  func didCreateNewSession(_ deli: Any?, p: KVPerson, v: KVVendor) -> Bool
 }
 
 class KVDetailViewController: UIViewController
@@ -92,9 +101,14 @@ class KVDetailViewController: UIViewController
       personEditor.editablePerson = detailPerson
       break
     case "ShowSession":
-      
+      /**
+      Ok to make a session I need to have a vendor to publish it and a person to bind it to
+      */
       break
     case "ShowVendor":
+      /**
+      In order to perform the show session I will need to at the very least have an informal protocol to make a blank vendor
+      */
       break
     case "ShowSetup":
       _ = delegate?.didMakePersonFor(self)

@@ -40,10 +40,6 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Det
     if vendorDataController.MOC != AllDataController.PSK.viewContext {
       vendorDataController.MOC = AllDataController.PSK.viewContext
     }
-//    if !(people.isEmpty)
-//    {
-//      detailViewController?.detailPerson = people.first
-//    }
   }
   /**
   setupDummyLoad()
@@ -173,6 +169,20 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Det
   }
   /**
   */
+  func didAddVendor(_ deli: Any?, svc: KVService, session :KVSession) -> Bool
+  {
+    var allTasksCompleteIfTrue = false
+    
+    return(allTasksCompleteIfTrue)
+  }
+  /**
+  */
+  func didCreateNewSession(_ deli: Any?, p: KVPerson, v: KVVendor) -> Bool
+  {
+    var allTasksCompleteIfTrue = false
+    
+    return(allTasksCompleteIfTrue)
+  }
   func didChangeGraphicsOn(_ entity: KVGraphics)
   {
     if currentPerson?.graphics != entity
