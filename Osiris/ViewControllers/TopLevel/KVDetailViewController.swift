@@ -25,17 +25,28 @@ import MapKit
 
 protocol DetailVueDelegate
 {
-//  func phaseTest(_ delegate :Any? )
-  func didMakePersonFor(_ delegate :Any? ) -> Bool
-  /**
-  these could probably go into the vendor and session controller's protocol
-  *Additionally* I may need a services controller 
-  Or the effect could be a cascaded protocol
-  these are at or around line 180 in the PrimeViewController
-  */
-  
+//  Coding Ain’t Done ‘Til All the Tests Run
+//  ‘Nuff said.
+
+
+/**
+these could probably go into the vendor and session controller's protocol
+*Additionally* I may need a services controller 
+Or the effect could be a cascaded protocol
+these are at or around line 180 in the PrimeViewController
+
+AAMOFF!
+the q&d version kinda has the right effect, I simply cant rely on this or the next class being a s/c of .this Luckily as I am only using three methods which add an instance if (id) - So that this and any other vue just has to implement it;
+Well this is interesting do I have _p, arr<_p>, _v, _s?
+
+Lastly I *did* get confused about what I can and should send as a delegate. ANd how trim I can make it srsly that is where I should start first   
+
+
+
+*/
+  func didAddPersonFor(_ delegate :Any? ) -> Bool
   func didAddVendor(_ deli: Any?, svc: KVService, session :KVSession) -> Bool
-  func didCreateNewSession(_ deli: Any?, p: KVPerson, v: KVVendor) -> Bool
+  func didAddNewSession(_ deli: Any?, p: KVPerson, v: KVVendor) -> Bool
 }
 
 class KVDetailViewController: UIViewController
@@ -49,7 +60,7 @@ class KVDetailViewController: UIViewController
   @IBOutlet weak var vendorsButton = UIButton()
   @IBOutlet weak var personsButton = UIButton()
   @IBOutlet weak var personsLabel = UILabel()
-  //  var hasBeenSetUpIfTrue: Bool! = true.
+
   var delegate: DetailVueDelegate?
   var personsArr: Array <KVPerson>!
   var detailPerson: KVPerson? {
@@ -62,6 +73,9 @@ class KVDetailViewController: UIViewController
   {
     setupGUIState()
     //setupMapState
+    /**
+    If I crash here it is b/c this is nil I do not need the title but this should not really be nil
+    */
     if let _p = detailPerson
     {
       title = _p.incepDate!.description
@@ -75,21 +89,14 @@ class KVDetailViewController: UIViewController
   }
   override func viewWillAppear(_ animated: Bool)
   {
-    if (personsArr.isEmpty == false)
-    {
-      if (detailPerson == nil)
-      {
-        detailPerson = personsArr.first
-      }
-    }
+//    if !(personsArr.isEmpty)
+//    {
+//      if (detailPerson == nil)
+//      {
+//        detailPerson = personsArr.first
+//      }
+//    }
   }
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-  // Dispose of any resources that can be recreated.
-  }
-  /**
-  The Person
-  */
   @IBAction func startSetupAction(_ sender: UIButton)
   {
 //    _ = delegate?.didMakePersonFor(self)
@@ -98,37 +105,34 @@ class KVDetailViewController: UIViewController
   }
   override func prepare(for segue: UIStoryboardSegue, sender: Any?)
   {
+    /**
+    Lastly this is the funniest of b/points here 
+    I shall be examining the currentPerson, Vendor, and Session
+    */
     let identifier = segue.identifier!
     switch identifier {
     case "ShowPerson":
       let personEditor = segue.destination as! KVPersonDetailViewController
       personEditor.editablePerson = detailPerson
       break
+    case "ShowVendor":
+      /**
+       In order to perform the show session I will need to at the very least have an informal protocol to make a blank vendor
+       */
+      break
     case "ShowSession":
       /**
       Ok to make a session I need to have a vendor to publish it and a person to bind it to
       */
       break
-    case "ShowVendor":
-      /**
-      In order to perform the show session I will need to at the very least have an informal protocol to make a blank vendor
-      */
-      break
     case "ShowSetup":
-      _ = delegate?.didMakePersonFor(self)
+      _ = delegate?.didAddPersonFor(self)
       self.reloadInputViews()
       break
     default:
       break
     }
-//    if segue.identifier == "ShowLicense" {
-//      //I would need to make is and set it to conform to a protocol on the PVC
-//    }
   }
-  /** 
-  Setup the inital State of the Buttons
-  _if the PDC…isEmpty do the buttons for ONLY setup_
-  */
   func setupGUIState()
   {
     if personsArr != nil

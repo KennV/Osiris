@@ -25,8 +25,6 @@ import HealthKitUI
 
 extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, VendorConDelegate, DetailVueDelegate
 {
-
-
   // MARK: - Set Application State
   /**
    */
@@ -126,81 +124,156 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
       }
     }
   }
-//   MARK : - Protocol Conformance
-  // MARK: - Conformance is Complinace!
+  // MARK: - Table View Protocol Conformance
   /**
-  I have this one layer too deep.
+  (*Not the setupƒn *)
+   // FIXMED - These are NOT custom in the XIB and Are Barely custom Here:
+  With the initial issue of the GUI in the XIB I have to have custom Heights, these are in this groovy litle delegate that probably doesn't need to be on the main
+  
    */
-  func didChangeVendor(_ t: KVVendor)
+  // Sizes of headers and footers
+  override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
   {
+    return (40)
+  }
+  // Labels and buttons in headers adn footers
+  override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+  {
+    //While Height 0 Override down thurr
+    let headerVue = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: view.frame.size.width, height: 0)))
+    let sectionLabel = UILabel(frame: CGRect(origin: CGPoint(x: 10, y: 10), size: CGSize(width: view.frame.size.width, height: 21)))
+    sectionLabel.backgroundColor = UIColor.clear
+    sectionLabel.textColor = UIColor.cyan
+    sectionLabel.font = UIFont.boldSystemFont(ofSize: 17)
+    
+    let sectionButton = UIButton(frame: CGRect(x: 80, y: 10, width: 88, height: 21))
+    //    sectionButton.backgroundColor = UIColor.clear
+    //    sectionButton.titleLabel!.textColor = UIColor.black
+    
+    switch section
+    {
+    case 0:
+      sectionLabel.text = NSLocalizedString("Person:", comment: "")
+      sectionButton.setTitle(" ++ ", for: .normal)
+      
+      sectionButton.addTarget(self, action: #selector(willAddPerson(_:)), for: .touchDown)
+    case 1:
+      sectionLabel.text = NSLocalizedString("Vendors:", comment: "")
+      sectionButton.setTitle(" ++ ", for: .normal)
+      sectionButton.addTarget(self, action: #selector(willAddVendor(_:)), for: .touchDown)
+      
+    case 2:
+      sectionLabel.text = NSLocalizedString("Sessions:", comment: "")
+      sectionButton.setTitle(" ++ ", for: .normal)
+    //
+    default:
+      return nil
+    }
+    headerVue.addSubview(sectionButton) //
+    headerVue.addSubview(sectionLabel)
+    
+    return headerVue
     
   }
-  func willAddVendor(_ deli: Any?)
+  // Height for the different sections
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
   {
-    mkNewVendor()
-    tableView.reloadData()
+    switch indexPath.section {
+    case 0:
+      return 96
+    case 1:
+      return 48
+    case 2:
+      return 48
+    default:
+      break
+    }
+    return 48
+    
   }
-  func willAddPerson(_ deli: Any?)
+  
+  // MARK: - Conformance is Complinace!
+  /**
+  Simplify
+  Because it is not an IBAction it may be called from anywhere, so it is in a protocol and because that is the way we did it in cocoa I ref the delegate, and I return a Bool
+   So this seems to be the best current order to call them in.
+   
+  */
+
+  func mkNewPerson() -> KVPerson
   {
     /**
      lets make an actual p
      Then edit it
      */
-    let _p = (personDataController.createPersonInContext(personDataController.MOC!))
-    personDataController.resetPersonToEditMeState(_p)
+    let tmpPerson = (personDataController.createPersonInContext(personDataController.MOC!))
+    personDataController.resetPersonToEditMeState(tmpPerson)
+    return (tmpPerson)
+  }
+  func willAddPerson(_ deli: Any?)
+  {
+    let _p = mkNewPerson()
     /**
      then save it
      */
     _ = personDataController.saveEntity(entity: _p)
     /**
      POP THE TABLE
+     
+     //currentPerson = people[0]
+     // _Do I Need to fix it in the render cell?_
      */
-    //currentPerson = people[0]
-    // _Do I Need to fix it in the render cell?_
     currentPerson = _p
     let indexPath = IndexPath(row: 0, section: 0)
     tableView.insertRows(at: [indexPath], with: .automatic)
+    didChangePerson(_p)
     //YES This Line is STILL Important
-    personDataController.saveCurrentContext(personDataController.MOC!)
-    /**
-     Optionally return it
-     */
-    
+    //personDataController.saveCurrentContext(personDataController.MOC!)
+   
   }
-
-  func didChangePerson(_ t: KVPerson)
-  {
-    personDataController.saveCurrentContext(personDataController.MOC!)
-    tableView.reloadData()
-  }
-  /**
-  Because it is not an IBAction it may be called from anywhere, so it is in a protocol and because that is the way we did it in cocoa I ref the delegate, and I return a Bool
-  */
-  func didMakePersonFor(_ delegate: Any?) -> Bool
+  func didAddPersonFor(_ delegate: Any?) -> Bool
   {
     print("\(delegate.debugDescription) from \(self.debugDescription) ")
     self.willAddPerson(delegate)
     return true
   }
-
-  /**
-  */
-  func didAddVendor(_ deli: Any?, svc: KVService, session :KVSession) -> Bool
+  func didChangePerson(_ t: KVPerson)
   {
-    var allTasksCompleteIfTrue = false
-    
-    return(allTasksCompleteIfTrue)
+    personDataController.saveCurrentContext(personDataController.MOC!)
+     tableView.reloadData()
   }
-  func mkNewVendor()
+  /**
+  
+  */
+  func mkNewVendor() -> KVVendor
   {
     let _v = (vendorDataController.createVendorInContext(vendorDataController.MOC!))
     _ = vendorDataController.saveEntity(entity: _v)
-    // is this an edit vendor / new vendor
-    // OR IS IT loaded from json? added and custom soem other way?
+    return(_v)
+  }
+  func willAddVendor(_ deli: Any?)
+  {
+    var v = mkNewVendor()
+    didChangeVendor(v)
+    
+  }
+  /*
+  ¿¿¿ Hmmm look at service existing like is is some kind of data bearing class and all ??? I might be a classCluster or somethign else that I can extend to give me types of sessions and transactions
+  */
+  func didAddVendor(_ deli: Any?, svc: KVService, session :KVSession) -> Bool
+  {
+    let allTasksCompleteIfTrue = true
+    let v = mkNewVendor()
+    didChangeVendor(v)
+    return(allTasksCompleteIfTrue)
+  }
+  func didChangeVendor(_ t: KVVendor)
+  {
     vendorDataController.saveCurrentContext(vendorDataController.MOC!)
+    tableView.reloadData()
   }
   /**
-   */
+  */
   func mkSession() -> KVSession
   {
     let _s = (sessionDataController.createSessionInContext(sessionDataController.MOC!))
@@ -211,9 +284,7 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     sessionDataController.saveCurrentContext(sessionDataController.MOC!)
     return(_s)
   }
-  /**
-  */
-  func didCreateNewSession(_ deli: Any?, p: KVPerson, v: KVVendor) -> Bool
+  func didAddNewSession(_ deli: Any?, p: KVPerson, v: KVVendor) -> Bool
   {
     var allTasksCompleteIfTrue = false
     
@@ -278,26 +349,4 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     })
     //I seriously Better Know What I am doing Next time I see this code: (count 0)
   } // OK it is not what I want (YET)
-//  func addSession()
-//  {
-    /**
-     OK I had to clean this up in Both places
-     */
-    //    delegate?.willMakeMessageFromPerson(currentPerson!) //It needs to reload table data
-//  }
-  /**
-  */
-//  func AddPlace()
-//  {
-    //    delegate?.willMakeNewPlaceHere(delegate)
-    //    configureView()
-//  }
-  /**
-  */
-//  func addEvent()
-//  {
-    //    delegate?.willAddNewEvent(self)
-//  }
 }
-
-
