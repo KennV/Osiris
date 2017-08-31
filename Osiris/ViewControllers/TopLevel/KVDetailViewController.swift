@@ -39,9 +39,7 @@ AAMOFF!
 the q&d version kinda has the right effect, I simply cant rely on this or the next class being a s/c of .this Luckily as I am only using three methods which add an instance if (id) - So that this and any other vue just has to implement it;
 Well this is interesting do I have _p, arr<_p>, _v, _s?
 
-Lastly I *did* get confused about what I can and should send as a delegate. ANd how trim I can make it srsly that is where I should start first   
-
-
+Lastly I *did* get confused about what I can and should send as a delegate. And how trim I can make it srsly that is where I should start first -=- That was a great idea.
 
 */
   func didAddPersonFor(_ delegate :Any? ) -> Bool
@@ -51,6 +49,9 @@ Lastly I *did* get confused about what I can and should send as a delegate. ANd 
 
 class KVDetailViewController: UIViewController
 {
+  // Interface
+  var delegate: DetailVueDelegate?
+  // GUI
   @IBOutlet weak var mapView = MKMapView()
   @IBOutlet weak var setupButton = UIButton()
   @IBOutlet weak var detailDescriptionLabel = UILabel()
@@ -60,8 +61,7 @@ class KVDetailViewController: UIViewController
   @IBOutlet weak var vendorsButton = UIButton()
   @IBOutlet weak var personsButton = UIButton()
   @IBOutlet weak var personsLabel = UILabel()
-
-  var delegate: DetailVueDelegate?
+  // Data
   var personsArr: Array <KVPerson>!
   var detailPerson: KVPerson? {
     didSet {
@@ -69,6 +69,9 @@ class KVDetailViewController: UIViewController
       configureView()
     }
   }
+  var currentVendor: KVVendor!
+  var currentSession: KVSession!
+  
   func configureView()
   {
     setupGUIState()
