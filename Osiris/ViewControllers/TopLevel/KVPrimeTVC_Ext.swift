@@ -120,6 +120,12 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
         dvc.delegate = self
         dvc.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
         dvc.navigationItem.leftItemsSupplementBackButton = true
+        if !(vendors.isEmpty) {
+          dvc.currentVendor = vendors.first
+        }
+        if !(sessions.isEmpty) {
+          dvc.currentSession = sessions.first
+        }
       }
     }
   }
@@ -135,7 +141,7 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
   {
     return (40)
   }
-  // Labels and buttons in headers adn footers
+  // Labels and buttons in headers and footers
   override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
   {
     //While Height 0 Override down thurr
@@ -154,7 +160,6 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     case 0:
       sectionLabel.text = NSLocalizedString("Person:", comment: "")
       sectionButton.setTitle(" ++ ", for: .normal)
-      
       sectionButton.addTarget(self, action: #selector(willAddPerson(_:)), for: .touchDown)
     case 1:
       sectionLabel.text = NSLocalizedString("Vendors:", comment: "")
@@ -164,6 +169,7 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     case 2:
       sectionLabel.text = NSLocalizedString("Sessions:", comment: "")
       sectionButton.setTitle(" ++ ", for: .normal)
+      sectionButton.addTarget(self, action: #selector(willAddSession(_:)), for: .touchDown)
     //
     default:
       return nil
@@ -188,11 +194,16 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
       break
     }
     return 48
-    
   }  
   // TODO: - Multi Table View Selection
   /**
   Currently a little buggy but not very
+  OK I CAN see the DVC so I can see if it has a current Vendor, and if not to 
+   
+  But I will still need an ivar to hold the index of the vendor or the session that was selectd
+  AND 
+   AND
+   AND I need to be able to use the last person or the last session that was created (from the DVC/Deli) if I do not have one when that view comes up
   */
   override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath)
   {
@@ -229,7 +240,6 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
    So this seems to be the best current order to call them in.
    
   */
-
   func mkNewPerson() -> KVPerson
   {
     /**
@@ -307,19 +317,27 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
   func mkSession() -> KVSession
   {
     let _s = (sessionDataController.createSessionInContext(sessionDataController.MOC!))
-    // for current or selected vendor
-    // when should it change for person and or owner
-    // is _that_ result saved or computed?
     _ = sessionDataController.saveEntity(entity: _s)
-    sessionDataController.saveCurrentContext(sessionDataController.MOC!)
     return(_s)
   }
-  func didAddNewSession(_ deli: Any?, p: KVPerson, v: KVVendor) -> Bool
+  func willAddSession(_ sender: Any?) {
+    let xs = mkSession()
+    _ = sessionDataController.saveEntity(entity: xs)
+    self.didChangeSession(xs)
+  }
+
+  func didAddNewSession(_ deli: Any?) -> Bool
   {
-    var allTasksCompleteIfTrue = false
+    let allTasksCompleteIfTrue = false
     
     return(allTasksCompleteIfTrue)
   }
+  func didChangeSession(_ s: KVSession)
+  {
+    sessionDataController.saveCurrentContext(sessionDataController.MOC!)
+    tableView.reloadData()
+  }
+  
   func didChangeGraphicsOn(_ entity: KVGraphics)
   {
     if currentPerson?.graphics != entity

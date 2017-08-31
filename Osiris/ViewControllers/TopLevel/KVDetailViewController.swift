@@ -44,7 +44,8 @@ Lastly I *did* get confused about what I can and should send as a delegate. And 
 */
   func didAddPersonFor(_ delegate :Any? ) -> Bool
   func didAddVendor(_ deli: Any?, svc: KVService, session :KVSession) -> Bool
-  func didAddNewSession(_ deli: Any?, p: KVPerson, v: KVVendor) -> Bool
+//  func didAddNewSession(_ deli: Any?, p: KVPerson, v: KVVendor) -> Bool
+  func didAddNewSession(_ deli: Any?) -> Bool
 }
 
 class KVDetailViewController: UIViewController
@@ -54,13 +55,9 @@ class KVDetailViewController: UIViewController
   // GUI
   @IBOutlet weak var mapView = MKMapView()
   @IBOutlet weak var setupButton = UIButton()
-//  @IBOutlet weak var detailDescriptionLabel = UILabel()
-//  @IBOutlet weak var sessionsLabel = UILabel()
   @IBOutlet weak var sessionsButton = UIButton()
-//  @IBOutlet weak var vendorsLabel = UILabel()
   @IBOutlet weak var vendorsButton = UIButton()
   @IBOutlet weak var personsButton = UIButton()
-//  @IBOutlet weak var personsLabel = UILabel()
   // Data
   var personsArr: Array <KVPerson>!
   var detailPerson: KVPerson? {
@@ -69,8 +66,8 @@ class KVDetailViewController: UIViewController
       configureView()
     }
   }
-  var currentVendor: KVVendor!
-  var currentSession: KVSession!
+  var currentVendor: KVVendor! = nil
+  var currentSession: KVSession! = nil
   
   func configureView()
   {
@@ -171,12 +168,3 @@ class KVDetailViewController: UIViewController
   }
   
 }
-/*
- sessionsLabel?.isHidden = true
- personsLabel?.isHidden = true
- vendorsLabel?.isHidden = true
- 
- sessionsLabel?.isHidden = false
- personsLabel?.isHidden = false
- vendorsLabel?.isHidden = false
- */
