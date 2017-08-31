@@ -189,6 +189,37 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     }
     return 48
     
+  }  
+  // TODO: - Multi Table View Selection
+  /**
+  Currently a little buggy but not very
+  */
+  override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath)
+  {
+    let cell = tableView.cellForRow(at: indexPath)
+    switch indexPath.section {
+    case 0:
+      print(" ")
+    case 1:
+      if (maxCount <= 1) {
+        if (cell?.accessoryType == UITableViewCellAccessoryType.checkmark)
+        { maxCount -= 1
+          cell!.accessoryType = UITableViewCellAccessoryType.none;
+        } else {
+          cell!.accessoryType = UITableViewCellAccessoryType.checkmark;
+          maxCount += 1
+        }
+      }
+    case 2:
+      if (cell?.accessoryType == UITableViewCellAccessoryType.checkmark){
+        cell!.accessoryType = UITableViewCellAccessoryType.none;
+      }else{
+        cell!.accessoryType = UITableViewCellAccessoryType.checkmark;
+      }
+    default:
+      break
+    }
+//    return 0
   }
   
   // MARK: - Conformance is Complinace!

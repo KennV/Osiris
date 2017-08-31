@@ -60,6 +60,9 @@ class KVPrimeTVController: UITableViewController  {
       return sessionDataController.getAllEntities()
     }
   }
+  
+  var maxCount: Int = 0
+  
   override func viewDidLoad()
   {
     setupCLManager()
@@ -81,6 +84,7 @@ class KVPrimeTVController: UITableViewController  {
       detailViewController?.delegate = self
       detailViewController?.personsArr = people
     }
+    tableView.allowsMultipleSelection = true
   }
   override func viewWillAppear(_ animated: Bool)
   {

@@ -755,13 +755,13 @@
                                                         </constraints>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kI5-JK-aaf" userLabel="TypesSelector">
-                                                        <rect key="frame" x="86" y="50.333333333333343" width="288" height="50.333333333333343"/>
+                                                        <rect key="frame" x="86" y="50.333333333333343" width="288" height="49.999999999999972"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oQt-TC-2nY">
-                                                                <rect key="frame" x="8" y="8" width="279" height="30.333333333333343"/>
+                                                                <rect key="frame" x="8" y="8" width="279" height="29.999999999999972"/>
                                                             </stackView>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Vm-2u-U3S">
-                                                                <rect key="frame" x="17" y="16" width="64" height="10.333333333333314"/>
+                                                                <rect key="frame" x="17" y="16" width="64" height="10"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             </view>
                                                         </subviews>
@@ -777,10 +777,10 @@
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dAE-G8-ly7">
-                                                        <rect key="frame" x="160" y="100.66666666666669" width="214" height="29.333333333333314"/>
+                                                        <rect key="frame" x="160" y="100.33333333333331" width="214" height="29.666666666666686"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HIF-t5-gMI">
-                                                                <rect key="frame" x="0.0" y="0.0" width="96" height="29.333333333333314"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="96" height="29.666666666666686"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="96" id="aGH-Ze-Yv8"/>
                                                                 </constraints>
@@ -789,7 +789,7 @@
                                                                 </state>
                                                             </button>
                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A9Y-dL-ZP2">
-                                                                <rect key="frame" x="96" y="0.0" width="118" height="29.333333333333314"/>
+                                                                <rect key="frame" x="96" y="0.0" width="118" height="29.666666666666686"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
@@ -844,7 +844,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hji-BO-rFl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1672" y="1008"/>
+            <point key="canvasLocation" x="1632" y="1126"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="Nki-YV-4Qg">
@@ -864,7 +864,7 @@
         <scene sceneID="smW-Zh-WAh">
             <objects>
                 <tableViewController title="Master" clearsSelectionOnViewWillAppear="NO" id="7bK-jq-Zjz" customClass="KVPrimeTVController" customModule="Osiris" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="128" sectionHeaderHeight="18" sectionFooterHeight="18" id="tDQ-x3-DAh">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="128" sectionHeaderHeight="18" sectionFooterHeight="18" id="tDQ-x3-DAh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
