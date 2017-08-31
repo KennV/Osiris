@@ -6,14 +6,16 @@
  Copyright © 2017 dubian. All rights reserved.
  
 SINGLE RESPONSIBILITY
-
+(~_•)
 for testing purposes I need to be able to 
 Make an owner
 Make a vendor 
-• makea section header for it
-Make a Service/Session With an Owner and a Vendor
-for it to work I might use some Factory +session:(_ s vendor:v owner:o)
+• make a section header for it
+• Make a Service/Session With an Owner and a Vendor
 
+Added multiple selection for the TV. Let me see how to make that work
+(*I should look that up I know there is API for it, send it to the DVC and then have that go over to the edit views *)
+Yup I will have to manually toggle the state, Also I added a button to the custom personView. that NPE crash is rare but tagged
 */
 
 import UIKit
@@ -27,7 +29,7 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
 {
   // MARK: - Set Application State
   /**
-   */
+  */
   func setupDataControllers()
   {
     if personDataController.MOC != AllDataController.PSK.viewContext {
@@ -41,11 +43,7 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     }
   }
   /**
-  setupDummyLoad()
   */
-
-  /**
-   */
   func setupCLManager ()
   {
     locationManager?.delegate = self
@@ -58,7 +56,7 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     findLocation()
   }
   /**
-   */
+  */
   func setupCLAuthState()
   {
     if (CLLocationManager.authorizationStatus() == .notDetermined)
@@ -109,7 +107,8 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
   // MARK: - Segues
   override func prepare(for segue: UIStoryboardSegue, sender: Any?)
   {
-    ///MANUALLY BOUND TO THIS VIEWS NAV CONTROLLER
+
+    //MANUALLY BOUND TO THIS VIEWS NAV CONTROLLER
     if segue.identifier == "showDetail"
     {
       if let indexPath = tableView.indexPathForSelectedRow
@@ -127,7 +126,7 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
   // MARK: - Table View Protocol Conformance
   /**
   (*Not the setupƒn *)
-   // FIXMED - These are NOT custom in the XIB and Are Barely custom Here:
+   // FIXED - These are NOT custom in the XIB and Are Barely custom Here:
   With the initial issue of the GUI in the XIB I have to have custom Heights, these are in this groovy litle delegate that probably doesn't need to be on the main
   
    */
@@ -180,7 +179,7 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
   {
     switch indexPath.section {
     case 0:
-      return 96
+      return 128
     case 1:
       return 48
     case 2:
