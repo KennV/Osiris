@@ -54,13 +54,13 @@ class KVDetailViewController: UIViewController
   // GUI
   @IBOutlet weak var mapView = MKMapView()
   @IBOutlet weak var setupButton = UIButton()
-  @IBOutlet weak var detailDescriptionLabel = UILabel()
-  @IBOutlet weak var sessionsLabel = UILabel()
+//  @IBOutlet weak var detailDescriptionLabel = UILabel()
+//  @IBOutlet weak var sessionsLabel = UILabel()
   @IBOutlet weak var sessionsButton = UIButton()
-  @IBOutlet weak var vendorsLabel = UILabel()
+//  @IBOutlet weak var vendorsLabel = UILabel()
   @IBOutlet weak var vendorsButton = UIButton()
   @IBOutlet weak var personsButton = UIButton()
-  @IBOutlet weak var personsLabel = UILabel()
+//  @IBOutlet weak var personsLabel = UILabel()
   // Data
   var personsArr: Array <KVPerson>!
   var detailPerson: KVPerson? {
@@ -138,6 +138,7 @@ class KVDetailViewController: UIViewController
   }
   func setupGUIState()
   {
+    
     if personsArr != nil
     {
       if personsArr.isEmpty
@@ -145,13 +146,10 @@ class KVDetailViewController: UIViewController
         mapView?.alpha = 0.0
         sessionsButton?.isHidden = true
         sessionsButton?.isEnabled = false
-        sessionsLabel?.isHidden = true
         
-        personsLabel?.isHidden = true
         personsButton?.isHidden = true
         personsButton?.isEnabled = false
         
-        vendorsLabel?.isHidden = true
         vendorsButton?.isHidden = true
         vendorsButton?.isEnabled = false
       } else {
@@ -161,14 +159,11 @@ class KVDetailViewController: UIViewController
         setupButton?.isEnabled = false
       
         sessionsButton?.isHidden = false
-        sessionsLabel?.isHidden = false
         sessionsButton?.isEnabled = true
         
-        personsLabel?.isHidden = false
         personsButton?.isHidden = false
         personsButton?.isEnabled = true
         
-        vendorsLabel?.isHidden = false
         vendorsButton?.isHidden = false
         vendorsButton?.isEnabled = true
       }
@@ -176,3 +171,12 @@ class KVDetailViewController: UIViewController
   }
   
 }
+/*
+ sessionsLabel?.isHidden = true
+ personsLabel?.isHidden = true
+ vendorsLabel?.isHidden = true
+ 
+ sessionsLabel?.isHidden = false
+ personsLabel?.isHidden = false
+ vendorsLabel?.isHidden = false
+ */

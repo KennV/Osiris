@@ -59,16 +59,10 @@
                                 </items>
                             </toolbar>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mc7-9j-u7u" userLabel="SessionStack">
-                                <rect key="frame" x="36" y="76" width="102.66666666666666" height="42"/>
+                                <rect key="frame" x="36" y="76" width="61" height="42"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hta-aM-uRY">
-                                        <rect key="frame" x="0.0" y="0.0" width="41.666666666666671" height="42"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1o-6V-IS2">
-                                        <rect key="frame" x="41.666666666666664" y="0.0" width="60.999999999999993" height="42"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="61" height="42"/>
                                         <state key="normal" title="Sessions"/>
                                         <connections>
                                             <segue destination="q1G-1d-rt2" kind="show" identifier="ShowSession" id="ed9-Cq-PB9"/>
@@ -80,7 +74,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kfo-AP-cOL" userLabel="VendorStack">
-                                <rect key="frame" x="279.33333333333326" y="76" width="98.666666666666686" height="42"/>
+                                <rect key="frame" x="321" y="76" width="57" height="42"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GGO-Hn-SaQ">
                                         <rect key="frame" x="0.0" y="0.0" width="57" height="42"/>
@@ -89,28 +83,16 @@
                                             <segue destination="5kb-fC-VPd" kind="show" identifier="ShowVendor" id="E7j-wg-eTZ"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVB-Qy-whV">
-                                        <rect key="frame" x="57" y="0.0" width="41.666666666666686" height="42"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="Zxu-JP-4mw"/>
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zmo-At-ZWY" userLabel="PersonStack">
-                                <rect key="frame" x="36.000000000000007" y="638" width="89.666666666666686" height="42"/>
+                                <rect key="frame" x="36" y="638" width="48" height="42"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rqB-dZ-SNZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="41.666666666666671" height="42"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YDe-cY-WgQ">
-                                        <rect key="frame" x="41.666666666666671" y="0.0" width="48" height="42"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="48" height="42"/>
                                         <state key="normal" title="Person"/>
                                         <connections>
                                             <segue destination="Vwc-CG-Oo6" kind="show" identifier="ShowPerson" id="N6g-vm-V98"/>
@@ -124,16 +106,10 @@
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zm1-hs-UgI">
                                 <rect key="frame" x="290" y="638" width="88" height="42"/>
                                 <subviews>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zWU-Ak-2pV">
-                                        <rect key="frame" x="-290" y="-638" width="0.0" height="30"/>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zWU-Ak-2pV">
+                                        <rect key="frame" x="0.0" y="0.0" width="88" height="42"/>
                                         <state key="normal" title="Button"/>
                                     </button>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJb-On-qkF">
-                                        <rect key="frame" x="-290" y="-638" width="0.0" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="3a9-rX-21J"/>
@@ -167,12 +143,9 @@
                     <connections>
                         <outlet property="mapView" destination="Gzr-Xg-lY3" id="u5v-LX-Z7g"/>
                         <outlet property="personsButton" destination="YDe-cY-WgQ" id="lBF-F9-Cp2"/>
-                        <outlet property="personsLabel" destination="rqB-dZ-SNZ" id="d0y-mO-r5Q"/>
                         <outlet property="sessionsButton" destination="K1o-6V-IS2" id="mJr-Ek-kLC"/>
-                        <outlet property="sessionsLabel" destination="Hta-aM-uRY" id="j7e-5l-9WO"/>
                         <outlet property="setupButton" destination="E5u-zy-ApG" id="PIa-Ba-Pb9"/>
                         <outlet property="vendorsButton" destination="GGO-Hn-SaQ" id="dSr-rY-9jR"/>
-                        <outlet property="vendorsLabel" destination="dVB-Qy-whV" id="W2n-VZ-9oV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
@@ -891,7 +864,7 @@
         <scene sceneID="smW-Zh-WAh">
             <objects>
                 <tableViewController title="Master" clearsSelectionOnViewWillAppear="NO" id="7bK-jq-Zjz" customClass="KVPrimeTVController" customModule="Osiris" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="128" sectionHeaderHeight="18" sectionFooterHeight="18" id="tDQ-x3-DAh">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="128" sectionHeaderHeight="18" sectionFooterHeight="18" id="tDQ-x3-DAh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
