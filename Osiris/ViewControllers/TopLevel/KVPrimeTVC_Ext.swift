@@ -16,6 +16,8 @@ Make a vendor
 Added multiple selection for the TV. Let me see how to make that work
 (*I should look that up I know there is API for it, send it to the DVC and then have that go over to the edit views *)
 Yup I will have to manually toggle the state, Also I added a button to the custom personView. that NPE crash is rare but tagged
+ 
+OK I will need a currentObj/CurrSelectedObj and for a newSelectedObj deselect CurrSelectedObj then sel theNewOne 
 */
 
 import UIKit
@@ -30,7 +32,7 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
   // MARK: - Set Application State
   /**
   */
-  func setupDataControllers()
+  func OLDsetupDataControllers()
   {
     if personDataController.MOC != AllDataController.PSK.viewContext {
       personDataController.MOC = AllDataController.PSK.viewContext
@@ -40,6 +42,22 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     }
     if vendorDataController.MOC != AllDataController.PSK.viewContext {
       vendorDataController.MOC = AllDataController.PSK.viewContext
+    }
+  }
+  
+  func setupDataControllers()
+  {
+    if personDataController.PSK !== AllDataController.PSK {
+      personDataController.PSK = AllDataController.PSK
+      personDataController.MOC = AllDataController.PSK.viewContext
+    }
+    if vendorDataController.PSK !== AllDataController.PSK {
+      vendorDataController.PSK = AllDataController.PSK
+      vendorDataController.MOC = AllDataController.PSK.viewContext
+    }
+    if sessionDataController.PSK !== AllDataController.PSK {
+      sessionDataController.PSK = AllDataController.PSK
+      sessionDataController.MOC = AllDataController.PSK.viewContext
     }
   }
   /**
@@ -305,6 +323,7 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     let allTasksCompleteIfTrue = true
     let v = mkNewVendor()
     didChangeVendor(v)
+    v.addToInventoryStack(mkSession())
     return(allTasksCompleteIfTrue)
   }
   func didChangeVendor(_ t: KVVendor)
@@ -323,6 +342,15 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
   func willAddSession(_ sender: Any?) {
     let xs = mkSession()
     _ = sessionDataController.saveEntity(entity: xs)
+    /**
+    Observation This Crashes but not from Vendor
+    //    let x = mkSession()
+    //    x.buyer = people[0]
+    Observation this works but makes two
+    //    people.first?.servicesStack?.adding(mkSession())
+    */
+    //mutate xs and add to this with that buyer / vendor
+    people.first?.servicesStack?.adding(xs)
     self.didChangeSession(xs)
   }
 
