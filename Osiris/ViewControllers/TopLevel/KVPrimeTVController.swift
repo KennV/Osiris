@@ -34,7 +34,11 @@ class KVPrimeTVController: UITableViewController  {
   var personDataController = KVPersonDataController()
   var vendorDataController = KVVendorDataController()
   var sessionDataController = KVSessionDataController()
-
+  
+  var viewBkgdColor: UIColor!
+  var sectionLabelBackColor: UIColor!
+  var sectionLabelTxtColor: UIColor!
+  
   var currentPerson: KVPerson?
   {
     didSet {
@@ -70,13 +74,11 @@ class KVPrimeTVController: UITableViewController  {
     setupDataControllers()
 
     super.viewDidLoad()
-    view.backgroundColor = UIColor.darkGray
+
     personDataController.delegate = self
     
-    navigationItem.leftBarButtonItem = editButtonItem
+    configureGUI()
     
-    let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(willAddPerson(_:)))
-    navigationItem.rightBarButtonItem = addButton
     if let split = splitViewController
     {
       let controllers = split.viewControllers
@@ -86,6 +88,19 @@ class KVPrimeTVController: UITableViewController  {
     }
     tableView.allowsMultipleSelection = true
   }
+  func configureGUI()
+  {
+    viewBkgdColor = UIColor.darkGray
+    sectionLabelBackColor = UIColor.clear
+    sectionLabelTxtColor = UIColor.cyan
+    
+    navigationItem.leftBarButtonItem = editButtonItem
+    let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(willAddPerson(_:)))
+    navigationItem.rightBarButtonItem = addButton
+    
+    view.backgroundColor = viewBkgdColor
+  }
+  
   override func viewWillAppear(_ animated: Bool)
   {
     clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed

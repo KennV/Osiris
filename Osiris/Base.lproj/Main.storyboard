@@ -106,8 +106,8 @@
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zm1-hs-UgI">
                                 <rect key="frame" x="290" y="638" width="88" height="42"/>
                                 <subviews>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zWU-Ak-2pV">
-                                        <rect key="frame" x="-290" y="-638" width="0.0" height="30"/>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zWU-Ak-2pV">
+                                        <rect key="frame" x="0.0" y="0.0" width="88" height="42"/>
                                         <state key="normal" title="Button"/>
                                     </button>
                                 </subviews>
@@ -116,7 +116,6 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="cPw-Me-yp2" firstAttribute="top" secondItem="zm1-hs-UgI" secondAttribute="bottom" constant="12" id="0fp-qp-Yai"/>
                             <constraint firstItem="E5u-zy-ApG" firstAttribute="centerX" secondItem="cPw-Me-yp2" secondAttribute="centerX" id="80d-62-mMP"/>
@@ -864,7 +863,7 @@
         <scene sceneID="smW-Zh-WAh">
             <objects>
                 <tableViewController title="Master" clearsSelectionOnViewWillAppear="NO" id="7bK-jq-Zjz" customClass="KVPrimeTVController" customModule="Osiris" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="128" sectionHeaderHeight="18" sectionFooterHeight="18" id="tDQ-x3-DAh">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" sectionIndexMinimumDisplayRowCount="4" rowHeight="128" sectionHeaderHeight="18" sectionFooterHeight="18" id="tDQ-x3-DAh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>

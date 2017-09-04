@@ -7,17 +7,12 @@
  
 SINGLE RESPONSIBILITY
 (~_•)
-for testing purposes I need to be able to 
-Make an owner
-Make a vendor 
-• make a section header for it
-• Make a Service/Session With an Owner and a Vendor
 
 Added multiple selection for the TV. Let me see how to make that work
 (*I should look that up I know there is API for it, send it to the DVC and then have that go over to the edit views *)
 Yup I will have to manually toggle the state, Also I added a button to the custom personView. that NPE crash is rare but tagged
- 
-OK I will need a currentObj/CurrSelectedObj and for a newSelectedObj deselect CurrSelectedObj then sel theNewOne 
+OK I will need a currentObj/CurrSelectedObj and for a newSelectedObj deselect CurrSelectedObj then sel theNewOne
+It is just a fancy release/retain cycle
 */
 
 import UIKit
@@ -32,19 +27,6 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
   // MARK: - Set Application State
   /**
   */
-  func OLDsetupDataControllers()
-  {
-    if personDataController.MOC != AllDataController.PSK.viewContext {
-      personDataController.MOC = AllDataController.PSK.viewContext
-    }
-    if sessionDataController.MOC != AllDataController.PSK.viewContext {
-      sessionDataController.MOC = AllDataController.PSK.viewContext
-    }
-    if vendorDataController.MOC != AllDataController.PSK.viewContext {
-      vendorDataController.MOC = AllDataController.PSK.viewContext
-    }
-  }
-  
   func setupDataControllers()
   {
     if personDataController.PSK !== AllDataController.PSK {
@@ -165,8 +147,8 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     //While Height 0 Override down thurr
     let headerVue = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: view.frame.size.width, height: 0)))
     let sectionLabel = UILabel(frame: CGRect(origin: CGPoint(x: 10, y: 10), size: CGSize(width: view.frame.size.width, height: 21)))
-    sectionLabel.backgroundColor = UIColor.clear
-    sectionLabel.textColor = UIColor.cyan
+    sectionLabel.backgroundColor = sectionLabelBackColor
+    sectionLabel.textColor = sectionLabelTxtColor
     sectionLabel.font = UIFont.boldSystemFont(ofSize: 17)
     
     let sectionButton = UIButton(frame: CGRect(x: 80, y: 10, width: 88, height: 21))
@@ -322,19 +304,19 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     
   }
   /*
-  ¿¿¿ Hmmm look at service existing like is is some kind of data bearing class and all ??? I might be a classCluster or somethign else that I can extend to give me types of sessions and transactions
-  */
-  /* Also Not adding the session that I just added here
+  Also Not permanently adding the session that I just added here
   */
   func didAddVendor(_ deli: Any?) -> Bool
   {
     let allTasksCompleteIfTrue = true
     let v = mkNewVendor()
+    v.addToInventoryStack(mkSession()) //switched order because I was saving before adding the session
     didChangeVendor(v)
-    v.addToInventoryStack(mkSession())
-    tableView.reloadData()
     return(allTasksCompleteIfTrue)
   }
+  /*
+   ¿¿¿ Hmmm look at service existing like is is some kind of data bearing class and all ??? I might be a classCluster or somethign else that I can extend to give me types of sessions and transactions
+   */
   func didAddVendor(_ deli: Any?, svc: KVService, session :KVSession) -> Bool
   {
     let allTasksCompleteIfTrue = true
