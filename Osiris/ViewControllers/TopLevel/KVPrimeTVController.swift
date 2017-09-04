@@ -39,6 +39,12 @@ class KVPrimeTVController: UITableViewController  {
   var sectionLabelBackColor: UIColor!
   var sectionLabelTxtColor: UIColor!
   
+  var vendorCellTitleTextColor: UIColor!
+  var vendorCellDetailTextColor: UIColor!
+  
+  var sessionCellTitleTextColor: UIColor!
+  var sessionCellDetailTextColor: UIColor!
+  
   var currentPerson: KVPerson?
   {
     didSet {
@@ -77,8 +83,6 @@ class KVPrimeTVController: UITableViewController  {
     super.viewDidLoad()
 
     personDataController.delegate = self
-    
-    
     
     if let split = splitViewController
     {
@@ -137,16 +141,19 @@ class KVPrimeTVController: UITableViewController  {
   {
     if (indexPath.section == 0)
     {
-      let c = tableView.dequeueReusableCell(withIdentifier: "OwnerCell", for: indexPath) as! KVMapTableViewCell
-      //          let person = people[indexPath.row]
-      //          c.textLabel!.text = person.incepDate?.description
+      let c = tableView.dequeueReusableCell(withIdentifier: "OwnerCell", for: indexPath) as! KVBasicCustomCell
+      let person = people[indexPath.row]
+      c.nameLabel!.text = person.qName //.incepDate?.description
+      c.photoImageView.backgroundColor = UIColor.blue
+      c.ratingControl.backgroundColor = UIColor.cyan
+      //  Using the ratingContol
       return c
     }
     if (indexPath.section == 1)
     {
       let f = tableView.dequeueReusableCell(withIdentifier: "VendorCell", for: indexPath) //as! KVBasicCustomCell
       let item = vendors[(indexPath as NSIndexPath).row]
-      //      f.nameLabel!.text = item.qName
+      f.textLabel!.text = item.qName
       return f
     }
     if (indexPath.section == 2)
@@ -214,9 +221,9 @@ class KVPrimeTVController: UITableViewController  {
     }
     if personDataController.getAllEntities().count == 0
     {
-//      If through some future mischief or stupidity the arry becomes empty then by deletion /GUI it will insert a new person
       willAddPerson(self)
-      tableView.reloadData()
+//      If through some future mischief or stupidity the arry becomes empty then by deletion /GUI it will insert a new person
+//      tableView.reloadData()
     }
     tableView.reloadData()
   }

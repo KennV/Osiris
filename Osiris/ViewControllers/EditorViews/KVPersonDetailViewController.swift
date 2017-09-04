@@ -4,7 +4,8 @@
  
  Created by Kenn Villegas on 7/18/17.
  Copyright © 2017 dubian. All rights reserved.
- */
+
+*/
 
 import UIKit
 import MapKit
@@ -22,6 +23,8 @@ class KVPersonDetailViewController: KVDetailViewController
   @IBOutlet weak var personsTypeTextField = UITextField()
   @IBOutlet weak var currentFilterLabel = UILabel()
   @IBOutlet weak var currentFilterTextField = UITextField()
+  
+//  TODO: - Fix the sizes in the GUI
   
   var editablePerson: KVPerson? {
     didSet {

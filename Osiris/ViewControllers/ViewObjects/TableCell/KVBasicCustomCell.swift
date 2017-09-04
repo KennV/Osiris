@@ -15,9 +15,9 @@ class KVBasicCustomCell: UITableViewCell
   
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var photoImageView: UIImageView!
-  //need a slider and a label
+  //need a slider _OR_ a label
   //  @IBOutlet weak var tinyLabel: UILabel!
-  @IBOutlet weak var ratingControl: KVRatingView!
+  @IBOutlet var ratingControl: KVRatingView!
   override func awakeFromNib()
   {
     super.awakeFromNib()
