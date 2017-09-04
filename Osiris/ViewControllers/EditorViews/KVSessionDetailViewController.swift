@@ -1,16 +1,20 @@
 /**
-  KVSessionDetailViewController.swift
-  Osiris
-
-  Created by Kenn Villegas on 7/18/17.
-  Copyright © 2017 dubian. All rights reserved.
-*/
+ KVSessionDetailViewController.swift
+ Osiris
+ 
+ Created by Kenn Villegas on 7/18/17.
+ Copyright © 2017 dubian. All rights reserved.
+ */
 
 import UIKit
 
 class KVSessionDetailViewController: KVDetailViewController
 {
-//  @IBOutlet weak var
+  /**
+   This thing also has 2 of the button views
+   
+   */
+  //  @IBOutlet weak var
   @IBOutlet weak var smallLabel01: UILabel!
   @IBOutlet weak var smallButton01: UIButton!
   
@@ -24,24 +28,28 @@ class KVSessionDetailViewController: KVDetailViewController
   @IBOutlet weak var typesSelectorRight06: UIButton!
   
   @IBOutlet weak var view07: UIView!
+  var editableSession: KVSession? {
+    didSet {
+      configureView()
+    }
+  }
   
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    // Do any additional setup after loading the view.
+  }
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+  override func configureView()
+  {
+    configureTextView()
+  }
+  func configureTextView()
+  {
+    
+  }
   
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    /*
-    // MARK: - Navigation
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
