@@ -70,14 +70,15 @@ class KVPrimeTVController: UITableViewController  {
   override func viewDidLoad()
   {
     setupCLManager()
-    findLocation()
     setupDataControllers()
+    configureGUI()
+    findLocation()
 
     super.viewDidLoad()
 
     personDataController.delegate = self
     
-    configureGUI()
+    
     
     if let split = splitViewController
     {
@@ -100,7 +101,6 @@ class KVPrimeTVController: UITableViewController  {
     
     view.backgroundColor = viewBkgdColor
   }
-  
   override func viewWillAppear(_ animated: Bool)
   {
     clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
@@ -108,21 +108,11 @@ class KVPrimeTVController: UITableViewController  {
     detailViewController?.personsArr = people
     super.viewWillAppear(animated)
   }
-  /**
-   ## insert a new object of Type ##
-   
-   - Parameter sender: An *Any*
-   */
   // MARK: - Table View
-  /**
-  Set for Owner, Vendors, and Sessions
-  */
   override func numberOfSections(in tableView: UITableView) -> Int
   {
     return 3
   }
-  /**
-  */
   override func tableView(_ tableView: UITableView,
                           numberOfRowsInSection section: Int) -> Int
   {

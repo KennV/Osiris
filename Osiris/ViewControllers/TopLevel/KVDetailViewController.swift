@@ -10,14 +10,16 @@ Yes, this _does_ need map/location/health imported, BUT it also needs to have a 
 
 20170715@0000
 well, yes.
- 
-OK Can I operate the corner buttons w/o a stack view, Or Do I _rilly_ do it on stack01..04?
 
-OK if I am in SetupMode the buttons and map need to be invisible
- AND if i am in Landscape then I need to swallow the side view for wide / non compact layouts.
+OK if I am in SetupMode the buttons and map need to be invisible AND if i am in Landscape then I need to swallow the side view for wide / non compact layouts.
+ 
 OKAY I need a interface to the PeopleCon
+ 
 And It needs to be setup in the appDeli 
 OR I just set it in the TVC VWillAppear…
+ 
+AAMOFF!
+
 */
 
 import UIKit
@@ -27,21 +29,6 @@ protocol DetailVueDelegate
 {
 //  Coding Ain’t Done ‘Til All the Tests Run
 //  ‘Nuff said.
-
-
-/**
-these could probably go into the vendor and session controller's protocol
-*Additionally* I may need a services controller 
-Or the effect could be a cascaded protocol
-these are at or around line 180 in the PrimeViewController
-
-AAMOFF!
-the q&d version kinda has the right effect, I simply cant rely on this or the next class being a s/c of .this Luckily as I am only using three methods which add an instance if (id) - So that this and any other vue just has to implement it;
-Well this is interesting do I have _p, arr<_p>, _v, _s?
-
-Lastly I *did* get confused about what I can and should send as a delegate. And how trim I can make it srsly that is where I should start first -=- That was a great idea.
-
-*/
   func didAddPersonFor(_ delegate :Any? ) -> Bool
   func didAddVendor(_ deli: Any?) -> Bool
 //  func didAddVendor(_ deli: Any?, svc: KVService, session :KVSession) -> Bool
@@ -86,6 +73,7 @@ class KVDetailViewController: UIViewController
   {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
+    setupGUIState()
     configureView()
   }
   override func viewWillAppear(_ animated: Bool)
@@ -100,9 +88,7 @@ class KVDetailViewController: UIViewController
   }
   @IBAction func startSetupAction(_ sender: UIButton)
   {
-//    _ = delegate?.didMakePersonFor(self)
-//    self.reloadInputViews()
-//    
+    //self.reloadInputViews()
   }
   override func prepare(for segue: UIStoryboardSegue, sender: Any?)
   {
@@ -121,8 +107,7 @@ class KVDetailViewController: UIViewController
       if (currentVendor == nil) {
       _ = delegate?.didAddVendor(delegate)
       }
-      
-//      vendorEditor.editableVendor =
+      //vendorEditor.editableVendor =
       /**
        In order to perform the show session I will need to at the very least have an informal protocol to make a blank vendor
        And this is still true today:
