@@ -309,21 +309,39 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     _ = vendorDataController.saveEntity(entity: _v)
     return(_v)
   }
+  
+  /**
+  Needs a delete function
+  To nullify the vendor's sub-entities
+  */
+  //TODO: Add Delete Function!!!
   func willAddVendor(_ deli: Any?)
   {
-    var v = mkNewVendor()
+    let v = mkNewVendor()
     didChangeVendor(v)
     
   }
   /*
   ¿¿¿ Hmmm look at service existing like is is some kind of data bearing class and all ??? I might be a classCluster or somethign else that I can extend to give me types of sessions and transactions
   */
+  /* Also Not adding the session that I just added here
+  */
+  func didAddVendor(_ deli: Any?) -> Bool
+  {
+    let allTasksCompleteIfTrue = true
+    let v = mkNewVendor()
+    didChangeVendor(v)
+    v.addToInventoryStack(mkSession())
+    tableView.reloadData()
+    return(allTasksCompleteIfTrue)
+  }
   func didAddVendor(_ deli: Any?, svc: KVService, session :KVSession) -> Bool
   {
     let allTasksCompleteIfTrue = true
     let v = mkNewVendor()
     didChangeVendor(v)
     v.addToInventoryStack(mkSession())
+    sessionDataController.saveContext()
     return(allTasksCompleteIfTrue)
   }
   func didChangeVendor(_ t: KVVendor)

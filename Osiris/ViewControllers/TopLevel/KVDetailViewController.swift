@@ -43,7 +43,8 @@ Lastly I *did* get confused about what I can and should send as a delegate. And 
 
 */
   func didAddPersonFor(_ delegate :Any? ) -> Bool
-  func didAddVendor(_ deli: Any?, svc: KVService, session :KVSession) -> Bool
+  func didAddVendor(_ deli: Any?) -> Bool
+//  func didAddVendor(_ deli: Any?, svc: KVService, session :KVSession) -> Bool
 //  func didAddNewSession(_ deli: Any?, p: KVPerson, v: KVVendor) -> Bool
   func didAddNewSession(_ deli: Any?) -> Bool
 }
@@ -116,8 +117,15 @@ class KVDetailViewController: UIViewController
       personEditor.editablePerson = detailPerson
       break
     case "ShowVendor":
+      let vendorEditor = segue.destination as! KVVendorDetailViewController
+      if (currentVendor == nil) {
+      _ = delegate?.didAddVendor(delegate)
+      }
+      
+//      vendorEditor.editableVendor =
       /**
        In order to perform the show session I will need to at the very least have an informal protocol to make a blank vendor
+       And this is still true today:
        */
       break
     case "ShowSession":

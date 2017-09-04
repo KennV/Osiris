@@ -213,6 +213,7 @@ class KVPrimeTVController: UITableViewController  {
       willAddPerson(self)
       tableView.reloadData()
     }
+    tableView.reloadData()
   }
   /**
   Activate Segue from Cell-Tapped
