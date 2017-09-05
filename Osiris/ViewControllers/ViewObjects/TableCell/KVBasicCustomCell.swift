@@ -12,12 +12,16 @@ import UIKit
 class KVBasicCustomCell: UITableViewCell
 {
   // MARK: Properties
-  
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var photoImageView: UIImageView!
   //need a slider _OR_ a label
-  //  @IBOutlet weak var tinyLabel: UILabel!
+  //@IBOutlet var slider: UISlider!
+  //@IBOutlet weak var tinyLabel: UILabel!
   @IBOutlet var ratingControl: KVRatingView!
+  /**
+  I bet that this could be a collection view
+  */
+  
   override func awakeFromNib()
   {
     super.awakeFromNib()

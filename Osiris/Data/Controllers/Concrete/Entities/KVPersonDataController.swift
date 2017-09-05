@@ -78,7 +78,17 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
     setupRandomPerson(newPerson)
 	// Now what can I assert in unit tests
   }
-  
+  override func deleteEntityInContext(_ context: NSManagedObjectContext, entity: T)
+  {
+    //NSLog("Powa:: %@ !",entity.objectID);
+    //Need to delete my sessions
+    while ((entity.sessionsStack?.count)! >= 0)
+    {
+      _ = entity.sessionsStack?.dropFirst()
+    }
+    //Need to delete my goods and or services
+    context.delete(entity)
+  }
   //MARK TODO: Add Health specific Datas
   func resetPersonDefaults(_ person: T)
   {
@@ -90,7 +100,6 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
     person.phoneNumber = "(555)abc-defg"
     person.textID  = person.firstName! + ("_") + person.lastName!
   }
-
   func resetPersonToEditMeState(_ person: T)
   {
     let edString = "Edit-Me"

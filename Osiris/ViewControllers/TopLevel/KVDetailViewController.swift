@@ -104,13 +104,12 @@ class KVDetailViewController: UIViewController
       break
     case "ShowVendor":
       let vendorEditor = segue.destination as! KVVendorDetailViewController
-      if (currentVendor == nil) {
+      if (vendorEditor.editableVendor == nil) {
       _ = delegate?.didAddVendor(delegate)
       }
-      //vendorEditor.editableVendor =
       /**
-       In order to perform the show session I will need to at the very least have an informal protocol to make a blank vendor
-       And this is still true today:
+      Extended from previous Commit;
+      This protocol gets a lot done.
        */
       break
     case "ShowSession":

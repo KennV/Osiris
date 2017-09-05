@@ -62,11 +62,13 @@ class KVPrimeTVController: UITableViewController  {
   }
   var vendors : Array <KVVendor> {
     get {
+      detailViewController?.configureView()
       return vendorDataController.getAllEntities()
     }
   }
   var sessions : Array <KVSession> {
     get {
+      detailViewController?.configureView()
       return sessionDataController.getAllEntities()
     }
   }
@@ -141,31 +143,31 @@ class KVPrimeTVController: UITableViewController  {
   {
     if (indexPath.section == 0)
     {
-      let c = tableView.dequeueReusableCell(withIdentifier: "OwnerCell", for: indexPath) as! KVBasicCustomCell
+      let pCell = tableView.dequeueReusableCell(withIdentifier: "OwnerCell", for: indexPath) as! KVBasicCustomCell
       let person = people[indexPath.row]
-      c.nameLabel!.text = person.qName //.incepDate?.description
-      c.photoImageView.backgroundColor = UIColor.blue
-      c.ratingControl.backgroundColor = UIColor.cyan
-      //  Using the ratingContol
-      return c
+      pCell.nameLabel!.text = person.qName //.incepDate?.description
+      
+      pCell.photoImageView.backgroundColor = UIColor.blue
+      pCell.ratingControl.backgroundColor = UIColor.darkGray
+      pCell.backgroundColor = UIColor.lightGray
+    
+      return pCell
     }
     if (indexPath.section == 1)
     {
-      let f = tableView.dequeueReusableCell(withIdentifier: "VendorCell", for: indexPath) //as! KVBasicCustomCell
+      let vCell = tableView.dequeueReusableCell(withIdentifier: "VendorCell", for: indexPath) //as! KVBasicCustomCell
       let item = vendors[(indexPath as NSIndexPath).row]
-      f.textLabel!.text = item.qName
-      return f
+      vCell.textLabel!.text = item.qName
+      return vCell
     }
     if (indexPath.section == 2)
     {
-      let d = tableView.dequeueReusableCell(withIdentifier: "SessionCell", for: indexPath) //as! KVBasicCustomCell
+      let sCell = tableView.dequeueReusableCell(withIdentifier: "SessionCell", for: indexPath) //as! KVBasicCustomCell
       let item = sessions[(indexPath as NSIndexPath).row]
-      //      d.nameLabel!.text = item.qName
-      return d
+      sCell.textLabel!.text = item.qName
+//      d.detailTextLabel?.text = item.incepDate?.description
+      return sCell
     }
-    /*
-     return cell c,d,e,f or return an empty one
-     */
     return (UITableViewCell())//cell!
   }
   override func tableView(_ tableView: UITableView,
