@@ -270,13 +270,25 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
      //currentPerson = people[0]
      // _Do I Need to fix it in the render cell?_
      */
+    findLocation()
+    if let loc = locationManager?.location?.coordinate {
+      _p.location?.latitude = loc.latitude as NSNumber
+      _p.location?.longitude = loc.longitude as NSNumber
+    }
     currentPerson = _p
     let indexPath = IndexPath(row: 0, section: 0)
     tableView.insertRows(at: [indexPath], with: .automatic)
     didChangePerson(_p)
     //YES This Line is STILL Important
     //personDataController.saveCurrentContext(personDataController.MOC!)
-   
+    /** 
+    ADDITIONALLY the Abstract entityControl needs to save the entity for the owner
+    
+    let dbLoc = _p.location
+    let jiveGFX = _p.graphics
+    
+     */
+    
   }
   func didAddPersonFor(_ delegate: Any?) -> Bool
   {
