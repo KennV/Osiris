@@ -77,14 +77,14 @@ class KVPrimeTVController: UITableViewController  {
   
   override func viewDidLoad()
   {
-    setupCLManager()
-    setupDataControllers()
-    configureGUI()
-    findLocation()
-
     super.viewDidLoad()
+    setupCLManager()
+    resetDataControllers()
+    /* so instead of calling findLocation() 2x I should setupMapView
+    cept i don't have a map view. */
+    configureGUI()
+    //findLocation() // second call
 
-    personDataController.delegate = self
     
     if let split = splitViewController
     {

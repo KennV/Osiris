@@ -44,7 +44,7 @@
                                 <rect key="frame" x="20" y="32" width="374" height="672"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E5u-zy-ApG">
-                                <rect key="frame" x="167" y="343" width="81" height="46"/>
+                                <rect key="frame" x="167.33333333333334" y="343" width="81" height="46"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <state key="normal" title="Setup!"/>
                                 <connections>

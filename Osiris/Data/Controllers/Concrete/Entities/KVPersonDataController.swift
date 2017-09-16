@@ -82,10 +82,7 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
   {
     //NSLog("Powa:: %@ !",entity.objectID);
     //Need to delete my sessions
-    while ((entity.sessionsStack?.count)! >= 0)
-    {
-      _ = entity.sessionsStack?.dropFirst()
-    }
+    entity.removeFromSessionsStack(entity.sessionsStack!)
     //Need to delete my goods and or services
     context.delete(entity)
   }

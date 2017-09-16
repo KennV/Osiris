@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     let masterNavigationController = splitViewController.viewControllers[0] as! UINavigationController
     let c = masterNavigationController.topViewController as! KVPrimeTVController
     c.AllDataController = rootDataController as KVOsirisDataController
-    c.setupDataControllers()
+    c.resetDataControllers()
 
     return true
   }

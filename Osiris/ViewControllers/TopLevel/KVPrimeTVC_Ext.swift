@@ -22,28 +22,35 @@ import MapKit
 import HealthKit
 import HealthKitUI
 
-extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, VendorConDelegate, DetailVueDelegate
+extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, VendorConDelegate, DetailVueDelegate, SessionDataDelegate
 {
   // MARK: - Set Application State
   /**
+  I could do it un the XIB and I could error check for it but setting it up verbose in this is good
+  setupDataControllers
+   resetDataControllers
   */
-  func setupDataControllers()
+  
+  func resetDataControllers()
   {
     if personDataController.PSK !== AllDataController.PSK {
       personDataController.PSK = AllDataController.PSK
       personDataController.MOC = AllDataController.PSK.viewContext
+      personDataController.delegate = self
     }
     if vendorDataController.PSK !== AllDataController.PSK {
       vendorDataController.PSK = AllDataController.PSK
       vendorDataController.MOC = AllDataController.PSK.viewContext
+      vendorDataController.delegate = self
     }
     if sessionDataController.PSK !== AllDataController.PSK {
       sessionDataController.PSK = AllDataController.PSK
       sessionDataController.MOC = AllDataController.PSK.viewContext
+      sessionDataController.delegate = self
     }
   }
-  /**
-  */
+  
+  
   func setupCLManager ()
   {
     locationManager?.delegate = self
@@ -51,12 +58,12 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     locationManager?.distanceFilter = kCLDistanceFilterNone
     // According to BestPractices I was OK but now I am modern
     locationManager?.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-    
     locationManager?.startUpdatingLocation()
+    // I was going to check on if it was not delegate but it it
+    print("setupCLManager")
     findLocation()
   }
-  /**
-  */
+  
   func setupCLAuthState()
   {
     if (CLLocationManager.authorizationStatus() == .notDetermined)
@@ -301,22 +308,23 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
   {
     let v = mkNewVendor()
     didChangeVendor(v)
-    
+
   }
   /*
   Also Not permanently adding the session that I just added here
+  inventoryStack is a NSSet of <items>
   */
   func didAddVendor(_ deli: Any?) -> Bool
   {
     let allTasksCompleteIfTrue = true
     let v = mkNewVendor()
-    v.addToInventoryStack(mkSession()) //switched order because I was saving before adding the session
+    // v.addToInventoryStack(mkSession()) //switched order because I was saving before adding the session
     didChangeVendor(v)
     return(allTasksCompleteIfTrue)
   }
   /*
    ¿¿¿ Hmmm look at service existing like is is some kind of data bearing class and all ??? I might be a classCluster or somethign else that I can extend to give me types of sessions and transactions
-   */
+  */
   func didAddVendor(_ deli: Any?, svc: KVService, session :KVSession) -> Bool
   {
     let allTasksCompleteIfTrue = true
@@ -339,7 +347,8 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     _ = sessionDataController.saveEntity(entity: _s)
     return(_s)
   }
-  func willAddSession(_ sender: Any?) {
+  func willAddSession(_ sender: Any?)
+  {
     let xs = mkSession()
     _ = sessionDataController.saveEntity(entity: xs)
     /**
@@ -353,7 +362,6 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     people.first?.servicesStack?.adding(xs)
     self.didChangeSession(xs)
   }
-
   func didAddNewSession(_ deli: Any?) -> Bool
   {
     let allTasksCompleteIfTrue = false
@@ -381,12 +389,10 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
   */
   func findLocation()
   {
-    let defLat : Double = 37.33115792
-    let defLon : Double = -122.03076853
-    ///These locations are from gdb output,
-    // They should be revised to reflect "home"
-    print(locationManager?.location?.coordinate.latitude ?? defLat)
-    print(locationManager?.location?.coordinate.longitude ?? defLon)
+    if let c = locationManager?.location?.coordinate {
+      print("point at \(c.latitude): and \(c.longitude)")
+    }
+    foundLocation()
   }
   /**
   Yippe
@@ -394,6 +400,7 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
   func foundLocation()
   {
     locationManager?.stopUpdatingLocation()
+    print("stopped updating location")
   }
   // moved the coder to the AresDataController
   /**

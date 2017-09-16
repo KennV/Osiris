@@ -7,11 +7,16 @@
 
 */
 
+protocol SessionDataDelegate {
+  
+}
+
 import UIKit
 import CoreData
 
 class KVSessionDataController<T : KVSession> : KVItemDataController <T>
 {
+  var delegate: SessionDataDelegate? //
   override init()
   {
     super.init()
