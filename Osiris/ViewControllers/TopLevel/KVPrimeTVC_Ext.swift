@@ -56,10 +56,11 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     locationManager?.delegate = self
     setupCLAuthState()
     locationManager?.distanceFilter = kCLDistanceFilterNone
-    // According to BestPractices I was OK but now I am modern
+
     locationManager?.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+    locationManager?.activityType = .otherNavigation    
     locationManager?.startUpdatingLocation()
-    // I was going to check on if it was not delegate but it it
+    
     print("setupCLManager")
     findLocation()
   }
@@ -401,7 +402,8 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
   */
   func findLocation()
   {
-    if let c = locationManager?.location?.coordinate {
+    if let c = locationManager?.location?.coordinate
+    {
       print("point at \(c.latitude): and \(c.longitude)")
     }
     foundLocation()
