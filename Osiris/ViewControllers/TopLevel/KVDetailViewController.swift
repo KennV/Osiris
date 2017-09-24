@@ -36,7 +36,7 @@ protocol DetailVueDelegate
   func didAddNewSession(_ deli: Any?) -> Bool
 }
 
-class KVDetailViewController: UIViewController
+class KVDetailViewController: UIViewController, MKMapViewDelegate
 {
   // Interface
   var delegate: DetailVueDelegate?
@@ -74,6 +74,7 @@ class KVDetailViewController: UIViewController
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     setupGUIState()
+    setupMapView()
     configureView()
   }
   override func viewWillAppear(_ animated: Bool)
@@ -157,6 +158,38 @@ class KVDetailViewController: UIViewController
         vendorsButton?.isEnabled = true
       }
     }
+  }
+  func setupMapView()
+  {
+    mapView?.delegate = self
+    // .Hybrid - Has Scale; .Standard Has all Custom camera No Scale Bar
+    mapView?.mapType = .hybridFlyover
+
+    mapView?.showsScale = true
+    mapView?.showsUserLocation = true
+    mapView?.showsPointsOfInterest = true
+    mapView?.showsCompass = false
+    if (detailPerson?.location != nil) {
+      let loc = CLLocation(latitude: (detailPerson?.location?.latitude?.doubleValue)!, longitude:(detailPerson?.location?.longitude?.doubleValue)!)
+//      mapView?.centerCoordinate = loc.coordinate
+    let defR = MKCoordinateRegionMakeWithDistance(loc.coordinate, 5000, 5000)
+      mapView?.setRegion(defR, animated: true)
+    }
+
+    let camera = MKMapCamera()
+    camera.centerCoordinate = (mapView?.centerCoordinate)! //see line 175
+    camera.pitch = 70
+    camera.altitude = 400
+    camera.heading = 0
+    print("\(String(describing: mapView?.centerCoordinate.latitude))")
+//
+//    mapView.camera = camera
+    //    let defLoc = CLLocation(latitude: (39.329842664338024), longitude: (-76.607890399244241))
+    //    let defR = MKCoordinateRegionMakeWithDistance(loc.coordinate, 5000, 5000)
+    //    mapView.setRegion(defR, animated: true)
+   /**
+     terminating because it runs slow as fuck in sim and I do not have batteries to do it in HW
+    */
   }
   
 }
