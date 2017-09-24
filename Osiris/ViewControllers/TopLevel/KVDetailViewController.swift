@@ -4,8 +4,7 @@
 
   Created by Kenn Villegas on 6/13/17.
   Copyright © 2017 dubian. All rights reserved.
-*/
-/**
+
 Yes, this _does_ need map/location/health imported, BUT it also needs to have a way to pop that back over to prime setup might need to go into a sub nav controller.
 
 20170715@0000
@@ -169,15 +168,14 @@ class KVDetailViewController: UIViewController, MKMapViewDelegate
     mapView?.showsUserLocation = true
     mapView?.showsPointsOfInterest = true
     mapView?.showsCompass = false
-    if (detailPerson?.location != nil) {
-      let loc = CLLocation(latitude: (detailPerson?.location?.latitude?.doubleValue)!, longitude:(detailPerson?.location?.longitude?.doubleValue)!)
-//      mapView?.centerCoordinate = loc.coordinate
+
+    let loc = CLLocation(latitude: (detailPerson?.location?.latitude?.doubleValue)!, longitude:(detailPerson?.location?.longitude?.doubleValue)!)
     let defR = MKCoordinateRegionMakeWithDistance(loc.coordinate, 5000, 5000)
       mapView?.setRegion(defR, animated: true)
-    }
+
 
     let camera = MKMapCamera()
-    camera.centerCoordinate = (mapView?.centerCoordinate)! //see line 175
+    camera.centerCoordinate = (mapView?.centerCoordinate)!
     camera.pitch = 70
     camera.altitude = 400
     camera.heading = 0
