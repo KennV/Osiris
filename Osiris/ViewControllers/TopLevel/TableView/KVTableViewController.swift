@@ -22,7 +22,7 @@ import HealthKitUI
  
  */
 
-class KVPrimeTVController: UITableViewController  {
+class KVTableViewController: UITableViewController  {
   
   var detailViewController: KVMapViewController? = nil
   

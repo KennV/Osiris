@@ -51,7 +51,7 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
     let pxDescription = NSEntityDescription.entity(forEntityName: (EntityTypes.Physics), in: PSK.viewContext)
     
     let person = KVPerson(entity: pDescription!, insertInto: context) as! T
-    person.incepDate = NSDate()
+    person.incepDate = NSDate() as Date
     let gfx = KVGraphics(entity: gDescription!, insertInto: context)
     let physx = KVPhysics(entity: pxDescription!, insertInto: context)
     let loc = KVLocation(entity: lDescription!, insertInto: context)

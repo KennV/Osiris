@@ -14,7 +14,7 @@ import CoreData
 class OsirisTests: XCTestCase {
   var PSK : NSPersistentContainer? = nil
   var testMOC : NSManagedObjectContext? = nil
-  var SUT = KVPrimeTVController()
+  var SUT = KVTableViewController()
 
   func setupPSK() -> NSPersistentContainer
   {
