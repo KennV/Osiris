@@ -7,17 +7,12 @@
  
 SINGLE RESPONSIBILITY
 (~_•)
-for testing purposes I need to be able to 
-Make an owner
-Make a vendor 
-• make a section header for it
-• Make a Service/Session With an Owner and a Vendor
 
 Added multiple selection for the TV. Let me see how to make that work
 (*I should look that up I know there is API for it, send it to the DVC and then have that go over to the edit views *)
 Yup I will have to manually toggle the state, Also I added a button to the custom personView. that NPE crash is rare but tagged
- 
-OK I will need a currentObj/CurrSelectedObj and for a newSelectedObj deselect CurrSelectedObj then sel theNewOne 
+OK I will need a currentObj/CurrSelectedObj and for a newSelectedObj deselect CurrSelectedObj then sel theNewOne
+It is just a fancy release/retain cycle
 */
 
 import UIKit
@@ -27,54 +22,49 @@ import MapKit
 import HealthKit
 import HealthKitUI
 
-extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, VendorConDelegate, DetailVueDelegate
+extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, VendorConDelegate, DetailVueDelegate, SessionDataDelegate
 {
   // MARK: - Set Application State
   /**
+  I could do it un the XIB and I could error check for it but setting it up verbose in this is good
+  setupDataControllers
+   resetDataControllers
   */
-  func OLDsetupDataControllers()
-  {
-    if personDataController.MOC != AllDataController.PSK.viewContext {
-      personDataController.MOC = AllDataController.PSK.viewContext
-    }
-    if sessionDataController.MOC != AllDataController.PSK.viewContext {
-      sessionDataController.MOC = AllDataController.PSK.viewContext
-    }
-    if vendorDataController.MOC != AllDataController.PSK.viewContext {
-      vendorDataController.MOC = AllDataController.PSK.viewContext
-    }
-  }
   
-  func setupDataControllers()
+  func resetDataControllers()
   {
     if personDataController.PSK !== AllDataController.PSK {
       personDataController.PSK = AllDataController.PSK
       personDataController.MOC = AllDataController.PSK.viewContext
+      personDataController.delegate = self
     }
     if vendorDataController.PSK !== AllDataController.PSK {
       vendorDataController.PSK = AllDataController.PSK
       vendorDataController.MOC = AllDataController.PSK.viewContext
+      vendorDataController.delegate = self
     }
     if sessionDataController.PSK !== AllDataController.PSK {
       sessionDataController.PSK = AllDataController.PSK
       sessionDataController.MOC = AllDataController.PSK.viewContext
+      sessionDataController.delegate = self
     }
   }
-  /**
-  */
+  
+  
   func setupCLManager ()
   {
     locationManager?.delegate = self
     setupCLAuthState()
     locationManager?.distanceFilter = kCLDistanceFilterNone
-    // According to BestPractices I was OK but now I am modern
+
     locationManager?.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-    
+    locationManager?.activityType = .otherNavigation    
     locationManager?.startUpdatingLocation()
+    
+    print("setupCLManager")
     findLocation()
   }
-  /**
-  */
+  
   func setupCLAuthState()
   {
     if (CLLocationManager.authorizationStatus() == .notDetermined)
@@ -165,8 +155,8 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     //While Height 0 Override down thurr
     let headerVue = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: view.frame.size.width, height: 0)))
     let sectionLabel = UILabel(frame: CGRect(origin: CGPoint(x: 10, y: 10), size: CGSize(width: view.frame.size.width, height: 21)))
-    sectionLabel.backgroundColor = UIColor.clear
-    sectionLabel.textColor = UIColor.cyan
+    sectionLabel.backgroundColor = sectionLabelBackColor
+    sectionLabel.textColor = sectionLabelTxtColor
     sectionLabel.font = UIFont.boldSystemFont(ofSize: 17)
     
     let sectionButton = UIButton(frame: CGRect(x: 80, y: 10, width: 88, height: 21))
@@ -281,13 +271,25 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
      //currentPerson = people[0]
      // _Do I Need to fix it in the render cell?_
      */
+    findLocation()
+    if let loc = locationManager?.location?.coordinate {
+      _p.location?.latitude = loc.latitude as NSNumber
+      _p.location?.longitude = loc.longitude as NSNumber
+    }
     currentPerson = _p
     let indexPath = IndexPath(row: 0, section: 0)
     tableView.insertRows(at: [indexPath], with: .automatic)
     didChangePerson(_p)
     //YES This Line is STILL Important
     //personDataController.saveCurrentContext(personDataController.MOC!)
-   
+    /** 
+    ADDITIONALLY the Abstract entityControl needs to save the entity for the owner
+    
+    let dbLoc = _p.location
+    let jiveGFX = _p.graphics
+    
+     */
+    
   }
   func didAddPersonFor(_ delegate: Any?) -> Bool
   {
@@ -309,14 +311,32 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     _ = vendorDataController.saveEntity(entity: _v)
     return(_v)
   }
+  
+  /**
+  Needs a delete function
+  To nullify the vendor's sub-entities
+  */
+  //TODO: Add Delete Function!!!
   func willAddVendor(_ deli: Any?)
   {
-    var v = mkNewVendor()
+    let v = mkNewVendor()
     didChangeVendor(v)
-    
+
   }
   /*
-  ¿¿¿ Hmmm look at service existing like is is some kind of data bearing class and all ??? I might be a classCluster or somethign else that I can extend to give me types of sessions and transactions
+  Also Not permanently adding the session that I just added here
+  inventoryStack is a NSSet of <items>
+  */
+  func didAddVendor(_ deli: Any?) -> Bool
+  {
+    let allTasksCompleteIfTrue = true
+    let v = mkNewVendor()
+    // v.addToInventoryStack(mkSession()) //switched order because I was saving before adding the session
+    didChangeVendor(v)
+    return(allTasksCompleteIfTrue)
+  }
+  /*
+   ¿¿¿ Hmmm look at service existing like is is some kind of data bearing class and all ??? I might be a classCluster or somethign else that I can extend to give me types of sessions and transactions
   */
   func didAddVendor(_ deli: Any?, svc: KVService, session :KVSession) -> Bool
   {
@@ -324,6 +344,7 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     let v = mkNewVendor()
     didChangeVendor(v)
     v.addToInventoryStack(mkSession())
+    sessionDataController.saveContext()
     return(allTasksCompleteIfTrue)
   }
   func didChangeVendor(_ t: KVVendor)
@@ -339,7 +360,8 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     _ = sessionDataController.saveEntity(entity: _s)
     return(_s)
   }
-  func willAddSession(_ sender: Any?) {
+  func willAddSession(_ sender: Any?)
+  {
     let xs = mkSession()
     _ = sessionDataController.saveEntity(entity: xs)
     /**
@@ -353,7 +375,6 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     people.first?.servicesStack?.adding(xs)
     self.didChangeSession(xs)
   }
-
   func didAddNewSession(_ deli: Any?) -> Bool
   {
     let allTasksCompleteIfTrue = false
@@ -381,12 +402,11 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
   */
   func findLocation()
   {
-    let defLat : Double = 37.33115792
-    let defLon : Double = -122.03076853
-    ///These locations are from gdb output,
-    // They should be revised to reflect "home"
-    print(locationManager?.location?.coordinate.latitude ?? defLat)
-    print(locationManager?.location?.coordinate.longitude ?? defLon)
+    if let c = locationManager?.location?.coordinate
+    {
+      print("point at \(c.latitude): and \(c.longitude)")
+    }
+    foundLocation()
   }
   /**
   Yippe
@@ -394,6 +414,7 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
   func foundLocation()
   {
     locationManager?.stopUpdatingLocation()
+    print("stopped updating location")
   }
   // moved the coder to the AresDataController
   /**

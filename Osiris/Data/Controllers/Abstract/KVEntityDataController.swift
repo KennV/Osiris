@@ -23,7 +23,8 @@ class KVEntityDataController<T : KVEntity > : KVOsirisDataController<T>
     setupGraphics(g: KVEntity.graphics!)
     setupLocation(l: KVEntity.location!)
     setupPhysics(p: KVEntity.physics!)
-  }  
+    _ = saveEntity(entity: KVEntity)
+  }
   func setupGraphics(g :KVGraphics)
   {
     g.caption = "New"

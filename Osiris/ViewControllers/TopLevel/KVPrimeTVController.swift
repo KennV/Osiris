@@ -34,7 +34,17 @@ class KVPrimeTVController: UITableViewController  {
   var personDataController = KVPersonDataController()
   var vendorDataController = KVVendorDataController()
   var sessionDataController = KVSessionDataController()
-
+  
+  var viewBkgdColor: UIColor!
+  var sectionLabelBackColor: UIColor!
+  var sectionLabelTxtColor: UIColor!
+  
+  var vendorCellTitleTextColor: UIColor!
+  var vendorCellDetailTextColor: UIColor!
+  
+  var sessionCellTitleTextColor: UIColor!
+  var sessionCellDetailTextColor: UIColor!
+  
   var currentPerson: KVPerson?
   {
     didSet {
@@ -52,11 +62,13 @@ class KVPrimeTVController: UITableViewController  {
   }
   var vendors : Array <KVVendor> {
     get {
+      detailViewController?.configureView()
       return vendorDataController.getAllEntities()
     }
   }
   var sessions : Array <KVSession> {
     get {
+      detailViewController?.configureView()
       return sessionDataController.getAllEntities()
     }
   }
@@ -65,18 +77,15 @@ class KVPrimeTVController: UITableViewController  {
   
   override func viewDidLoad()
   {
-    setupCLManager()
-    findLocation()
-    setupDataControllers()
-
     super.viewDidLoad()
-    view.backgroundColor = UIColor.darkGray
-    personDataController.delegate = self
+    setupCLManager()
+    resetDataControllers()
+    /* so instead of calling findLocation() 2x I should setupMapView
+    cept i don't have a map view. */
+    configureGUI()
+    //findLocation() // second call
+
     
-    navigationItem.leftBarButtonItem = editButtonItem
-    
-    let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(willAddPerson(_:)))
-    navigationItem.rightBarButtonItem = addButton
     if let split = splitViewController
     {
       let controllers = split.viewControllers
@@ -86,6 +95,18 @@ class KVPrimeTVController: UITableViewController  {
     }
     tableView.allowsMultipleSelection = true
   }
+  func configureGUI()
+  {
+    viewBkgdColor = UIColor.darkGray
+    sectionLabelBackColor = UIColor.clear
+    sectionLabelTxtColor = UIColor.cyan
+    
+    navigationItem.leftBarButtonItem = editButtonItem
+    let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(willAddPerson(_:)))
+    navigationItem.rightBarButtonItem = addButton
+    
+    view.backgroundColor = viewBkgdColor
+  }
   override func viewWillAppear(_ animated: Bool)
   {
     clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
@@ -93,21 +114,11 @@ class KVPrimeTVController: UITableViewController  {
     detailViewController?.personsArr = people
     super.viewWillAppear(animated)
   }
-  /**
-   ## insert a new object of Type ##
-   
-   - Parameter sender: An *Any*
-   */
   // MARK: - Table View
-  /**
-  Set for Owner, Vendors, and Sessions
-  */
   override func numberOfSections(in tableView: UITableView) -> Int
   {
     return 3
   }
-  /**
-  */
   override func tableView(_ tableView: UITableView,
                           numberOfRowsInSection section: Int) -> Int
   {
@@ -132,28 +143,31 @@ class KVPrimeTVController: UITableViewController  {
   {
     if (indexPath.section == 0)
     {
-      let c = tableView.dequeueReusableCell(withIdentifier: "OwnerCell", for: indexPath) as! KVMapTableViewCell
-      //          let person = people[indexPath.row]
-      //          c.textLabel!.text = person.incepDate?.description
-      return c
+      let pCell = tableView.dequeueReusableCell(withIdentifier: "OwnerCell", for: indexPath) as! KVBasicCustomCell
+      let person = people[indexPath.row]
+      pCell.nameLabel!.text = person.qName //.incepDate?.description
+      
+      pCell.photoImageView.backgroundColor = UIColor.blue
+      pCell.ratingControl.backgroundColor = UIColor.darkGray
+      pCell.backgroundColor = UIColor.lightGray
+    
+      return pCell
     }
     if (indexPath.section == 1)
     {
-      let f = tableView.dequeueReusableCell(withIdentifier: "VendorCell", for: indexPath) //as! KVBasicCustomCell
+      let vCell = tableView.dequeueReusableCell(withIdentifier: "VendorCell", for: indexPath) //as! KVBasicCustomCell
       let item = vendors[(indexPath as NSIndexPath).row]
-      //      f.nameLabel!.text = item.qName
-      return f
+      vCell.textLabel!.text = item.qName
+      return vCell
     }
     if (indexPath.section == 2)
     {
-      let d = tableView.dequeueReusableCell(withIdentifier: "SessionCell", for: indexPath) //as! KVBasicCustomCell
+      let sCell = tableView.dequeueReusableCell(withIdentifier: "SessionCell", for: indexPath) //as! KVBasicCustomCell
       let item = sessions[(indexPath as NSIndexPath).row]
-      //      d.nameLabel!.text = item.qName
-      return d
+      sCell.textLabel!.text = item.qName
+//      d.detailTextLabel?.text = item.incepDate?.description
+      return sCell
     }
-    /*
-     return cell c,d,e,f or return an empty one
-     */
     return (UITableViewCell())//cell!
   }
   override func tableView(_ tableView: UITableView,
@@ -209,10 +223,11 @@ class KVPrimeTVController: UITableViewController  {
     }
     if personDataController.getAllEntities().count == 0
     {
-//      If through some future mischief or stupidity the arry becomes empty then by deletion /GUI it will insert a new person
       willAddPerson(self)
-      tableView.reloadData()
+//      If through some future mischief or stupidity the arry becomes empty then by deletion /GUI it will insert a new person
+//      tableView.reloadData()
     }
+    tableView.reloadData()
   }
   /**
   Activate Segue from Cell-Tapped

@@ -4,20 +4,21 @@
 
   Created by Kenn Villegas on 6/13/17.
   Copyright © 2017 dubian. All rights reserved.
-*/
-/**
+
 Yes, this _does_ need map/location/health imported, BUT it also needs to have a way to pop that back over to prime setup might need to go into a sub nav controller.
 
 20170715@0000
 well, yes.
- 
-OK Can I operate the corner buttons w/o a stack view, Or Do I _rilly_ do it on stack01..04?
 
-OK if I am in SetupMode the buttons and map need to be invisible
- AND if i am in Landscape then I need to swallow the side view for wide / non compact layouts.
+OK if I am in SetupMode the buttons and map need to be invisible AND if i am in Landscape then I need to swallow the side view for wide / non compact layouts.
+ 
 OKAY I need a interface to the PeopleCon
+ 
 And It needs to be setup in the appDeli 
 OR I just set it in the TVC VWillAppear…
+ 
+AAMOFF!
+
 */
 
 import UIKit
@@ -27,28 +28,14 @@ protocol DetailVueDelegate
 {
 //  Coding Ain’t Done ‘Til All the Tests Run
 //  ‘Nuff said.
-
-
-/**
-these could probably go into the vendor and session controller's protocol
-*Additionally* I may need a services controller 
-Or the effect could be a cascaded protocol
-these are at or around line 180 in the PrimeViewController
-
-AAMOFF!
-the q&d version kinda has the right effect, I simply cant rely on this or the next class being a s/c of .this Luckily as I am only using three methods which add an instance if (id) - So that this and any other vue just has to implement it;
-Well this is interesting do I have _p, arr<_p>, _v, _s?
-
-Lastly I *did* get confused about what I can and should send as a delegate. And how trim I can make it srsly that is where I should start first -=- That was a great idea.
-
-*/
   func didAddPersonFor(_ delegate :Any? ) -> Bool
-  func didAddVendor(_ deli: Any?, svc: KVService, session :KVSession) -> Bool
+  func didAddVendor(_ deli: Any?) -> Bool
+//  func didAddVendor(_ deli: Any?, svc: KVService, session :KVSession) -> Bool
 //  func didAddNewSession(_ deli: Any?, p: KVPerson, v: KVVendor) -> Bool
   func didAddNewSession(_ deli: Any?) -> Bool
 }
 
-class KVDetailViewController: UIViewController
+class KVDetailViewController: UIViewController, MKMapViewDelegate
 {
   // Interface
   var delegate: DetailVueDelegate?
@@ -85,6 +72,8 @@ class KVDetailViewController: UIViewController
   {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
+    setupGUIState()
+    setupMapView()
     configureView()
   }
   override func viewWillAppear(_ animated: Bool)
@@ -99,9 +88,7 @@ class KVDetailViewController: UIViewController
   }
   @IBAction func startSetupAction(_ sender: UIButton)
   {
-//    _ = delegate?.didMakePersonFor(self)
-//    self.reloadInputViews()
-//    
+    //self.reloadInputViews()
   }
   override func prepare(for segue: UIStoryboardSegue, sender: Any?)
   {
@@ -116,8 +103,13 @@ class KVDetailViewController: UIViewController
       personEditor.editablePerson = detailPerson
       break
     case "ShowVendor":
+      let vendorEditor = segue.destination as! KVVendorDetailViewController
+      if (vendorEditor.editableVendor == nil) {
+      _ = delegate?.didAddVendor(delegate)
+      }
       /**
-       In order to perform the show session I will need to at the very least have an informal protocol to make a blank vendor
+      Extended from previous Commit;
+      This protocol gets a lot done.
        */
       break
     case "ShowSession":
@@ -165,6 +157,37 @@ class KVDetailViewController: UIViewController
         vendorsButton?.isEnabled = true
       }
     }
+  }
+  func setupMapView()
+  {
+    mapView?.delegate = self
+    // .Hybrid - Has Scale; .Standard Has all Custom camera No Scale Bar
+    mapView?.mapType = .hybridFlyover
+
+    mapView?.showsScale = true
+    mapView?.showsUserLocation = true
+    mapView?.showsPointsOfInterest = true
+    mapView?.showsCompass = false
+
+    let loc = CLLocation(latitude: (detailPerson?.location?.latitude?.doubleValue)!, longitude:(detailPerson?.location?.longitude?.doubleValue)!)
+    let defR = MKCoordinateRegionMakeWithDistance(loc.coordinate, 5000, 5000)
+      mapView?.setRegion(defR, animated: true)
+
+
+    let camera = MKMapCamera()
+    camera.centerCoordinate = (mapView?.centerCoordinate)!
+    camera.pitch = 70
+    camera.altitude = 400
+    camera.heading = 0
+    print("\(String(describing: mapView?.centerCoordinate.latitude))")
+//
+//    mapView.camera = camera
+    //    let defLoc = CLLocation(latitude: (39.329842664338024), longitude: (-76.607890399244241))
+    //    let defR = MKCoordinateRegionMakeWithDistance(loc.coordinate, 5000, 5000)
+    //    mapView.setRegion(defR, animated: true)
+   /**
+     terminating because it runs slow as fuck in sim and I do not have batteries to do it in HW
+    */
   }
   
 }

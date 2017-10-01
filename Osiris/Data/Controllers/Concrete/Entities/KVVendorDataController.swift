@@ -57,7 +57,7 @@ class KVVendorDataController<T : KVVendor > : KVEntityDataController<T>
   }
   func resetVendorDefaults(_ vendor: T)
   {
-    
+    //v.removeFromInventoryStack(<#T##values: NSSet##NSSet#>)
   }
 
 }
