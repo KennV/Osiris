@@ -14,7 +14,7 @@
 		3806F9901EF031A50070B103 /* OsirisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3806F98F1EF031A50070B103 /* OsirisTests.swift */; };
 		3806F99B1EF031A50070B103 /* OsirisUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3806F99A1EF031A50070B103 /* OsirisUITests.swift */; };
 		3806F9AE1EF032470070B103 /* Osiris.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3806F9AC1EF032470070B103 /* Osiris.xcdatamodeld */; };
-		38233C281EF837F80000DEC1 /* KVDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38233C221EF837F80000DEC1 /* KVDetailViewController.swift */; };
+		38233C281EF837F80000DEC1 /* KVMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38233C221EF837F80000DEC1 /* KVMapViewController.swift */; };
 		38233C291EF837F80000DEC1 /* KVPrimeTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38233C231EF837F80000DEC1 /* KVPrimeTVController.swift */; };
 		38233C301EF83B9C0000DEC1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38233C2F1EF83B9C0000DEC1 /* MapKit.framework */; };
 		38233C321EF83BA40000DEC1 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38233C311EF83BA40000DEC1 /* HealthKit.framework */; };
@@ -69,7 +69,7 @@
 		3806F99A1EF031A50070B103 /* OsirisUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OsirisUITests.swift; sourceTree = "<group>"; };
 		3806F99C1EF031A50070B103 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3806F9AD1EF032470070B103 /* Osiris.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Osiris.xcdatamodel; sourceTree = "<group>"; };
-		38233C221EF837F80000DEC1 /* KVDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVDetailViewController.swift; sourceTree = "<group>"; };
+		38233C221EF837F80000DEC1 /* KVMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVMapViewController.swift; sourceTree = "<group>"; };
 		38233C231EF837F80000DEC1 /* KVPrimeTVController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVPrimeTVController.swift; sourceTree = "<group>"; };
 		38233C2F1EF83B9C0000DEC1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		38233C311EF83BA40000DEC1 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
@@ -334,7 +334,7 @@
 		38C0D8C91F3A1600007D850E /* detail */ = {
 			isa = PBXGroup;
 			children = (
-				38233C221EF837F80000DEC1 /* KVDetailViewController.swift */,
+				38233C221EF837F80000DEC1 /* KVMapViewController.swift */,
 			);
 			name = detail;
 			sourceTree = "<group>";
@@ -443,17 +443,20 @@
 					3806F9741EF031A50070B103 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = LQ75G5YK98;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					3806F98A1EF031A50070B103 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = LQ75G5YK98;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 3806F9741EF031A50070B103;
 					};
 					3806F9951EF031A50070B103 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = LQ75G5YK98;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 3806F9741EF031A50070B103;
 					};
@@ -529,7 +532,7 @@
 				387DEE741F1E831D00578AE3 /* KVSessionDetailViewController.swift in Sources */,
 				38C0D8C71F3A1025007D850E /* KVPrimeTVC_Ext.swift in Sources */,
 				387DEE721F1E82FD00578AE3 /* KVPersonDetailViewController.swift in Sources */,
-				38233C281EF837F80000DEC1 /* KVDetailViewController.swift in Sources */,
+				38233C281EF837F80000DEC1 /* KVMapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -689,7 +692,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.k3nV.Osiris;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -703,7 +707,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.k3nV.Osiris;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -717,7 +722,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.k3nV.OsirisTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Osiris.app/Osiris";
 			};
 			name = Debug;
@@ -732,7 +738,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.k3nV.OsirisTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Osiris.app/Osiris";
 			};
 			name = Release;
@@ -746,7 +753,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.k3nV.OsirisUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = Osiris;
 			};
 			name = Debug;
@@ -760,7 +768,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.k3nV.OsirisUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = Osiris;
 			};
 			name = Release;

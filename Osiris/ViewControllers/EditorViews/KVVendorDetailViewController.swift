@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class KVVendorDetailViewController: KVDetailViewController
+class KVVendorDetailViewController: KVMapViewController
 {
   
   @IBOutlet weak var vendorMapView: MKMapView!
@@ -33,6 +33,7 @@ class KVVendorDetailViewController: KVDetailViewController
   {
     super.viewDidLoad()
   }
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
@@ -41,14 +42,17 @@ class KVVendorDetailViewController: KVDetailViewController
   Jeepers this class is empty But it loads
   Cant test for properties (like with person) if this doesn't have a vendor
   */
+  
   func configureTextView()
   {
     
   }
+  
   func configureMapView()
   {
     
   }
+  
   override func configureView()
   {
     configureTextView()

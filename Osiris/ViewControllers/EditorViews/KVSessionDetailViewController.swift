@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KVSessionDetailViewController: KVDetailViewController
+class KVSessionDetailViewController: KVMapViewController
 {
   /**
    This thing also has 2 of the button views
@@ -39,14 +39,17 @@ class KVSessionDetailViewController: KVDetailViewController
     
     // Do any additional setup after loading the view.
   }
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
+  
   override func configureView()
   {
     configureTextView()
   }
+  
   func configureTextView()
   {
     

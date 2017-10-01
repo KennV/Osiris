@@ -122,7 +122,7 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
       if let indexPath = tableView.indexPathForSelectedRow
       {
         let person = people[indexPath.row] //as! NSDate
-        let dvc = (segue.destination as! UINavigationController).topViewController as! KVDetailViewController
+        let dvc = (segue.destination as! UINavigationController).topViewController as! KVMapViewController
         dvc.personsArr = people
         dvc.detailPerson = person
         dvc.delegate = self
@@ -258,7 +258,7 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     personDataController.resetPersonToEditMeState(tmpPerson)
     return (tmpPerson)
   }
-  func willAddPerson(_ deli: Any?)
+  @objc func willAddPerson(_ deli: Any?)
   {
     let _p = mkNewPerson()
     /**
@@ -317,12 +317,13 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
   To nullify the vendor's sub-entities
   */
   //TODO: Add Delete Function!!!
-  func willAddVendor(_ deli: Any?)
+  @objc func willAddVendor(_ deli: Any?)
   {
     let v = mkNewVendor()
     didChangeVendor(v)
 
   }
+  
   /*
   Also Not permanently adding the session that I just added here
   inventoryStack is a NSSet of <items>
@@ -335,6 +336,7 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     didChangeVendor(v)
     return(allTasksCompleteIfTrue)
   }
+  
   /*
    ¿¿¿ Hmmm look at service existing like is is some kind of data bearing class and all ??? I might be a classCluster or somethign else that I can extend to give me types of sessions and transactions
   */
@@ -347,11 +349,13 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     sessionDataController.saveContext()
     return(allTasksCompleteIfTrue)
   }
+  
   func didChangeVendor(_ t: KVVendor)
   {
     vendorDataController.saveCurrentContext(vendorDataController.MOC!)
     tableView.reloadData()
   }
+  
   /**
   */
   func mkSession() -> KVSession
@@ -360,7 +364,8 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     _ = sessionDataController.saveEntity(entity: _s)
     return(_s)
   }
-  func willAddSession(_ sender: Any?)
+  
+  @objc func willAddSession(_ sender: Any?)
   {
     let xs = mkSession()
     _ = sessionDataController.saveEntity(entity: xs)
@@ -375,12 +380,14 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     people.first?.servicesStack?.adding(xs)
     self.didChangeSession(xs)
   }
+  
   func didAddNewSession(_ deli: Any?) -> Bool
   {
     let allTasksCompleteIfTrue = false
     
     return(allTasksCompleteIfTrue)
   }
+  
   func didChangeSession(_ s: KVSession)
   {
     sessionDataController.saveCurrentContext(sessionDataController.MOC!)
@@ -397,6 +404,7 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     // pass it to the other deli
     //    delegate?.didChangePerson(currentPerson!)
   }
+  
   /**
   Find out where we are and then stop
   */
@@ -408,6 +416,7 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     }
     foundLocation()
   }
+  
   /**
   Yippe
   */
@@ -416,9 +425,11 @@ extension KVPrimeTVController: CLLocationManagerDelegate, PersonConDelegate, Ven
     locationManager?.stopUpdatingLocation()
     print("stopped updating location")
   }
+  
   // moved the coder to the AresDataController
   /**
   */
+  
   func forwardGeocoding(address: String)
   {
     CLGeocoder().geocodeAddressString(address, completionHandler: { (placemarks, error) in

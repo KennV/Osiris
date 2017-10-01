@@ -10,7 +10,7 @@
 import UIKit
 import MapKit
 
-class KVPersonDetailViewController: KVDetailViewController
+class KVPersonDetailViewController: KVMapViewController
 {
   /**
   Yeah fixed these _BUT_ for some reason these were not at all wired to the GUI
@@ -31,17 +31,20 @@ class KVPersonDetailViewController: KVDetailViewController
       configureView()
     }
   }
+  
   override func viewDidLoad()
   {
     super.viewDidLoad()
     // Do any additional setup after loading the view.
     configureView()
   }
+  
   override func didReceiveMemoryWarning()
   {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
+  
   func configureTextView()
   {
     if let p = editablePerson {
@@ -65,9 +68,11 @@ class KVPersonDetailViewController: KVDetailViewController
     }
     
   }
+  
   func configureMapView() {
     
   }
+  
   // This is new
   override func configureView() {
     configureTextView()

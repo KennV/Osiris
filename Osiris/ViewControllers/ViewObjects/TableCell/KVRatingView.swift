@@ -45,6 +45,7 @@ class KVRatingView: UIView
       addSubview(button)
     }
   }
+  
   override func layoutSubviews()
   {
     // Set the button's width and height to a square the size of the frame's height.
@@ -57,13 +58,15 @@ class KVRatingView: UIView
     }
     updateButtonSelectionStates()
   }
+  
   // MARK: Button Action
-  func ratingButtonTapped(_ button: UIButton)
+  @objc func ratingButtonTapped(_ button: UIButton)
   {
     rating = ratingButtons.index(of: button)! + 1
     
     updateButtonSelectionStates()
   }
+  
   func updateButtonSelectionStates()
   {
     for (index, button) in ratingButtons.enumerated() {
@@ -71,4 +74,5 @@ class KVRatingView: UIView
       button.isSelected = index < rating
     }
   }
+  
 }
