@@ -93,49 +93,7 @@ class KVMapViewController: UIViewController, MKMapViewDelegate
     //    }
   }
   
-  @IBAction func startSetupAction(_ sender: UIButton)
-  {
-    //self.reloadInputViews()
-  }
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
-    /**
-     Lastly this is the funniest of b/points here
-     I shall be examining the currentPerson, Vendor, and Session
-     */
-    let identifier = segue.identifier!
-    switch identifier {
-    case "ShowPerson":
-      let personEditor = segue.destination as! KVPersonDetailViewController
-      personEditor.editablePerson = detailPerson
-      break
-    case "ShowVendor":
-      let vendorEditor = segue.destination as! KVVendorDetailViewController
-      if (vendorEditor.editableVendor == nil) {
-        _ = delegate?.didAddVendor(delegate)
-      }
-      /**
-       Extended from previous Commit;
-       This protocol gets a lot done.
-       */
-      break
-    case "ShowSession":
-      /**
-       Ok to make a session I need to have a vendor to publish it and a person to bind it to
-       */
-      break
-    case "ShowSetup":
-      _ = delegate?.didAddPersonFor(self)
-      self.reloadInputViews()
-      break
-    default:
-      break
-    }
-  }
-  
-  func setupGUIState()
-  {
+  func setupGUIState() {
     
     if personsArr != nil
     {
@@ -167,6 +125,7 @@ class KVMapViewController: UIViewController, MKMapViewDelegate
       }
     }
   }
+  
   func setupMapState() {
     /** Actually set in VDidLoad
     mapView?.delegate = self
@@ -179,10 +138,6 @@ class KVMapViewController: UIViewController, MKMapViewDelegate
       _kmv.showsCompass = false
       }
   }
-  func renderPerson(_ p : KVPerson) {
-    print("GROOVY")
-    
-  }
-  
+
 }
 
