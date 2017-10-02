@@ -22,7 +22,7 @@ import MapKit
 import HealthKit
 import HealthKitUI
 
-extension KVTableViewController: CLLocationManagerDelegate, PersonConDelegate, VendorConDelegate, DetailVueDelegate, SessionDataDelegate
+extension KVTableViewController: CLLocationManagerDelegate, PersonConDelegate, VendorConDelegate, MapViewDelegate, SessionDataDelegate
 {
   // MARK: - Set Application State
   /**

@@ -27,6 +27,7 @@
 		387DEE721F1E82FD00578AE3 /* KVPersonDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387DEE711F1E82FD00578AE3 /* KVPersonDetailViewController.swift */; };
 		387DEE741F1E831D00578AE3 /* KVSessionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387DEE731F1E831D00578AE3 /* KVSessionDetailViewController.swift */; };
 		387DEE761F1E837800578AE3 /* KVVendorDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387DEE751F1E837800578AE3 /* KVVendorDetailViewController.swift */; };
+		3881060F1F82D78100B18212 /* KVMapViewCon_Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3881060E1F82D78100B18212 /* KVMapViewCon_Ext.swift */; };
 		38AFEF701F10BF5000FC52CE /* KVSessionDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFEF6F1F10BF5000FC52CE /* KVSessionDataController.swift */; };
 		38C744751F290D6900955A2B /* KVMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C744741F290D6900955A2B /* KVMapTableViewCell.swift */; };
 		38D1EB2A1F81ADE600E28694 /* KVTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383ABEED1F81ACA3003E765B /* KVTableViewController.swift */; };
@@ -85,6 +86,7 @@
 		387DEE711F1E82FD00578AE3 /* KVPersonDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KVPersonDetailViewController.swift; path = EditorViews/KVPersonDetailViewController.swift; sourceTree = "<group>"; };
 		387DEE731F1E831D00578AE3 /* KVSessionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KVSessionDetailViewController.swift; path = EditorViews/KVSessionDetailViewController.swift; sourceTree = "<group>"; };
 		387DEE751F1E837800578AE3 /* KVVendorDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KVVendorDetailViewController.swift; path = EditorViews/KVVendorDetailViewController.swift; sourceTree = "<group>"; };
+		3881060E1F82D78100B18212 /* KVMapViewCon_Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVMapViewCon_Ext.swift; sourceTree = "<group>"; };
 		38AFEF6F1F10BF5000FC52CE /* KVSessionDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KVSessionDataController.swift; path = Concrete/Items/Sessions/KVSessionDataController.swift; sourceTree = "<group>"; };
 		38C744741F290D6900955A2B /* KVMapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KVMapTableViewCell.swift; path = MapViewTableCell/KVMapTableViewCell.swift; sourceTree = "<group>"; };
 		38DFA1991EF9A51C00954CCF /* KVVendorDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KVVendorDataController.swift; path = Concrete/Entities/KVVendorDataController.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				383ABEEA1F81ACA3003E765B /* KVMapViewController.swift */,
+				3881060E1F82D78100B18212 /* KVMapViewCon_Ext.swift */,
 			);
 			path = MapView;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 				38441FCF1F1144AA00197FE4 /* KVBasicCustomCell.swift in Sources */,
 				38C744751F290D6900955A2B /* KVMapTableViewCell.swift in Sources */,
 				38F5DA5C1EF982AA0062CDD5 /* KVEntityDataController.swift in Sources */,
+				3881060F1F82D78100B18212 /* KVMapViewCon_Ext.swift in Sources */,
 				38D1EB2A1F81ADE600E28694 /* KVTableViewController.swift in Sources */,
 				3806F9AE1EF032470070B103 /* Osiris.xcdatamodeld in Sources */,
 				38D1EB2B1F81ADEA00E28694 /* KVTableViewCon_Ext.swift in Sources */,

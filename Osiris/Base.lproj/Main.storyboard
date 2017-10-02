@@ -16,7 +16,7 @@
             <objects>
                 <navigationController title="Master" id="RMx-3f-FxP" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Pmd-2v-anx">
-                        <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -39,7 +39,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Gzr-Xg-lY3">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="satelliteFlyover" pitchEnabled="NO" showsUserLocation="YES" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gzr-Xg-lY3">
                                 <rect key="frame" x="20" y="32" width="374" height="672"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E5u-zy-ApG">
@@ -159,7 +159,7 @@
                         <viewControllerLayoutGuide type="bottom" id="aKs-jG-lrV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="j7E-Ep-PZk">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="tsp-qw-BOn" userLabel="RootStack">
@@ -392,7 +392,7 @@
                                 </subviews>
                             </stackView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aWr-cb-5ep">
-                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="692" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem title="Item" id="xf1-AF-AGO"/>
@@ -433,7 +433,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Vm2-2B-Hnv"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="7Dx-kS-qO7">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9GA-1d-pTc" userLabel="RootStack">
@@ -650,7 +650,7 @@
                         <viewControllerLayoutGuide type="bottom" id="BXf-pm-P4r"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="zfb-Fq-Cq3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="MB9-0K-eaS" userLabel="RootStack">
@@ -863,7 +863,7 @@
             <objects>
                 <tableViewController title="Master" clearsSelectionOnViewWillAppear="NO" id="7bK-jq-Zjz" customClass="KVTableViewController" customModule="Osiris" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" sectionIndexMinimumDisplayRowCount="4" rowHeight="128" sectionHeaderHeight="18" sectionFooterHeight="18" id="tDQ-x3-DAh">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
@@ -875,10 +875,10 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="gQe-dw-J83" userLabel="BigStack">
-                                            <rect key="frame" x="8" y="10" width="398" height="108.66666666666666"/>
+                                            <rect key="frame" x="8" y="9.3333333333333286" width="398" height="111"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="rqa-Vl-4pO" userLabel="ImageAndButton">
-                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="108.66666666666666"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="111"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ykN-6W-kcm">
                                                             <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
@@ -888,7 +888,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dmo-pR-X3b">
-                                                            <rect key="frame" x="17" y="80" width="46" height="28.666666666666657"/>
+                                                            <rect key="frame" x="17" y="80" width="46" height="31"/>
                                                             <state key="normal" title="Button"/>
                                                         </button>
                                                     </subviews>
@@ -898,34 +898,34 @@
                                                     </constraints>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="HVs-tc-CaW" userLabel="Buttons and Jive">
-                                                    <rect key="frame" x="88" y="0.0" width="310" height="108.66666666666666"/>
+                                                    <rect key="frame" x="88" y="0.0" width="310" height="111"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UgQ-1P-47Q">
-                                                            <rect key="frame" x="0.0" y="0.0" width="310" height="39.666666666666671"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="310" height="42"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eKs-Kv-iFK" userLabel="TypesSelector" customClass="KVRatingView" customModule="Osiris" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="52.666666666666671" width="310" height="55.999999999999986"/>
+                                                            <rect key="frame" x="0.0" y="55" width="310" height="56"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4jX-bK-job">
-                                                                    <rect key="frame" x="8" y="7.9999999999999929" width="282" height="43"/>
+                                                                    <rect key="frame" x="8" y="8" width="282" height="43"/>
                                                                 </stackView>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eKA-3e-wdc">
-                                                                    <rect key="frame" x="8" y="10.999999999999993" width="50" height="36"/>
+                                                                    <rect key="frame" x="8" y="11" width="50" height="36"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="blP-wb-nr4">
-                                                                    <rect key="frame" x="66" y="10.999999999999993" width="50" height="36"/>
+                                                                    <rect key="frame" x="66" y="11" width="50" height="36"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jOi-2Q-V5w">
-                                                                    <rect key="frame" x="124" y="10.999999999999993" width="50" height="36"/>
+                                                                    <rect key="frame" x="124" y="11" width="50" height="36"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F1t-Fa-Tkr">
-                                                                    <rect key="frame" x="182" y="10.999999999999993" width="53" height="36"/>
+                                                                    <rect key="frame" x="182" y="11" width="53" height="36"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </view>
                                                             </subviews>
@@ -1048,7 +1048,7 @@
             <objects>
                 <navigationController id="vC3-pB-5Vb" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="DjV-YW-jjY">
-                        <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -1068,7 +1068,7 @@
                         <viewControllerLayoutGuide type="bottom" id="uu4-Dd-cA8"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="UzW-qW-LqM">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="hf8-vw-HuQ">

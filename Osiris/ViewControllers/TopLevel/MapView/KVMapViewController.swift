@@ -24,7 +24,7 @@
 import UIKit
 import MapKit
 
-protocol DetailVueDelegate
+protocol MapViewDelegate
 {
   //  Coding Ain’t Done ‘Til All the Tests Run
   //  ‘Nuff said.
@@ -38,7 +38,7 @@ protocol DetailVueDelegate
 class KVMapViewController: UIViewController, MKMapViewDelegate
 {
   // Interface
-  var delegate: DetailVueDelegate?
+  var delegate: MapViewDelegate?
   // GUI
   @IBOutlet weak var mapView = MKMapView()
   @IBOutlet weak var setupButton = UIButton()
@@ -59,13 +59,11 @@ class KVMapViewController: UIViewController, MKMapViewDelegate
   func configureView()
   {
     setupGUIState()
-    //setupMapState
-    /**
-     If I crash here it is b/c this is nil I do not need the title but this should not really be nil
-     */
     if let _p = detailPerson
     {
-      title = _p.incepDate!.description
+//      title = _p.incepDate!.description
+      title = _p.qName
+      renderPerson(_p)
     }
   }
   
@@ -74,7 +72,13 @@ class KVMapViewController: UIViewController, MKMapViewDelegate
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     setupGUIState()
-    setupMapView()
+    if !(mapView?.delegate === self) {
+      print ("Setting MapView.Deli to self")
+      mapView?.delegate = self
+    }
+//    setupMapState()
+    //    setupMapView() // is it a crasher still?
+    
     configureView()
   }
   
@@ -163,37 +167,22 @@ class KVMapViewController: UIViewController, MKMapViewDelegate
       }
     }
   }
-  
-  func setupMapView()
-  {
+  func setupMapState() {
+    /** Actually set in VDidLoad
     mapView?.delegate = self
-    // .Hybrid - Has Scale; .Standard Has all Custom camera No Scale Bar
-    mapView?.mapType = .hybridFlyover
+    */
+    if let _kmv = self.mapView {
+      _kmv.mapType = .hybridFlyover
+      _kmv.showsScale = true
+      _kmv.showsUserLocation = true
+      _kmv.showsPointsOfInterest = true
+      _kmv.showsCompass = false
+      }
+  }
+  func renderPerson(_ p : KVPerson) {
+    print("GROOVY")
     
-    mapView?.showsScale = true
-    mapView?.showsUserLocation = true
-    mapView?.showsPointsOfInterest = true
-    mapView?.showsCompass = false
-    
-    let loc = CLLocation(latitude: (detailPerson?.location?.latitude?.doubleValue)!, longitude:(detailPerson?.location?.longitude?.doubleValue)!)
-    let defR = MKCoordinateRegionMakeWithDistance(loc.coordinate, 5000, 5000)
-    mapView?.setRegion(defR, animated: true)
-    
-    
-    let camera = MKMapCamera()
-    camera.centerCoordinate = (mapView?.centerCoordinate)!
-    camera.pitch = 70
-    camera.altitude = 400
-    camera.heading = 0
-    print("\(String(describing: mapView?.centerCoordinate.latitude))")
-    //
-    //    mapView.camera = camera
-    //    let defLoc = CLLocation(latitude: (39.329842664338024), longitude: (-76.607890399244241))
-    //    let defR = MKCoordinateRegionMakeWithDistance(loc.coordinate, 5000, 5000)
-    //    mapView.setRegion(defR, animated: true)
-    /**
-     terminating because it runs slow as fuck in sim and I do not have batteries to do it in HW
-     */
   }
   
 }
+
