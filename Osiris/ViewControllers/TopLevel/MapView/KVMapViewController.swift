@@ -55,9 +55,8 @@ class KVMapViewController: UIViewController, MKMapViewDelegate
   }
   var currentVendor: KVVendor! = nil
   var currentSession: KVSession! = nil
-  
-  func configureView()
-  {
+
+  func configureView() {
     setupGUIState()
     if let _p = detailPerson
     {
@@ -66,9 +65,8 @@ class KVMapViewController: UIViewController, MKMapViewDelegate
       renderPerson(_p)
     }
   }
-  
-  override func viewDidLoad()
-  {
+
+  override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     setupGUIState()
@@ -81,7 +79,7 @@ class KVMapViewController: UIViewController, MKMapViewDelegate
     
     configureView()
   }
-  
+
   override func viewWillAppear(_ animated: Bool)
   {
     //    if !(personsArr.isEmpty)
@@ -91,52 +89,6 @@ class KVMapViewController: UIViewController, MKMapViewDelegate
     //        detailPerson = personsArr.first
     //      }
     //    }
-  }
-  
-  func setupGUIState() {
-    
-    if personsArr != nil
-    {
-      if personsArr.isEmpty
-      {
-        mapView?.alpha = 0.0
-        sessionsButton?.isHidden = true
-        sessionsButton?.isEnabled = false
-        
-        personsButton?.isHidden = true
-        personsButton?.isEnabled = false
-        
-        vendorsButton?.isHidden = true
-        vendorsButton?.isEnabled = false
-      } else {
-        mapView?.alpha = 01.0
-        
-        setupButton?.isHidden = true
-        setupButton?.isEnabled = false
-        
-        sessionsButton?.isHidden = false
-        sessionsButton?.isEnabled = true
-        
-        personsButton?.isHidden = false
-        personsButton?.isEnabled = true
-        
-        vendorsButton?.isHidden = false
-        vendorsButton?.isEnabled = true
-      }
-    }
-  }
-  
-  func setupMapState() {
-    /** Actually set in VDidLoad
-    mapView?.delegate = self
-    */
-    if let _kmv = self.mapView {
-      _kmv.mapType = .hybridFlyover
-      _kmv.showsScale = true
-      _kmv.showsUserLocation = true
-      _kmv.showsPointsOfInterest = true
-      _kmv.showsCompass = false
-      }
   }
 
 }

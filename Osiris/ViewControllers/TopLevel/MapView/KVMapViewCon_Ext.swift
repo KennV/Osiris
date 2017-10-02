@@ -32,9 +32,8 @@ extension KVMapViewController: CLLocationManagerDelegate
       mapView?.camera = camera
     }
   }
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
+
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     /**
      Lastly this is the funniest of b/points here
      I shall be examining the currentPerson, Vendor, and Session
@@ -69,9 +68,54 @@ extension KVMapViewController: CLLocationManagerDelegate
     }
   }
 
-  @IBAction func startSetupAction(_ sender: UIButton)
-  {
+  @IBAction func startSetupAction(_ sender: UIButton) {
     //self.reloadInputViews()
+  }
+
+  func setupGUIState() {
+    
+    if personsArr != nil
+    {
+      if personsArr.isEmpty
+      {
+        mapView?.alpha = 0.0
+        sessionsButton?.isHidden = true
+        sessionsButton?.isEnabled = false
+        
+        personsButton?.isHidden = true
+        personsButton?.isEnabled = false
+        
+        vendorsButton?.isHidden = true
+        vendorsButton?.isEnabled = false
+      } else {
+        mapView?.alpha = 01.0
+        
+        setupButton?.isHidden = true
+        setupButton?.isEnabled = false
+        
+        sessionsButton?.isHidden = false
+        sessionsButton?.isEnabled = true
+        
+        personsButton?.isHidden = false
+        personsButton?.isEnabled = true
+        
+        vendorsButton?.isHidden = false
+        vendorsButton?.isEnabled = true
+      }
+    }
+  }
+
+  func setupMapState() {
+    /** Actually set in VDidLoad
+    mapView?.delegate = self
+    */
+    if let _kmv = self.mapView {
+      _kmv.mapType = .hybridFlyover
+      _kmv.showsScale = true
+      _kmv.showsUserLocation = true
+      _kmv.showsPointsOfInterest = true
+      _kmv.showsCompass = false
+      }
   }
 
 }
