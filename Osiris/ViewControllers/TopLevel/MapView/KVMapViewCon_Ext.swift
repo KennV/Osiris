@@ -14,8 +14,8 @@ Planned changes include CoreLocation Functionality, does it need one or can it
 import UIKit
 import MapKit
 
-extension KVMapViewController: CLLocationManagerDelegate
-{
+extension KVMapViewController: CLLocationManagerDelegate {
+  
   func renderPerson(_ p : KVPerson) {
     if (mapView != nil) {
       print("GROOVY")
@@ -73,11 +73,8 @@ extension KVMapViewController: CLLocationManagerDelegate
   }
 
   func setupGUIState() {
-    
-    if personsArr != nil
-    {
-      if personsArr.isEmpty
-      {
+    if personsArr != nil {
+      if personsArr.isEmpty{
         mapView?.alpha = 0.0
         sessionsButton?.isHidden = true
         sessionsButton?.isEnabled = false
