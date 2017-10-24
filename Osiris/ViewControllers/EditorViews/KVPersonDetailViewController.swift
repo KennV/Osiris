@@ -38,6 +38,7 @@ class KVPersonDetailViewController: KVMapViewController, UITextFieldDelegate
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view.
+    configureTextView()
     configureView()
   }
   
@@ -56,34 +57,47 @@ class KVPersonDetailViewController: KVMapViewController, UITextFieldDelegate
     /*
     OKAY this is more like I was talking about in the MapViewExt
     */
-    if let p = editablePerson {
-      if let pTF = personsNameTextField {
-//        let tName = p.firstName!
-        if !(pTF.delegate === self) {
-          print("Delegate inactive???")
-        }
-        pTF.text = p.firstName!
-      }
-      if let mTF = midInitialTextField {
-        mTF.text = ("¿-?") //p.middleName!
-      }
-      if let tTF = personsTypeTextField {
-        tTF.text = p.type
-      }
-      if let aTF = personsAddressTextField {
-        aTF.text = p.location?.address
-      }
-    }
+  }
 
+  override func configureView() {
+    renderPersonText(editablePerson!)
+    configureMapView(editablePerson!)
+  }
+/**
+*/  
+  func configureMapView(_ person : KVPerson) {
+    /**
+     Now a *Funny* thing here is that I can add a locManager here or have one provided for me right now I do not need it.
+     *BUT* because I have three maps (at least) then I could extend a lot of the map's behavior with a protocol.
+     */
+    if let loc = person.location {
+      mapView?.centerCoordinate.latitude = (loc.latitude?.doubleValue)!
+      mapView?.centerCoordinate.longitude = (loc.longitude?.doubleValue)!
+      
+    }
   }
   
-  func configureMapView() {
+  func renderPersonText(_ person : KVPerson) {
     /**
-   
+     by taking this out of the configureTextView() I can use
     */
+    if let pTF = personsNameTextField {
+      //        let tName = p.firstName!
+      if !(pTF.delegate === self) {
+        print("Delegate inactive???")
+      }
+      pTF.text = person.firstName!
+    }
+    if let mTF = midInitialTextField {
+      mTF.text = ("¿-?") //p.middleName!
+    }
+    if let tTF = personsTypeTextField {
+      tTF.text = person.type
+    }
+    if let aTF = personsAddressTextField {
+      aTF.text = person.location?.address
+    }
+    
   }
-  // This is new
-  override func configureView() {
-    configureTextView()
-  }
+
 }
