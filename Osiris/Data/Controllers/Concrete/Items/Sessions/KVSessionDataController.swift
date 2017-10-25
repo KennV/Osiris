@@ -8,6 +8,9 @@
 */
 
 protocol SessionDataDelegate {
+  /**
+  Yay I need behaviour to set timers and quick timers
+   */
   
 }
 
