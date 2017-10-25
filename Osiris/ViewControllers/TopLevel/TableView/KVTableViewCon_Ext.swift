@@ -297,7 +297,7 @@ extension KVTableViewController: CLLocationManagerDelegate, PersonConDelegate, V
     self.willAddPerson(delegate)
     return true
   }
-  func didChangePerson(_ t: KVPerson)
+  func didChangePerson(_ person: KVPerson)
   {
     personDataController.saveCurrentContext(personDataController.MOC!)
      tableView.reloadData()

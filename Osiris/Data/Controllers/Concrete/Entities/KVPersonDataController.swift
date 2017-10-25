@@ -12,8 +12,11 @@ import CoreData
 import UIKit
 
 protocol PersonConDelegate {
-  func didChangePerson(_ t: KVPerson)
+  func didChangePerson(_ person: KVPerson)
   func willAddPerson(_ deli: Any?)
+  /// REDHOT!
+  //func willAddPerson(_ deli: Any?, _ person : KNPerson)
+  
   //  func willMakeMessageFromPerson(_ person: KVPerson?)
   //  func willMakeNewPlaceHere(deli: Any?) -> ()
   //  func willAddNewEvent( _ deli: Any?)
