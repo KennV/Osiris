@@ -46,8 +46,7 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
   - Parameter context: MOC
   - Returns: T: \<T\>
   */
-  func createPersonInContext(_ context: NSManagedObjectContext) -> T
-  {
+  func createPersonInContext(_ context: NSManagedObjectContext) -> T {
     let pDescription = NSEntityDescription.entity(forEntityName: (EntityTypes.Person), in: PSK.viewContext)
     let gDescription = NSEntityDescription.entity(forEntityName: (EntityTypes.Graphics), in: PSK.viewContext)
     let lDescription = NSEntityDescription.entity(forEntityName: (EntityTypes.Location), in: PSK.viewContext)
@@ -73,25 +72,24 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
   /**
   
   */
-  func makePerson()
-  {
+  func makePerson() {
     let newPerson = createPersonInContext(PSK.viewContext)
     setupEntity(newPerson)
 //    resetPersonDefaults(newPerson)
     setupRandomPerson(newPerson)
 	// Now what can I assert in unit tests
   }
-  override func deleteEntityInContext(_ context: NSManagedObjectContext, entity: T)
-  {
+  
+  override func deleteEntityInContext(_ context: NSManagedObjectContext, entity: T) {
     //NSLog("Powa:: %@ !",entity.objectID);
     //Need to delete my sessions
     entity.removeFromSessionsStack(entity.sessionsStack!)
     //Need to delete my goods and or services
     context.delete(entity)
   }
+  
   //MARK TODO: Add Health specific Datas
-  func resetPersonDefaults(_ person: T)
-  {
+  func resetPersonDefaults(_ person: T) {
     setupEntity(person)
     person.firstName = maleNames[1]
     person.middleName = femaleNames[1]
@@ -100,8 +98,8 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
     person.phoneNumber = "(555)abc-defg"
     person.textID  = person.firstName! + ("_") + person.lastName!
   }
-  func resetPersonToEditMeState(_ person: T)
-  {
+  
+  func resetPersonToEditMeState(_ person: T) {
     let edString = "Edit-Me"
     setupEntity(person)
     person.firstName = edString
@@ -112,13 +110,13 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
     person.phoneNumber = "(555)" + edString
     person.textID  = person.firstName! + ("-") + person.lastName!
   }
-  func setupRandomPerson(_ rndPerson: T)
-  {
+  
+  func setupRandomPerson(_ rndPerson: T) {
     setupRandomPersonName(rndPerson)
     rndPerson.phoneNumber = makeRandomPhoneNumber()
   }
-  func setupRandomPersonName(_ rndNamedPerson: T)
-  {
+  
+  func setupRandomPersonName(_ rndNamedPerson: T) {
     if (makeRandomNumber(100)) > 50 {
       rndNamedPerson.firstName = femaleNames[makeRandomNumber(20)]
     } else {
@@ -134,5 +132,5 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
       rndNamedPerson.middleName = ""
     }
   }
-  
+
 }
