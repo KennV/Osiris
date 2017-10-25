@@ -45,13 +45,11 @@ class KVSessionDetailViewController: KVMapViewController
     // Dispose of any resources that can be recreated.
   }
   
-  override func configureView()
-  {
+  override func configureView() {
     configureTextView()
   }
   
-  func configureTextView()
-  {
+  func configureTextView() {
     
   }
   
