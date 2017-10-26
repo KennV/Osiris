@@ -29,8 +29,7 @@ class KVVendorDetailViewController: KVMapViewController
     }
   }
   
-  override func viewDidLoad()
-  {
+  override func viewDidLoad() {
     super.viewDidLoad()
   }
   
@@ -38,25 +37,34 @@ class KVVendorDetailViewController: KVMapViewController
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
+
   /**
   Jeepers this class is empty But it loads
-  Cant test for properties (like with person) if this doesn't have a vendor
+  Can't test for properties (like with person) if this doesn't have a vendor
   */
   
-  func configureTextView()
-  {
+  func configureTextView() {
     
   }
   
-  func configureMapView()
-  {
-    
-  }
-  
-  override func configureView()
-  {
+  override func configureView() {
     configureTextView()
     configureMapView()
   }
+
+  func configureMapView() {
+    
+  }
   
+  func renderTextView(_ vendor: KVVendor) {
+    
+  }
+
+  func renderMapViewForAllVendors(_ array: Array<KVVendor>) {
+    
+  }
+  
+  func renderMapViewForCurrentVendor(_ vendor: KVVendor) {
+    
+  }
 }
