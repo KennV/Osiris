@@ -5,44 +5,58 @@
   Created by Kenn Villegas on 6/20/17.
   Copyright © 2017 dubian. All rights reserved.
 */
+/**
+##Conceptual and temporary Documentation##
+as I already have a person controller delegate
+_AND_ an extension to the Person class then;
+What do I put into this protocol and extension
 
+*/
 
 import CoreLocation
 import CoreData
 import UIKit
 
 protocol PersonConDelegate {
-  func didChangePerson(_ person: KVPerson)
+//  func didChangePerson(_ person: KVPerson)
   func willAddPerson(_ deli: Any?)
-  /// REDHOT!
-  //func willAddPerson(_ deli: Any?, _ person : KNPerson)
+  func didChangePerson(_ deli: Any?, person: KVPerson)
+  /**
+  OKAY replacing the @REDHOT with Obj-C Style Protocol Signatures
+  Which _begs_ the question what data is needed in the CallBack
   
-  //  func willMakeMessageFromPerson(_ person: KVPerson?)
-  //  func willMakeNewPlaceHere(deli: Any?) -> ()
-  //  func willAddNewEvent( _ deli: Any?)
+
+  func willAddPerson(_ deli: Any?, _ person : KVPerson)
+
+  func willMakeMessageFromPerson(_ deli: Any?, person: KVPerson?)
+  func willMakeNewPlaceHere(_ deli: Any?, person: KVPerson?) -> ()
+  func willAddNewEvent( _ deli: Any?)
+  */
 }
 
 extension KVPerson {
-
+  /**
+  Unimplemented Optional interface this should be capabilities to support the Protocol as above
+  */
 }
-//https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Enumerations.html
 enum PersonTypes {
+  /**
+  https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Enumerations.html
+  */
   case owner, friend, vendor
 //  case owner(personType:String, personStatus:NSNumber)
 }
+
 class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
 {
   var delegate: PersonConDelegate?
-  override init()
-  {
+  override init() {
     super.init()
     entityClassName = EntityTypes.Person
     MOC = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
   }
-  
-  /** 
+  /**
   ## Make a People ##
-
   - Parameter context: MOC
   - Returns: T: \<T\>
   */
@@ -80,14 +94,14 @@ class KVPersonDataController<T : KVPerson > : KVEntityDataController<T>
 	// Now what can I assert in unit tests
   }
   
-  override func deleteEntityInContext(_ context: NSManagedObjectContext, entity: T) {
+  override func deleteEntityInContext(_ context: NSManagedObjectContext, entity: T)
+  {
     //NSLog("Powa:: %@ !",entity.objectID);
     //Need to delete my sessions
     entity.removeFromSessionsStack(entity.sessionsStack!)
     //Need to delete my goods and or services
     context.delete(entity)
-  }
-  
+  }  
   //MARK TODO: Add Health specific Datas
   func resetPersonDefaults(_ person: T) {
     setupEntity(person)

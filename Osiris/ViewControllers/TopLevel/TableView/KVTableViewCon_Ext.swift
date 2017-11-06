@@ -280,15 +280,7 @@ extension KVTableViewController: CLLocationManagerDelegate, PersonConDelegate, V
     let indexPath = IndexPath(row: 0, section: 0)
     tableView.insertRows(at: [indexPath], with: .automatic)
     didChangePerson(_p)
-    //YES This Line is STILL Important
-    //personDataController.saveCurrentContext(personDataController.MOC!)
-    /** 
-    ADDITIONALLY the Abstract entityControl needs to save the entity for the owner
-    
-    let dbLoc = _p.location
-    let jiveGFX = _p.graphics
-    
-     */
+
     
   }
   func didAddPersonFor(_ delegate: Any?) -> Bool
@@ -296,6 +288,27 @@ extension KVTableViewController: CLLocationManagerDelegate, PersonConDelegate, V
     print("\(delegate.debugDescription) from \(self.debugDescription) ")
     self.willAddPerson(delegate)
     return true
+  }
+  //    didChangePerson(<#T##person: KVPerson##KVPerson#>)
+  
+  /**
+   # Behavior for Change Action #
+   Definition and siganture changed for better callback
+   - Parameters:
+   - deli: Which implements \<PersonConDelegate\>
+   - person: \<T : KVPerson\>
+   */
+  func didChangePerson(_ deli: Any?, person: KVPerson) {
+    if let dbLoc = person.location {
+      
+    }
+    if let jiveGFX = person.graphics {
+      
+    }
+    
+    personDataController.saveCurrentContext(personDataController.MOC!)
+    tableView.reloadData()
+    
   }
   func didChangePerson(_ person: KVPerson)
   {
